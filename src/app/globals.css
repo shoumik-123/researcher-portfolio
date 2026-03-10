@@ -1,39 +1,153 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: #eef2ff;
-  --color-primary-100: #e0e7ff;
-  --color-primary-200: #c7d2fe;
-  --color-primary-300: #a5b4fc;
-  --color-primary-400: #818cf8;
-  --color-primary-500: #6366f1;
-  --color-primary-600: #4f46e5;
-  --color-primary-700: #4338ca;
-  --color-primary-800: #3730a3;
-  --color-primary-900: #312e81;
+  /* Professional Color Palette - Define as CSS custom properties */
+  --color-primary: #2563eb;
+  --color-primary-light: #3b82f6;
+  --color-primary-dark: #1d4ed8;
   
-  --color-academic: #7c3aed;
-  --color-research: #059669;
-  --color-industry: #d97706;
+  --color-secondary: #7c3aed;
+  --color-secondary-light: #8b5cf6;
+  --color-secondary-dark: #6d28d9;
+  
+  --color-accent: #059669;
+  --color-warm: #d97706;
+  
+  /* Background Colors */
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  
+  /* Text Colors */
+  --color-text: #18181b;
+  --color-text-light: #52525b;
+  --color-text-lighter: #71717a;
+  
+  /* Border Colors */
+  --color-border: #e4e4e7;
+  --color-border-light: #f1f1f3;
 }
 
 @layer base {
   body {
-    @apply antialiased text-gray-900;
-    
+    @apply antialiased;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   }
 }
 
 @layer components {
   .container-custom {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-7xl mx-auto px-6 md:px-8 lg:px-12;
   }
   
-  .section-title {
-    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+  /* Header specific styles */
+  .header {
+    @apply sticky top-0 z-50 transition-all duration-300 bg-white border-b border-gray-100;
   }
   
-  .section-subtitle {
-    @apply text-xl text-gray-600 mb-12 max-w-3xl;
+  .header-scrolled {
+    @apply bg-white/95 backdrop-blur-md shadow-sm;
   }
+  
+  .logo-text {
+    @apply text-2xl font-light tracking-tight;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .nav-link {
+    @apply text-gray-600 hover:text-gray-900 transition-colors duration-200 relative px-3 py-2 rounded-md text-sm;
+  }
+  
+  .nav-link-active {
+    @apply text-primary font-medium;
+  }
+  
+  .nav-link-active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full;
+  }
+  
+  .dropdown-button {
+    @apply flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors duration-200;
+  }
+  
+  .dropdown-button-open {
+    color: var(--color-primary);
+  }
+  
+  .dropdown-menu {
+    @apply absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 border border-gray-100;
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.1), 0 8px 10px -6px rgba(37, 99, 235, 0.1);
+  }
+  
+  .dropdown-item {
+    @apply flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:text-gray-900 hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 transition-all duration-200;
+  }
+  
+  .dropdown-item-active {
+    @apply text-primary font-medium bg-gradient-to-r from-primary/10 to-secondary/10;
+  }
+  
+  /* Mobile menu */
+  .mobile-menu-button {
+    @apply p-2 rounded-md transition-all duration-200 text-gray-600 hover:text-primary hover:bg-primary/5;
+  }
+  
+  .mobile-menu-button-open {
+    @apply bg-gradient-to-r from-primary to-secondary text-white;
+  }
+  
+  .mobile-menu {
+    @apply py-4 border-t border-gray-100;
+    background: linear-gradient(180deg, white, #fafafa);
+  }
+  
+  .mobile-nav-link {
+    @apply block py-3 text-gray-700 hover:text-gray-900 transition-colors duration-200;
+  }
+  
+  .mobile-dropdown-item {
+    @apply py-2.5 text-sm text-gray-600 hover:text-gray-900 hover:pl-2 transition-all duration-200 flex items-center gap-3;
+  }
+  
+  /* Icons */
+  .icon-primary {
+    color: var(--color-primary);
+  }
+  
+  .icon-secondary {
+    color: var(--color-secondary);
+  }
+  
+  .icon-accent {
+    color: var(--color-accent);
+  }
+  
+  .icon-warm {
+    color: var(--color-warm);
+  }
+  
+  .icon-gray {
+    @apply text-gray-400;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
 }
