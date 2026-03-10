@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FiChevronDown, FiMenu, FiX, FiBook, FiAward, FiUsers, FiBriefcase, FiHome, FiMail, FiFileText } from 'react-icons/fi';
 import { navItems, NavItem } from '@/lib/navigation';
 
@@ -43,9 +43,8 @@ export default function Header() {
     return pathname === path;
   };
 
-  // Get icon for dropdown items
   const getItemIcon = (itemName: string) => {
-    const iconMap: { [key: string]: JSX.Element } = {
+    const iconMap: { [key: string]: React.JSX.Element } = {
       'Projects': <FiBriefcase className="icon-primary" size={14} />,
       'Publications': <FiBook className="icon-secondary" size={14} />,
       'Grants': <FiAward className="icon-accent" size={14} />,
