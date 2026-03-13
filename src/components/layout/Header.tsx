@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
@@ -7,7 +8,7 @@ import {
   FiBook, FiAward, FiUsers, FiMic, FiTrendingUp,
   FiGlobe, FiFileText, FiStar, FiCalendar, FiMapPin
 } from 'react-icons/fi';
-import { navItems } from '../../lib/navigation';
+import { navItems, NavItem } from '../../lib/navigation';
 
 export default function Header() {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Handle scroll effect
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function Header() {
     const iconColor = isWhite ? "text-white" : "text-primary";
     const size = isChild ? 14 : 16;
     
-    const iconMap: { [key: string]: JSX.Element } = {
+    const iconMap: { [key: string]: React.JSX.Element } = {
       'Home': <FiHome size={size} className={iconColor} />,
       'Professional Experience': <FiBriefcase size={size} className={iconColor} />,
       'UNOPS Experience': <FiGlobe size={size} className={iconColor} />,
