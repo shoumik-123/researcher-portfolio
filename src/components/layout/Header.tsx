@@ -203,7 +203,7 @@ export default function Header() {
 
   return (
     <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
-      <div className="container-custom">
+      <div className="container-custom ">
         {/* Desktop Header */}
         <div className="hidden lg:flex justify-between items-center h-20">
           <Link 
