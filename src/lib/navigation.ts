@@ -10,7 +10,8 @@ export const navItems: NavItem[] = [
     path: '/' 
   },
   { 
-    name: 'Experience',
+    name: 'Professional Experience',
+    path: '/experience',
     children: [
       { name: 'UNOPS Experience', path: '/experience/unops' },
       { name: 'BPCL Experience', path: '/experience/bpcl' },
@@ -18,38 +19,26 @@ export const navItems: NavItem[] = [
     ]
   },
   {
-    name: 'Research',
+    name: 'Research Journey',
+    path: '/research',
     children: [
-      { name: 'My Research Journey', path: '/research/journey' },
-      { name: 'Publications', path: '/research/publications' },
-      { name: 'International Conferences', path: '/research/conferences' },
-      { name: 'Laboratory Experience', path: '/research/laboratory' },
-      { name: 'Mentoring & Student Supervision', path: '/research/mentoring' },
+      { name: 'Lab Experimentations', path: '/research/lab' },
+      { name: 'Youth Engagement', path: '/research/youth' },
       { name: 'My PhD Journey', path: '/research/phd' },
     ]
   },
   {
-    name: 'Achievements',
+    name: 'About Me',
+    path: '/about',
     children: [
-      { name: 'Career Achievements', path: '/achievements/career' },
-      { name: 'Research Publications', path: '/achievements/publications' },
-      { name: 'Awards & Recognition', path: '/achievements/awards' },
-      { name: 'Certificates', path: '/achievements/certificates' },
-    ]
-  },
-  {
-    name: 'Training & Consultancy',
-    children: [
-      { name: 'SAIBES Activities', path: '/training/saibes' },
-      { name: 'Training Programs', path: '/training/programs' },
-      { name: 'Consultancy Work', path: '/training/consultancy' },
-      { name: 'Youth Engagement Initiatives', path: '/training/youth' },
+      { name: 'Achievements', path: '/achievements' },
+      { name: 'Training & Consultancy', path: '/achievements/training' },
     ]
   },
   {
     name: 'Media & Blog',
+    path: '/media',
     children: [
-      { name: 'Media Coverage', path: '/media/coverage' },
       { name: 'Blog & Insights', path: '/media/blog' },
     ]
   }
