@@ -59,3 +59,15 @@ export interface Mentor {
   description: string;
   image?: string;
 }
+
+export interface Page {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  image: string;
+  video?: string;
+  videoEmbed?: string;
+  type: string;
+  page: string;
+}

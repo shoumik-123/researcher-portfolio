@@ -33,6 +33,7 @@ export const navItems: NavItem[] = [
     children: [
       { name: 'Achievements', path: '/achievements' },
       { name: 'Training & Consultancy', path: '/achievements/training' },
+      { name: 'Education', path: '/education' },
     ]
   },
   {
