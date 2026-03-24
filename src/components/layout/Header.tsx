@@ -311,7 +311,7 @@ const NavLink = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean
     }`}>
       <div className="container-custom">
         {/* Desktop Header */}
-        <div className="hidden lg:flex justify-between items-center h-20">
+        <div className="hidden lg:flex justify-between items-center h-16">
           <Link 
             href="/" 
             className="text-2xl font-light text-white hover:opacity-90 transition-opacity"

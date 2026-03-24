@@ -1,4 +1,4 @@
-import { Publication, Mentor, Page } from '@/types';
+import { Publication, Mentor } from '@/types';
 
 export const researcherInfo = {
   name: 'Hasan Ahmed',
@@ -118,173 +118,198 @@ export const socialLinks = [
   { name: "Google Scholar", url: researcherInfo.social.googleScholar, icon: "GS", title: "Google Scholar" },
   { name: "Institutional", url: "https://ki.se", icon: "I", title: "Institutional Web Page" }
 ];
-export const pages: Page[] = [
-    {
-      "id": "home",
-      "name": "Home",
-      "title": "Hasan Ahmed - Researcher & Technical Expert",
-      "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "home",
-      "page": "/"
-    },
-    {
-      "id": "experience",
-      "name": "Professional Experience",
-      "title": "Professional Journey",
-      "description": "Overview of my professional experience across international organizations and corporate sectors.",
-      "image": "",
-      "video": "",
-      "videoEmbed": "",
-      "type": "experience",
-      "page": "/experience"
-    },
-    {
-      "id": "experience-unops",
-      "name": "UNOPS Experience",
-      "title": "Technical Expert - Environment at UNOPS",
-      "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-      "image": "",
-      "video": "",
-      "videoEmbed": "",
-      "type": "experience",
-      "page": "/experience/unops"
-    },
-    {
-      "id": "experience-bpcl",
-      "name": "BPCL Experience",
-      "title": "Research Consultant at BPCL",
-      "description": "Worked on research projects related to energy efficiency and sustainable practices in the corporate sector.",
-      "image": "",
-      "video": "",
-      "videoEmbed": "",
-      "type": "experience",
-      "page": "/experience/bpcl"
-    },
-    {
-      "id": "experience-maskeeters",
-      "name": "Maskeeters Experience",
-      "title": "Team Lead at Maskeeters",
-      "description": "Led a team of researchers and developers on innovative projects and research initiatives.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "experience",
-      "page": "/experience/maskeeters"
-    },
-    {
-      "id": "research",
-      "name": "Research Journey",
-      "title": "My Research Journey",
-      "description": "Overview of my research work, publications, and academic contributions.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "research",
-      "page": "/research"
-    },
-    {
-      "id": "research-lab",
-      "name": "Lab Experimentations",
-      "title": "Laboratory Research",
-      "description": "Hands-on laboratory work focusing on industrial waste valorization and polymer composite development.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "research",
-      "page": "/research/lab"
-    },
-    {
-      "id": "research-youth",
-      "name": "Youth Engagement",
-      "title": "Mentoring Young Researchers",
-      "description": "Supervising and mentoring undergraduate and graduate students in environmental research projects.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "research",
-      "page": "/research/youth"
-    },
-    {
-      "id": "research-phd",
-      "name": "My PhD Journey",
-      "title": "PhD in Environmental Science",
-      "description": "Doctoral research focusing on valorization of industrial waste for sustainable polymer composites.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "research",
-      "page": "/research/phd"
-    },
-    {
-      "id": "about",
-      "name": "About Me",
-      "title": "Hasan Ahmed",
-      "description": "Environmental researcher and technical expert passionate about sustainability, waste management, and mentoring young scientists.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "about",
-      "page": "/about"
-    },
-    {
-      "id": "achievements",
-      "name": "Achievements",
-      "title": "Key Achievements",
-      "description": "A comprehensive list of my professional achievements, awards, and recognitions.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "achievements",
-      "page": "/achievements"
-    },
-    {
-      "id": "training",
-      "name": "Training & Consultancy",
-      "title": "Training Programs & Consultancy Work",
-      "description": "Professional training programs delivered and consultancy services provided to organizations.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "training",
-      "page": "/achievements/training"
-    },
-    {
-      "id": "education",
-      "name": "Education",
-      "title": "Academic Background",
-      "description": "PhD in Environmental Science from University of Dhaka, Master of Science in Chemistry, and Bachelor of Science in Chemistry.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "education",
-      "page": "/education"
-    },
-    {
-      "id": "media",
-      "name": "Media & Blog",
-      "title": "Media Appearances & Blog",
-      "description": "Interviews, media coverage, and my personal blog on research and environmental topics.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "media",
-      "page": "/media"
-    },
-    {
-      "id": "blog",
-      "name": "Blog & Insights",
-      "title": "Blog & Insights",
-      "description": "Personal blog sharing insights on research, environmental sustainability, and professional experiences.",
-      "image": "https://drive.google.com/uc?export=view&id=xxxxxxxxxxx",
-      "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-      "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
-      "type": "blog",
-      "page": "/media/blog"
-    }
-  ]
+export const images = [
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "experience",
+    "name": "Professional Experience",
+    "title": "Professional Journey",
+    "description": "Overview of my professional experience across international organizations and corporate sectors.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience 2",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-bpcl",
+    "name": "BPCL Experience",
+    "title": "Research Consultant at BPCL",
+    "description": "Worked on research projects related to energy efficiency and sustainable practices in the corporate sector.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/bpcl"
+  },
+  {
+    "id": "experience-maskeeters",
+    "name": "Maskeeters Experience",
+    "title": "Team Lead at Maskeeters",
+    "description": "Led a team of researchers and developers on innovative projects and research initiatives.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/maskeeters"
+  },
+  {
+    "id": "experience-maskeeters",
+    "name": "Maskeeters Experience",
+    "title": "Team Lead at Maskeeters",
+    "description": "Led a team of researchers and developers on innovative projects and research initiatives.",
+    "image": "",
+    "video": "https://youtu.be/21E3MNWz5m4?list=RD21E3MNWz5m4",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/maskeeters"
+  },
+  {
+    "id": "research",
+    "name": "Research Journey",
+    "title": "My Research Journey",
+    "description": "Overview of my research work, publications, and academic contributions.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "type": "research",
+    "page": "/research"
+  },
+  {
+    "id": "research-lab",
+    "name": "Lab Experimentations",
+    "title": "Laboratory Research",
+    "description": "Hands-on laboratory work focusing on industrial waste valorization and polymer composite development.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "type": "research",
+    "page": "/research/lab"
+  },
+  {
+    "id": "research-youth",
+    "name": "Youth Engagement",
+    "title": "Mentoring Young Researchers",
+    "description": "Supervising and mentoring undergraduate and graduate students in environmental research projects.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "type": "research",
+    "page": "/research/youth"
+  },
+  {
+    "id": "research-phd",
+    "name": "My PhD Journey",
+    "title": "PhD in Environmental Science",
+    "description": "Doctoral research focusing on valorization of industrial waste for sustainable polymer composites.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "research",
+    "page": "/research/phd"
+  },
+  {
+    "id": "about",
+    "name": "About Me",
+    "title": "Hasan Ahmed",
+    "description": "Environmental researcher and technical expert passionate about sustainability, waste management, and mentoring young scientists.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "about",
+    "page": "/about"
+  },
+  {
+    "id": "achievements",
+    "name": "Achievements",
+    "title": "Key Achievements",
+    "description": "A comprehensive list of my professional achievements, awards, and recognitions.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "achievements",
+    "page": "/achievements"
+  },
+  {
+    "id": "training",
+    "name": "Training & Consultancy",
+    "title": "Training Programs & Consultancy Work",
+    "description": "Professional training programs delivered and consultancy services provided to organizations.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "training",
+    "page": "/achievements/training"
+  },
+  {
+    "id": "education",
+    "name": "Education",
+    "title": "Academic Background",
+    "description": "PhD in Environmental Science from University of Dhaka, Master of Science in Chemistry, and Bachelor of Science in Chemistry.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "education",
+    "page": "/education"
+  },
+  {
+    "id": "media",
+    "name": "Media & Blog",
+    "title": "Media Appearances & Blog",
+    "description": "Interviews, media coverage, and my personal blog on research and environmental topics.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "media",
+    "page": "/media"
+  },
+  {
+    "id": "blog",
+    "name": "Blog & Insights",
+    "title": "Blog & Insights",
+    "description": "Personal blog sharing insights on research, environmental sustainability, and professional experiences.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "blog",
+    "page": "/media/blog"
+  }
+];
+
+
+
 // Achievements data
 export const achievements = {
   researchImpact: [

@@ -11,7 +11,7 @@ import {
   expertise, 
   publications,
   mentors,
-  pages,
+  images,
   socialLinks,  // ✅ Add this
   achievements   // ✅ Add this
 } from '@/lib/data';

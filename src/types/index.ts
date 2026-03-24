@@ -68,6 +68,14 @@ export interface Page {
   image: string;
   video?: string;
   videoEmbed?: string;
+  images?: Array<{
+    id: string;
+    title: string;
+    description: string;
+    image: string;
+    video?: boolean;
+    videoEmbed?: string;
+  }>;
   type: string;
   page: string;
 }

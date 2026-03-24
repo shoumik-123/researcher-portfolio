@@ -18,14 +18,63 @@ import {
 
 import { 
   researcherInfo,
-  pages 
+  images 
 } from '@/lib/data';
 
-// Get experience page data from pages array
-const experiencePage = pages.find(page => page.id === 'experience');
-const unopsPage = pages.find(page => page.id === 'experience-unops');
-const bpclPage = pages.find(page => page.id === 'experience-bpcl');
-const maskeetersPage = pages.find(page => page.id === 'experience-maskeeters');
+// Get experience page data from images array
+const experiencePage = images.find(page => page.id === 'experience');
+const unopsPage = images.find(page => page.id === 'experience-unops');
+const unopsMediaItems = images.filter(page => page.id === 'experience-unops');
+const bpclPage = images.find(page => page.id === 'experience-bpcl');
+const maskeetersPage = images.find(page => page.id === 'experience-maskeeters');
+const researchLabPage = images.find(page => page.id === 'research-lab');
+const researchYouthPage = images.find(page => page.id === 'research-youth');
+const researchPhdPage = images.find(page => page.id === 'research-phd');
+
+const resolveImageUrl = (image?: string): string => {
+  if (!image) return '/images/achievement-1.jpg';
+
+  try {
+    const url = new URL(image);
+    if (url.pathname === '/_next/image' && url.searchParams.has('url')) {
+      const inner = url.searchParams.get('url');
+      if (inner) return decodeURIComponent(inner);
+    }
+  } catch {
+    // not a valid URL; return as-is
+  }
+
+  return image;
+};
+
+// Video URL resolver - converts YouTube watch/youtu.be URLs to embed format
+const resolveVideoEmbed = (videoUrl?: string): string => {
+  if (!videoUrl) return '';
+  
+  try {
+    // Handle youtu.be short URLs
+    if (videoUrl.includes('youtu.be/')) {
+      const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
+      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    }
+    
+    // Handle standard youtube.com URLs
+    if (videoUrl.includes('youtube.com')) {
+      const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
+      const videoId = urlParams.get('v');
+      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    }
+    
+    // Already an embed URL
+    if (videoUrl.includes('youtube.com/embed/')) {
+      return videoUrl;
+    }
+  } catch {
+    // return original if parsing fails
+  }
+  
+  return videoUrl;
+};
 
 // Experience data based on your content
 const experiences = [
@@ -44,7 +93,7 @@ const experiences = [
       "Led technical development and contextualization of innovative solutions for plastic pollution mitigation in Bangladesh.",
       "Facilitated the environmental compliance and technical review of large-scale recycling infrastructure, ensuring alignment with sustainability and safeguard standards."
     ],
-    image: unopsPage?.image,
+    image: resolveImageUrl(unopsPage?.image),
     video: unopsPage?.video,
     videoEmbed: unopsPage?.videoEmbed,
     type: "unops",
@@ -90,7 +139,7 @@ const experiences = [
       "Contributed to research publications focused on sustainable materials and health-related microbial studies.",
       "Promoted interdisciplinary thinking by linking microbiological data to broader environmental and biomedical outcomes."
     ],
-    image: bpclPage?.image ,
+    image: resolveImageUrl(researchLabPage?.image || researchYouthPage?.image),
     type: "research",
     icon: <FiBook className="w-6 h-6" />,
     color: "bg-purple-100 text-purple-600"
@@ -111,7 +160,7 @@ const experiences = [
       "Performed microbial identification and culture for foodborne pathogen surveillance.",
       "Addressed research gaps by applying innovative and interdisciplinary approaches to experimental design and data interpretation."
     ],
-    image: bpclPage?.image ,
+    image: resolveImageUrl(researchPhdPage?.image),
     type: "research",
     icon: <FiFileText className="w-6 h-6" />,
     color: "bg-orange-100 text-orange-600"
@@ -255,10 +304,11 @@ export default function ExperiencePage() {
                     {exp.image && exp.image.trim() !== '' && (
                       <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
                         <Image
-                          src={exp.image}
+                          src={resolveImageUrl(exp.image)}
                           alt={exp.organization}
                           fill
                           className="object-cover"
+                          unoptimized
                         />
                         {exp.videoEmbed && (
                           <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
