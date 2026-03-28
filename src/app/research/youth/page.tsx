@@ -18,11 +18,11 @@ import {
   FiChevronLeft,
   FiChevronRight,
   FiTool,
-
   FiUserCheck,
   FiHeart,
   FiAward,
-  FiZap
+  FiZap,
+  FiMic
 } from 'react-icons/fi';
 
 import { 
@@ -80,175 +80,20 @@ const galleryImages = youthMediaItems.map((item) => ({
   videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
 }));
 
-// Mentorship Programs
-const mentorshipPrograms = [
-  {
-    id: 1,
-    title: "Research Mentorship Program",
-    description: "Comprehensive mentorship program for undergraduate students interested in environmental research",
-    duration: "2023 - Present",
-    participants: "15+ students",
-    activities: [
-      "Weekly research guidance sessions",
-      "Lab training and safety protocols",
-      "Literature review techniques",
-      "Research paper writing workshops"
-    ],
-    outcomes: [
-      "5 research papers published",
-      "3 conference presentations",
-      "2 students pursuing higher studies abroad"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRD5vI5t7_jetgsM2JY4P2neVT4eCr17oL-wfD3OpPQIpZ589_6lwwQ7Ks9cO1zCMxYS6BIPJs_OJErgnFJ_HbS3LExYULw4XhBUM66_25QRKfY3UGnriV0hJTfYBkAjsRtIDCBIdIs1xurhLtGKrr2oVQLTqliACxmNzZat1M4qdNbF0xamS4YEOxp3ymb5aeO0uxzEl4yMibCvKJrEHcVKygAEjzXYGDVuA=w1280"
-  },
-  {
-    id: 2,
-    title: "Thesis Supervision",
-    description: "Supervising undergraduate and master's thesis projects in biomedical and environmental sciences",
-    duration: "2022 - Present",
-    participants: "5 students",
-    activities: [
-      "Thesis topic selection and development",
-      "Experimental design guidance",
-      "Data analysis and interpretation",
-      "Thesis writing and presentation preparation"
-    ],
-    outcomes: [
-      "1 master's thesis completed with publication",
-      "4 undergraduate theses completed",
-      "2 students awarded best thesis"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRD5vI5t7_jetgsM2JY4P2neVT4eCr17oL-wfD3OpPQIpZ589_6lwwQ7Ks9cO1zCMxYS6BIPJs_OJErgnFJ_HbS3LExYULw4XhBUM66_25QRKfY3UGnriV0hJTfYBkAjsRtIDCBIdIs1xurhLtGKrr2oVQLTqliACxmNzZat1M4qdNbF0xamS4YEOxp3ymb5aeO0uxzEl4yMibCvKJrEHcVKygAEjzXYGDVuA=w1280"
-  },
-  {
-    id: 3,
-    title: "Summer Research Internship",
-    description: "Intensive summer program introducing students to hands-on laboratory research",
-    duration: "2023 Summer",
-    participants: "8 students",
-    activities: [
-      "Laboratory technique training",
-      "Research project execution",
-      "Scientific writing workshops",
-      "Research presentation skills"
-    ],
-    outcomes: [
-      "8 students completed internship",
-      "2 collaborative research projects",
-      "1 research paper under preparation"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRD5vI5t7_jetgsM2JY4P2neVT4eCr17oL-wfD3OpPQIpZ589_6lwwQ7Ks9cO1zCMxYS6BIPJs_OJErgnFJ_HbS3LExYULw4XhBUM66_25QRKfY3UGnriV0hJTfYBkAjsRtIDCBIdIs1xurhLtGKrr2oVQLTqliACxmNzZat1M4qdNbF0xamS4YEOxp3ymb5aeO0uxzEl4yMibCvKJrEHcVKygAEjzXYGDVuA=w1280"
-  }
+// JUST Mentorship Projects
+const justProjects = [
+  "Antibacterial customized shoes from water hyacinth (reduced material cost by 20%)",
+  "Non-toxic resin development for improved project safety and sustainability",
+  "Chitosan extraction from crab shells using waste eggshells as a green chemical",
+  "Footwear designed as a heavy metal separator using cigarette filters for environmental protection"
 ];
 
-// Workshops & Training Sessions
-const workshops = [
-  {
-    id: 1,
-    title: "Introduction to Polymer Science",
-    date: "March 2024",
-    location: "KUET",
-    participants: 25,
-    description: "Workshop covering fundamentals of polymer synthesis, characterization, and applications",
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRD5vI5t7_jetgsM2JY4P2neVT4eCr17oL-wfD3OpPQIpZ589_6lwwQ7Ks9cO1zCMxYS6BIPJs_OJErgnFJ_HbS3LExYULw4XhBUM66_25QRKfY3UGnriV0hJTfYBkAjsRtIDCBIdIs1xurhLtGKrr2oVQLTqliACxmNzZat1M4qdNbF0xamS4YEOxp3ymb5aeO0uxzEl4yMibCvKJrEHcVKygAEjzXYGDVuA=w1280"
-  },
-  {
-    id: 2,
-    title: "Research Methodology and Scientific Writing",
-    date: "December 2023",
-    location: "University of Dhaka",
-    participants: 40,
-    description: "Training on research design, data analysis, and academic paper preparation",
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRD5vI5t7_jetgsM2JY4P2neVT4eCr17oL-wfD3OpPQIpZ589_6lwwQ7Ks9cO1zCMxYS6BIPJs_OJErgnFJ_HbS3LExYULw4XhBUM66_25QRKfY3UGnriV0hJTfYBkAjsRtIDCBIdIs1xurhLtGKrr2oVQLTqliACxmNzZat1M4qdNbF0xamS4YEOxp3ymb5aeO0uxzEl4yMibCvKJrEHcVKygAEjzXYGDVuA=w1280"
-  },
-  {
-    id: 3,
-    title: "Environmental Microbiology Techniques",
-    date: "October 2023",
-    location: "CARS, University of Dhaka",
-    participants: 15,
-    description: "Hands-on training on microbial culture, identification, and antibiotic resistance analysis",
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRD5vI5t7_jetgsM2JY4P2neVT4eCr17oL-wfD3OpPQIpZ589_6lwwQ7Ks9cO1zCMxYS6BIPJs_OJErgnFJ_HbS3LExYULw4XhBUM66_25QRKfY3UGnriV0hJTfYBkAjsRtIDCBIdIs1xurhLtGKrr2oVQLTqliACxmNzZat1M4qdNbF0xamS4YEOxp3ymb5aeO0uxzEl4yMibCvKJrEHcVKygAEjzXYGDVuA=w1280"
-  },
-  {
-    id: 4,
-    title: "Circular Economy and Waste Management",
-    date: "August 2023",
-    location: "BUET",
-    participants: 30,
-    description: "Workshop on sustainable waste management and circular economy principles",
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSRD5vI5t7_jetgsM2JY4P2neVT4eCr17oL-wfD3OpPQIpZ589_6lwwQ7Ks9cO1zCMxYS6BIPJs_OJErgnFJ_HbS3LExYULw4XhBUM66_25QRKfY3UGnriV0hJTfYBkAjsRtIDCBIdIs1xurhLtGKrr2oVQLTqliACxmNzZat1M4qdNbF0xamS4YEOxp3ymb5aeO0uxzEl4yMibCvKJrEHcVKygAEjzXYGDVuA=w1280"
-  }
-];
-
-// Student Achievements
-const studentAchievements = [
-  {
-    id: 1,
-    student: "Suman Dewanjee",
-    achievement: "Published research paper on chitosan-based hydrogel in peer-reviewed journal",
-    year: "2024",
-    type: "Publication"
-  },
-  {
-    id: 2,
-    student: "Mohammad Ali Tanvir",
-    achievement: "Best presentation award at ICME 2023 conference",
-    year: "2023",
-    type: "Award"
-  },
-  {
-    id: 3,
-    student: "Popi Khatun",
-    achievement: "Secured research fellowship for higher studies abroad",
-    year: "2024",
-    type: "Fellowship"
-  },
-  {
-    id: 4,
-    student: "Aniqa Tasnim",
-    achievement: "Co-authored paper on antibacterial composites in international journal",
-    year: "2023",
-    type: "Publication"
-  },
-  {
-    id: 5,
-    student: "Md. Ashikur Rahaman Noyon",
-    achievement: "Presented research at international conference (ICMIEE 2022)",
-    year: "2022",
-    type: "Conference"
-  },
-  {
-    id: 6,
-    student: "Saad Ahmed",
-    achievement: "Research on biodiesel from tannery waste presented at ICTSE 2024",
-    year: "2024",
-    type: "Conference"
-  }
-];
-
-// Mentoring Approach
-const mentoringApproach = [
-  {
-    title: "Personalized Guidance",
-    description: "One-on-one mentoring sessions tailored to each student's research interests and career goals",
-    icon: <FiUserCheck className="w-6 h-6" />
-  },
-  {
-    title: "Hands-on Training",
-    description: "Practical laboratory training and real-world research experience",
-    icon: <FiTool className="w-6 h-6" />
-  },
-  {
-    title: "Career Development",
-    description: "Guidance on academic pathways, graduate school applications, and research careers",
-    icon: <FiAward className="w-6 h-6" />
-  },
-  {
-    title: "Collaborative Research",
-    description: "Encouraging teamwork and interdisciplinary research collaboration",
-    icon: <FiUsers className="w-6 h-6" />
-  }
+// Keynote Topics
+const keynoteTopics = [
+  "Interdisciplinary research collaboration for advanced materials fabrication",
+  "Research skills and career growth toolkit",
+  "Sustainable waste management approaches",
+  "Project management, effective communication, and SDG implementation"
 ];
 
 export default function YouthEngagementPage() {
@@ -300,13 +145,13 @@ export default function YouthEngagementPage() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.h1
             key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase mb-6 text-center"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 text-center leading-tight"
             initial="hidden"
             animate="visible"
             variants={{
               visible: {
                 transition: {
-                  staggerChildren: 0.05,
+                  staggerChildren: 0.03,
                 },
               },
             }}
@@ -331,7 +176,7 @@ export default function YouthEngagementPage() {
             transition={{ delay: 1.2, duration: 1 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto text-center"
           >
-            {youthPage?.description || "Passionate about mentoring young researchers and fostering the next generation of scientists through guidance, training, and collaborative research opportunities"}
+            Inspiring and Empowering the Next Generation
           </motion.p>
         </div>
       </section>
@@ -344,174 +189,100 @@ export default function YouthEngagementPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h2 className="text-3xl font-light text-gray-900 mb-4 flex items-center gap-3">
-            <FiHeart className="text-primary" />
-            My Commitment to Youth Development
-          </h2>
-          <p className="text-gray-700 leading-relaxed text-justify">
-            I am deeply committed to mentoring and supporting the next generation of researchers. Through personalized guidance, hands-on training, and collaborative research opportunities, I strive to help young scientists develop the skills, confidence, and vision needed to pursue impactful careers in science and innovation. My mentoring approach emphasizes critical thinking, ethical research practices, and interdisciplinary collaboration, preparing students to address complex environmental and biomedical challenges.
+          <p className="text-gray-700 leading-relaxed text-justify text-lg mb-6">
+            I am passionate about mentoring young students and building the capacity of future environmental leaders through hands-on guidance, thesis supervision, and inspirational talks at universities.
+          </p>
+          <p className="text-gray-700 leading-relaxed text-justify text-lg">
+            <span className="font-semibold">My Commitment:</span> Through mentoring and speaking engagements, I help students bridge academic knowledge with real-world impact—turning ideas into sustainable solutions for a greener Bangladesh. I strongly believe that investing in young minds today is the most powerful way to create a circular and regenerative future.
           </p>
         </motion.section>
 
-        {/* Mentorship Programs */}
+        {/* Student Mentoring & Thesis Mentorship */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
             <FiUserCheck className="text-primary" />
-            Mentorship Programs
+            Student Mentoring & Thesis Mentorship
           </h2>
           
-          <div className="space-y-12">
-            {mentorshipPrograms.map((program) => (
-              <div key={program.id} className="border-l-4 border-primary pl-6 py-2 hover:bg-gray-50 transition-colors">
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* Image */}
-                  <div className="md:w-1/3">
-                    <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
-                      <img
-                        src={program.image}
-                        alt={program.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="md:w-2/3">
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-2">{program.title}</h3>
-                    <p className="text-gray-600 mb-3">{program.description}</p>
-                    
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-3">
-                      <span className="flex items-center gap-1"><FiCalendar className="w-4 h-4" /> {program.duration}</span>
-                      <span className="flex items-center gap-1"><FiUsers className="w-4 h-4" /> {program.participants}</span>
-                    </div>
-                    
-                    <div className="mb-3">
-                      <p className="text-sm font-semibold text-gray-700 mb-2">Activities:</p>
-                      <ul className="space-y-1">
-                        {program.activities.map((activity, i) => (
-                          <li key={i} className="flex gap-2 text-sm text-gray-600">
-                            <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                            <span>{activity}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700 mb-2">Outcomes:</p>
-                      <ul className="space-y-1">
-                        {program.outcomes.map((outcome, i) => (
-                          <li key={i} className="flex gap-2 text-sm text-gray-600">
-                            <FiStar className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                            <span>{outcome}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
+          <div className="space-y-8">
+            {/* JUST Section */}
+            <div className="bg-gray-50 rounded-xl p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                  <FiUsers className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900">Jessore University of Science and Technology (JUST)</h3>
+                  <p className="text-gray-600">Mentored four undergraduate students from the Biomedical Engineering Department on their final-year thesis projects</p>
                 </div>
               </div>
-            ))}
+              <p className="text-gray-700 mb-3">Guided them in developing practical, sustainable solutions including:</p>
+              <ul className="space-y-2">
+                {justProjects.map((project, idx) => (
+                  <li key={idx} className="flex gap-2 text-gray-700">
+                    <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
+                    <span>{project}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* University of Dhaka Section */}
+            <div className="bg-gray-50 rounded-xl p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                  <FiBook className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900">University of Dhaka</h3>
+                  <p className="text-gray-600">Supervised one Master's student from the Biomedical and Physics Departments</p>
+                </div>
+              </div>
+              <p className="text-gray-700">Supervised the development and fabrication of antibacterial sandwich composites, which resulted in a peer-reviewed journal publication.</p>
+            </div>
           </div>
         </motion.section>
 
-        {/* Workshops & Training */}
+        {/* Keynote Speeches & Lectures */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiBook className="text-primary" />
-            Workshops & Training Sessions
+            <FiMic className="text-primary" />
+            Keynote Speeches & Lectures
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {workshops.map((workshop) => (
-              <div key={workshop.id} className="bg-gray-50 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-                <div className="relative h-48">
-                  <img
-                    src={workshop.image}
-                    alt={workshop.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{workshop.title}</h3>
-                  <p className="text-gray-600 text-sm mb-3">{workshop.description}</p>
-                  <div className="flex flex-wrap gap-3 text-xs text-gray-500">
-                    <span className="flex items-center gap-1"><FiCalendar className="w-3 h-3" /> {workshop.date}</span>
-                    <span className="flex items-center gap-1"><FiMapPin className="w-3 h-3" /> {workshop.location}</span>
-                    <span className="flex items-center gap-1"><FiUsers className="w-3 h-3" /> {workshop.participants} participants</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Jessore University of Science and Technology (JUST)</h3>
+              <p className="text-gray-700 mb-3">Delivered keynote lectures and interactive sessions on:</p>
+              <ul className="space-y-2">
+                {keynoteTopics.map((topic, idx) => (
+                  <li key={idx} className="flex gap-2 text-gray-700">
+                    <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
+                    <span>{topic}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-        {/* Student Achievements */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiAward className="text-primary" />
-            Student Achievements
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {studentAchievements.map((achievement) => (
-              <div key={achievement.id} className="bg-gray-50 rounded-lg p-4 hover:bg-primary/5 transition-colors">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                    <FiStar className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{achievement.student}</h3>
-                    <p className="text-sm text-gray-600 mt-1">{achievement.achievement}</p>
-                    <div className="flex gap-3 mt-2 text-xs">
-                      <span className="text-primary">{achievement.year}</span>
-                      <span className="text-gray-400">|</span>
-                      <span className="text-gray-500">{achievement.type}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Mentoring Approach */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiHeart className="text-primary" />
-            My Mentoring Approach
-          </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mentoringApproach.map((approach, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-6 text-center hover:shadow-md transition-shadow">
-                <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">
-                  {approach.icon}
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">{approach.title}</h3>
-                <p className="text-sm text-gray-600">{approach.description}</p>
-              </div>
-            ))}
+            <div className="bg-gray-50 rounded-xl p-6">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">United Nations Youth and Students Association of Bangladesh (UNYSAB)</h3>
+              <p className="text-gray-700 mb-3">
+                Served as Keynote Speaker and Trainer, inspiring young leaders on environmental innovation, research excellence, and youth empowerment.
+              </p>
+              <p className="text-gray-700 mt-3">
+                Received an appreciation certificate from the President of UNYSAB for contributions to youth capacity building.
+              </p>
+            </div>
           </div>
         </motion.section>
 
@@ -519,15 +290,15 @@ export default function YouthEngagementPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.3 }}
           className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
             <FiImage className="text-primary" />
-            Engagement Gallery
+            Photo Gallery
           </h2>
           <p className="text-gray-600 mb-8">
-            Moments from mentorship sessions, workshops, and student research activities
+            Moments from mentorship sessions, keynote speeches, and student engagement activities
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -560,8 +331,6 @@ export default function YouthEngagementPage() {
             ))}
           </div>
         </motion.section>
-
-
       </div>
 
       {/* Lightbox Modal */}

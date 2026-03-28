@@ -73,7 +73,6 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
   return videoUrl;
 };
 
-        {/* Video Section (if video exists in images array) */}
 const galleryImages = bpclMediaItems.map((item) => ({ 
   id: item.id || `bpcl-${Math.random()}`,
   title: item.title || item.name || 'BPCL Experience',
@@ -153,13 +152,13 @@ export default function BPCLExperiencePage() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.h1
             key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase mb-6 text-center"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 text-center leading-tight"
             initial="hidden"
             animate="visible"
             variants={{
               visible: {
                 transition: {
-                  staggerChildren: 0.05,
+                  staggerChildren: 0.03,
                 },
               },
             }}
@@ -207,10 +206,10 @@ export default function BPCLExperiencePage() {
                   <h2 className="text-2xl font-semibold text-gray-900">
                     Bangladesh Petrochemical Company Limited (BPCL)
                   </h2>
-                  <p className="text-gray-600">Leading petrochemical company advancing sustainable industrial development</p>
+                  <p className="text-gray-600">Manager – Environment, Sustainability & MEAL</p>
                 </div>
               </div>
-              <p className="text-gray-600 mt-2 text-sm">
+              <p className="text-gray-600 mt-2">
                 BPCL is a leading petrochemical company in Bangladesh, advancing sustainable industrial development and promoting circular economy solutions in plastics recycling.
               </p>
               <div className="flex flex-wrap gap-6 text-sm text-gray-600 mt-6">
@@ -284,7 +283,7 @@ export default function BPCLExperiencePage() {
         </motion.section>
 
         {/* Key Focus Areas */}
-        <motion.section
+        {/* <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
@@ -314,9 +313,9 @@ export default function BPCLExperiencePage() {
               <p className="text-sm text-gray-600">Liaising with government, private sector, UN agencies, and local communities for harmonized execution</p>
             </div>
           </div>
-        </motion.section>
+        </motion.section> */}
 
-        {/* Image Gallery Section */}
+        {/* Photo Gallery Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -325,11 +324,11 @@ export default function BPCLExperiencePage() {
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
             <FiImage className="text-primary" />
-            Gallery
+            Photo Gallery
           </h2>
-          <p className="text-gray-600 mb-8">
+          {/* <p className="text-gray-600 mb-8">
             Visual documentation of leadership activities, stakeholder engagements, and project implementations during BPCL tenure
-          </p>
+          </p> */}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryImages.map((item, index) => (

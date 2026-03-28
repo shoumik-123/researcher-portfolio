@@ -18,23 +18,11 @@ export default function BlogPage() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen py-12">
+    <div className="bg-gray-50 min-h-screen py-20">
       <Container>
-        <h1 className="text-4xl font-light text-gray-900 mb-4">Blog & Insights</h1>
-        <p className="text-xl text-gray-600 mb-8">Thoughts on research and innovation</p>
+        <h1 className="text-4xl font-light text-gray-900 mb-4">coming soon</h1>
 
-        <div className="grid gap-6">
-          {posts.map((post, index) => (
-            <article key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-medium text-gray-900 mb-3">{post.title}</h2>
-              <p className="text-gray-700 mb-4">{post.excerpt}</p>
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <span className="flex items-center gap-1"><FiCalendar /> {post.date}</span>
-                <span className="flex items-center gap-1"><FiUser /> {post.author}</span>
-              </div>
-            </article>
-          ))}
-        </div>
+
       </Container>
     </div>
   );

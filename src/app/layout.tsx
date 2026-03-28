@@ -7,7 +7,7 @@ import Footer from '@/components/layout/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Hasan Ahmed - Interdisciplinary Researcher',
+  title: 'Hasan Ahmed - Environmental Specialist &  Interdisciplinary Researcher',
   description: 'Portfolio of Hasan Ahmed - Transforming waste into value-added materials',
 };
 

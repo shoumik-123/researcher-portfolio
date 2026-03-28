@@ -32,7 +32,9 @@ import {
   FiHeart,
   FiAward,
   FiTrendingUp,
-  FiTarget
+  FiTarget,
+  FiBriefcase,
+  FiMic
 } from 'react-icons/fi';
 
 import { 
@@ -90,176 +92,13 @@ const galleryImages = phdMediaItems.map((item) => ({
   videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
 }));
 
-// PhD Overview
-const phdOverview = {
-  title: "Valorization of Industrial Waste for Sustainable Polymer Composites",
-  field: "Environmental Science & Materials Engineering",
-  institution: "University of Dhaka",
-  supervisor: "Dr. Latiful Bari & Dr. Asma Rahman",
-  duration: "2021 - Present",
-  description: "My doctoral research focuses on transforming industrial waste materials into high-value polymer composites with applications in packaging, biomedical, and environmental sectors. The research integrates materials science, polymer chemistry, and environmental sustainability to develop biodegradable and biocompatible materials from waste resources."
-};
-
-// Research Timeline
-const researchTimeline = [
-  {
-    phase: "Literature Review & Gap Analysis",
-    period: "2021",
-    status: "completed",
-    description: "Comprehensive review of polymer composites, waste valorization, and sustainable materials. Identified key research gaps in industrial waste utilization.",
-    outcomes: ["Identified 5 major research gaps", "Published review paper", "Established research methodology"]
-  },
-  {
-    phase: "Material Collection & Characterization",
-    period: "2022",
-    status: "completed",
-    description: "Collection and characterization of industrial waste materials including tannery waste, shrimp shells, and sugarcane bagasse.",
-    outcomes: ["Collected 50+ waste samples", "Characterization using FTIR, XRD, SEM", "Established baseline properties"]
-  },
-  {
-    phase: "Polymer Composite Development",
-    period: "2022-2023",
-    status: "completed",
-    description: "Development and optimization of polymer composites from waste materials using various processing techniques.",
-    outcomes: ["Developed 3 composite formulations", "Optimized processing parameters", "Achieved 85% biodegradability"]
-  },
-  {
-    phase: "Characterization & Testing",
-    period: "2023",
-    status: "completed",
-    description: "Comprehensive testing of mechanical, thermal, and biological properties of developed composites.",
-    outcomes: ["Published 3 Q1 journal papers", "15+ citations", "Patent application filed"]
-  },
-  {
-    phase: "Biomedical Applications",
-    period: "2023-2024",
-    status: "in-progress",
-    description: "Exploring biomedical applications including wound healing, drug delivery, and tissue engineering.",
-    outcomes: ["Hydrogel development", "Cell viability studies", "Antibacterial testing"]
-  },
-  {
-    phase: "Thesis Writing & Submission",
-    period: "2024-2025",
-    status: "upcoming",
-    description: "Compilation of research findings, thesis writing, and final submission.",
-    outcomes: ["Thesis chapters", "Publications", "PhD defense"]
-  }
-];
-
-// Publications During PhD
-const phdPublications = [
-  {
-    title: "Valorization of Industrial Waste for Polymer Composite Development",
-    authors: "Ahmed H, Rahman A, Dewanjee S",
-    journal: "Journal of Environmental Management",
-    year: 2023,
-    impact: "Q1, IF: 8.9",
-    citations: 15,
-    link: "#"
-  },
-  {
-    title: "Development and Characterization of Chitosan-Based Antimicrobial Films",
-    authors: "Ahmed H, Noyon MAR, Uddin ME, et al.",
-    journal: "Cleaner Chemical Engineering",
-    year: 2025,
-    impact: "Q1",
-    citations: 5,
-    link: "#"
-  },
-  {
-    title: "Chitosan-Based Hydrogel Containing PVA, Cellulose and ZnO Nanoparticles",
-    authors: "Dewanjee S, Ahmed H, Tanvir MA, et al.",
-    journal: "Biomedical Materials",
-    year: 2024,
-    impact: "Q2",
-    citations: 8,
-    link: "#"
-  },
-  {
-    title: "Tannery Shaving Dust-Based Charcoal Blended Adsorbents",
-    authors: "Hosen MS, Sahen MS, Ahmed H, et al.",
-    journal: "Journal of Environmental Management",
-    year: 2024,
-    impact: "Q1, IF: 8.9",
-    citations: 3,
-    link: "#"
-  }
-];
-
-// Conference Presentations During PhD
-const phdConferences = [
-  {
-    title: "Biodegradable and flexible fiber-reinforced composite sheet from tannery solid wastes",
-    event: "ICMIEE 2022",
-    location: "KUET, Bangladesh",
-    date: "December 2022",
-    role: "Corresponding Author",
-    link: "#"
-  },
-  {
-    title: "Cr removed collagen from leather waste-based chitosan composite to remove dye",
-    event: "ICME 2023",
-    location: "BUET, Bangladesh",
-    date: "December 2023",
-    role: "Corresponding Author",
-    link: "#"
-  },
-  {
-    title: "Sustainable and eco-friendly development of tannery solid waste-based chitosan/eggshell antibacterial composite sheets",
-    event: "ICACE 2024",
-    location: "CUET, Bangladesh",
-    date: "December 2024",
-    role: "Corresponding Author",
-    link: "#"
-  }
-];
-
-// Research Collaborations
-const collaborations = [
-  {
-    institution: "Virginia Tech, USA",
-    collaborator: "Suman Dewanjee (PhD Fellow)",
-    focus: "Biomedical applications of chitosan composites",
-    period: "2023-2024"
-  },
-  {
-    institution: "KACST, Saudi Arabia",
-    collaborator: "Prof. Obaid Alharabi",
-    focus: "Emerging contaminants and environmental analytics",
-    period: "2023-Present"
-  },
-  {
-    institution: "BUET, Bangladesh",
-    collaborator: "Dr. Tarik Arafat",
-    focus: "Biomedical materials and wound healing",
-    period: "2022-2024"
-  },
-  {
-    institution: "University of Dhaka, Bangladesh",
-    collaborator: "Md. Ibrahim al Imran",
-    focus: "Hydrogel synthesis and characterization",
-    period: "2022-2023"
-  }
-];
-
-// Skills Developed
-const skillsDeveloped = [
-  { category: "Polymer Synthesis", skills: ["Solution casting", "Compression molding", "Electrospinning"] },
-  { category: "Characterization", skills: ["FTIR", "XRD", "SEM", "TGA/DSC", "Tensile Testing"] },
-  { category: "Biomedical", skills: ["Cell Culture", "Cell Viability", "Antibacterial Testing", "Cytotoxicity"] },
-  { category: "Analytical", skills: ["HPLC", "AAS", "Microbial Culture", "Spectroscopy"] },
-  { category: "Software", skills: ["OriginLab", "EndNote", "LaTeX", "ImageJ", "SPSS"] },
-  { category: "Academic", skills: ["Scientific Writing", "Grant Writing", "Peer Review", "Presentation"] }
-];
-
-// Research Impact Metrics
-const impactMetrics = [
-  { label: "Publications", value: "8+", icon: <FiFileText className="w-5 h-5" /> },
-  { label: "Citations", value: "30+", icon: <FiTrendingUp className="w-5 h-5" /> },
-  { label: "Conference Presentations", value: "6+", icon: <FiGlobe className="w-5 h-5" /> },
-  { label: "Collaborations", value: "4+", icon: <FiUsers className="w-5 h-5" /> },
-  { label: "Q1 Publications", value: "4", icon: <FiStar className="w-5 h-5" /> },
-  { label: "Students Mentored", value: "8", icon: <FiUserCheck className="w-5 h-5" /> }
+// Fields of Interest
+const fieldsOfInterest = [
+  "Environmental Science",
+  "Materials Science",
+  "Chemical Engineering",
+  "Biochemical Engineering",
+  "Biomedical Engineering"
 ];
 
 export default function PhDJourneyPage() {
@@ -311,13 +150,13 @@ export default function PhDJourneyPage() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.h1
             key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase mb-6 text-center"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 text-center leading-tight"
             initial="hidden"
             animate="visible"
             variants={{
               visible: {
                 transition: {
-                  staggerChildren: 0.05,
+                  staggerChildren: 0.03,
                 },
               },
             }}
@@ -342,233 +181,63 @@ export default function PhDJourneyPage() {
             transition={{ delay: 1.2, duration: 1 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto text-center"
           >
-            {phdPage?.description || "Doctoral research focusing on valorization of industrial waste for sustainable polymer composites and biomedical applications"}
+            Actively Seeking PhD Opportunities
           </motion.p>
         </div>
       </section>
 
       {/* MAIN CONTENT */}
       <div className="max-w-5xl mx-auto px-6 py-12">
-        {/* PhD Overview Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-50 rounded-2xl p-8 mb-12"
-        >
-          <div className="flex flex-col md:flex-row gap-6">
-            <div className="md:w-2/3">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-3">{phdOverview.title}</h2>
-              <p className="text-gray-600 mb-4">{phdOverview.description}</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                <div className="flex items-center gap-2">
-                  <FiBook className="text-primary" />
-                  <span className="text-gray-600">Field: {phdOverview.field}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FiMapPin className="text-primary" />
-                  <span className="text-gray-600">Institution: {phdOverview.institution}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FiUsers className="text-primary" />
-                  <span className="text-gray-600">Supervisors: {phdOverview.supervisor}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FiCalendar className="text-primary" />
-                  <span className="text-gray-600">Duration: {phdOverview.duration}</span>
-                </div>
-              </div>
-            </div>
-            <div className="md:w-1/3 flex justify-center items-center">
-              <div className="bg-primary/10 rounded-full p-6">
-                <FiTarget className="w-16 h-16 text-primary" />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Research Impact Metrics */}
+        {/* Fields of Interest */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
-          className="mb-16"
+          className="mb-12"
         >
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {impactMetrics.map((metric, idx) => (
-              <div key={idx} className="bg-white border border-gray-200 rounded-xl p-4 text-center hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-2">
-                  {metric.icon}
-                </div>
-                <div className="text-2xl font-bold text-gray-900">{metric.value}</div>
-                <div className="text-xs text-gray-500 uppercase tracking-wider">{metric.label}</div>
-              </div>
+          <h2 className="text-3xl font-light text-gray-900 mb-6 text-center">I am currently searching for PhD positions in the following interdisciplinary fields:</h2>
+          
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {fieldsOfInterest.map((field, idx) => (
+              <span key={idx} className="px-6 py-3 bg-primary/10 text-primary rounded-full text-lg font-medium">
+                {field}
+              </span>
             ))}
           </div>
         </motion.section>
 
-        {/* Research Timeline */}
+        {/* Research Vision */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-16"
+          className="mb-12"
         >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiCalendar className="text-primary" />
-            Research Timeline
+          <h2 className="text-3xl font-light text-gray-900 mb-4 flex items-center gap-3">
+            <FiEye className="text-primary" />
+            My Research Vision
           </h2>
-          
-          <div className="space-y-6">
-            {researchTimeline.map((phase, idx) => (
-              <div key={idx} className="relative pl-8 border-l-2 border-gray-200 hover:border-primary transition-colors">
-                <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full ${
-                  phase.status === 'completed' ? 'bg-green-500' : 
-                  phase.status === 'in-progress' ? 'bg-yellow-500' : 'bg-gray-300'
-                }`} />
-                <div className="mb-2 flex flex-wrap items-center gap-3">
-                  <h3 className="text-xl font-semibold text-gray-900">{phase.phase}</h3>
-                  <span className="text-sm text-gray-500">{phase.period}</span>
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    phase.status === 'completed' ? 'bg-green-100 text-green-700' : 
-                    phase.status === 'in-progress' ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-700'
-                  }`}>
-                    {phase.status}
-                  </span>
-                </div>
-                <p className="text-gray-600 mb-3">{phase.description}</p>
-                <ul className="space-y-1">
-                  {phase.outcomes.map((outcome, i) => (
-                    <li key={i} className="flex gap-2 text-sm text-gray-500">
-                      <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                      <span>{outcome}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <p className="text-gray-700 leading-relaxed text-justify text-lg">
+            My research vision focuses on advancing sustainable materials, waste-to-resource technologies, circular economy systems, and biomaterials for environmental remediation and biomedical applications. I am particularly interested in projects that combine laboratory innovation with real-world impact—transforming industrial and biological waste into high-value, eco-friendly solutions.
+          </p>
         </motion.section>
 
-        {/* Publications During PhD */}
+        {/* Future Update Note */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mb-16"
+          className="mb-12"
         >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiFileText className="text-primary" />
-            Publications During PhD
-          </h2>
-          
-          <div className="space-y-4">
-            {phdPublications.map((pub, idx) => (
-              <div key={idx} className="border-l-4 border-primary pl-4 py-2 hover:bg-gray-50 transition-colors">
-                <h3 className="font-semibold text-gray-900">{pub.title}</h3>
-                <p className="text-sm text-gray-600">{pub.authors}</p>
-                <div className="flex flex-wrap gap-3 mt-2 text-xs">
-                  <span className="text-primary">{pub.journal}</span>
-                  <span className="text-gray-400">|</span>
-                  <span>{pub.year}</span>
-                  <span className="text-gray-400">|</span>
-                  <span>Impact: {pub.impact}</span>
-                  <span className="text-gray-400">|</span>
-                  <span>Citations: {pub.citations}</span>
-                </div>
-                <a href={pub.link} className="inline-flex items-center gap-1 text-primary text-xs mt-2 hover:underline">
-                  View Publication <FiExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Conference Presentations */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiGlobe className="text-primary" />
-            Conference Presentations
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {phdConferences.map((conf, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow">
-                <h3 className="font-semibold text-gray-900 mb-2">{conf.title}</h3>
-                <p className="text-sm text-primary">{conf.event}</p>
-                <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500">
-                  <span className="flex items-center gap-1"><FiMapPin className="w-3 h-3" /> {conf.location}</span>
-                  <span className="flex items-center gap-1"><FiCalendar className="w-3 h-3" /> {conf.date}</span>
-                </div>
-                {conf.role && <p className="text-xs text-gray-400 mt-2">Role: {conf.role}</p>}
-                <a href={conf.link} className="inline-flex items-center gap-1 text-primary text-xs mt-3 hover:underline">
-                  View Paper <FiExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Research Collaborations */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiUsers className="text-primary" />
-            Research Collaborations
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {collaborations.map((collab, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                    <FiGlobe className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{collab.institution}</h3>
-                    <p className="text-sm text-gray-600">{collab.collaborator}</p>
-                    <p className="text-sm text-gray-500 mt-1">{collab.focus}</p>
-                    <p className="text-xs text-gray-400 mt-1">{collab.period}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Skills Developed */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiTool className="text-primary" />
-            Skills Developed
-          </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {skillsDeveloped.map((skill, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-4">
-                <h3 className="font-semibold text-gray-900 mb-2">{skill.category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {skill.skills.map((s, i) => (
-                    <span key={i} className="px-2 py-1 bg-white text-gray-600 rounded-md text-xs">
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+          <div className="bg-gray-50 rounded-2xl p-8 text-center">
+            <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">
+              <FiTrendingUp className="w-8 h-8" />
+            </div>
+            <p className="text-gray-700 text-lg mb-4">
+              Once I secure a PhD position, I will promptly update this section with the university name, specific research topic, and supervisor details.
+            </p>
+            <p className="text-gray-600">
+              This doctoral journey is the next strategic step in my career, allowing me to build upon my existing laboratory experience, UN project expertise, and peer-reviewed publications to contribute cutting-edge research toward global sustainability and health challenges.
+            </p>
           </div>
         </motion.section>
 
@@ -576,15 +245,15 @@ export default function PhDJourneyPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
+          transition={{ delay: 0.3 }}
           className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
             <FiImage className="text-primary" />
-            PhD Journey Gallery
+            Photo Gallery
           </h2>
           <p className="text-gray-600 mb-8">
-            Moments from laboratory work, conferences, and research collaborations during my PhD journey
+            Moments from research activities, laboratory work, and professional engagements
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -617,8 +286,6 @@ export default function PhDJourneyPage() {
             ))}
           </div>
         </motion.section>
-
-
       </div>
 
       {/* Lightbox Modal */}

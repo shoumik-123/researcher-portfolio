@@ -20,8 +20,14 @@ import {
   FiLayers,
   FiZap,
   FiActivity,
-  FiCamera ,
-  FiPackage 
+  FiCamera,
+  FiPackage,
+  FiDroplet,
+  FiWind,
+  FiThermometer,
+  FiGrid,
+  FiMic,
+  FiBookOpen
 } from 'react-icons/fi';
 
 import { 
@@ -79,124 +85,38 @@ const galleryImages = labMediaItems.map((item) => ({
   videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
 }));
 
-// Lab Experiments Data
-const labExperiments = [
-  {
-    id: 1,
-    title: "Polymer Composite Development",
-    description: "Development of biodegradable polymer composites from industrial waste materials",
-    duration: "2023-2024",
-    location: "Chemistry Lab, KUET",
-    supervisor: "Dr. Mamun Jamal",
-    techniques: ["FTIR", "SEM", "XRD", "Tensile Testing"],
-    outcomes: [
-      "Successfully developed biodegradable composite sheets",
-      "Published in Q1 journal (Impact Factor 5.2)",
-      "85% biodegradability achieved within 60 days"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SThJ0g90ZNmW96ZQLrSMXUY6Ne_K_pnKcr27FlALXIoOCmNbnuIw-Kje-D-0Q5O4lChhAXQIazkgrrgife8r1uc2in4JFGZ7ydqyWrA--mJ2UtFhQJ2jw7L9pu1U9K24_Dp-vyORxFIVRbVgjpPZ9npDzAAQbvWaSsm16voGZEgBnp1LZ3efK4XG4YPzfJxssUwGwYKqKwtmrxMmskdxLqhsq-ON-pE3KzxOoE=w1280"
-  },
-  {
-    id: 2,
-    title: "Chitosan-Based Hydrogel Synthesis",
-    description: "Fabrication of biocompatible hydrogels for wound healing applications",
-    duration: "2023-2024",
-    location: "Biomedical Weight Lab, BUET",
-    supervisor: "Dr. Tarek Arafat",
-    techniques: ["Cell Culture", "Cell Viability", "FTIR", "Swelling Tests"],
-    outcomes: [
-      "Developed antibacterial hydrogel with 95% cell viability",
-      "Published in biomedical materials journal",
-      "Potential application for wound dressing"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSrczYcIBdL8JqECctYcZNeSdDNWjvMNQWgI34dbA0F1Mnf36UFQsDSo7h-C4IPGbxtnA9nc-nGLxozoiSBUs9VFRjpyrpENEul3LKAPEq4y6mDzh2VxjQlNfvxl0Ud1_9aagjbBhQ3n6RknCMiHKTSDkqIdvJiG1ldicgN5otaoeFWphJuQuUx4kS8ONEy5W49oRQJWouPfZnj9E1GiEgJe-b8JesMhQS7=w1280"
-  },
-  {
-    id: 3,
-    title: "Microbial Identification & Analysis",
-    description: "Identification and characterization of antibiotic-resistant microorganisms",
-    duration: "2022-2024",
-    location: "Microbiology Lab, CARS, University of Dhaka",
-    supervisor: "Dr. Latiful Bari",
-    techniques: ["HPLC", "AAS", "Microbial Culture", "Antibacterial Analysis"],
-    outcomes: [
-      "Identified antibiotic-resistant strains in food samples",
-      "Published in Environmental Science and Pollution Research",
-      "23+ citations"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SSrczYcIBdL8JqECctYcZNeSdDNWjvMNQWgI34dbA0F1Mnf36UFQsDSo7h-C4IPGbxtnA9nc-nGLxozoiSBUs9VFRjpyrpENEul3LKAPEq4y6mDzh2VxjQlNfvxl0Ud1_9aagjbBhQ3n6RknCMiHKTSDkqIdvJiG1ldicgN5otaoeFWphJuQuUx4kS8ONEy5W49oRQJWouPfZnj9E1GiEgJe-b8JesMhQS7=w1280"
-  },
-  {
-    id: 4,
-    title: "Chitosan Extraction from Shrimp Shells",
-    description: "Sustainable extraction of chitosan using waste eggshells as chemical",
-    duration: "2023",
-    location: "Instrumentation Lab, BMBT, DU",
-    supervisor: "Lecturer Imran Sir",
-    techniques: ["AAS", "HPLC", "FTIR", "Thermal Analysis"],
-    outcomes: [
-      "85% extraction efficiency achieved",
-      "Mentored 4 undergraduate students",
-      "Eco-friendly extraction method"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SThJ0g90ZNmW96ZQLrSMXUY6Ne_K_pnKcr27FlALXIoOCmNbnuIw-Kje-D-0Q5O4lChhAXQIazkgrrgife8r1uc2in4JFGZ7ydqyWrA--mJ2UtFhQJ2jw7L9pu1U9K24_Dp-vyORxFIVRbVgjpPZ9npDzAAQbvWaSsm16voGZEgBnp1LZ3efK4XG4YPzfJxssUwGwYKqKwtmrxMmskdxLqhsq-ON-pE3KzxOoE=w1280"
-  },
-  {
-    id: 5,
-    title: "Phase Change Materials for Road Construction",
-    description: "Evaluation of freeze-thaw performance using phase change materials",
-    duration: "2023",
-    location: "Physics Lab, KUET",
-    supervisor: "Dr. Elias Uddin",
-    techniques: ["Thermal Analysis", "DSC", "Mechanical Testing"],
-    outcomes: [
-      "Presented at ICME 2023 conference",
-      "Improved freeze-thaw resistance by 40%",
-      "Potential for cold region applications"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SThJ0g90ZNmW96ZQLrSMXUY6Ne_K_pnKcr27FlALXIoOCmNbnuIw-Kje-D-0Q5O4lChhAXQIazkgrrgife8r1uc2in4JFGZ7ydqyWrA--mJ2UtFhQJ2jw7L9pu1U9K24_Dp-vyORxFIVRbVgjpPZ9npDzAAQbvWaSsm16voGZEgBnp1LZ3efK4XG4YPzfJxssUwGwYKqKwtmrxMmskdxLqhsq-ON-pE3KzxOoE=w1280"
-  },
-  {
-    id: 6,
-    title: "Antibacterial Sandwich Composites",
-    description: "Development of antibacterial sandwich composites for biomedical applications",
-    duration: "2023-2024",
-    location: "Software Learning Lab, KUET",
-    supervisor: "Dr. Elias Uddin",
-    techniques: ["Antibacterial Testing", "Mechanical Testing", "SEM Analysis"],
-    outcomes: [
-      "Supervised master's student",
-      "Published in peer-reviewed journal",
-      "99% antibacterial efficiency"
-    ],
-    image: "https://lh3.googleusercontent.com/sitesv/APaQ0SThJ0g90ZNmW96ZQLrSMXUY6Ne_K_pnKcr27FlALXIoOCmNbnuIw-Kje-D-0Q5O4lChhAXQIazkgrrgife8r1uc2in4JFGZ7ydqyWrA--mJ2UtFhQJ2jw7L9pu1U9K24_Dp-vyORxFIVRbVgjpPZ9npDzAAQbvWaSsm16voGZEgBnp1LZ3efK4XG4YPzfJxssUwGwYKqKwtmrxMmskdxLqhsq-ON-pE3KzxOoE=w1280"
-  }
+// Material Preparation & Processing
+const materialPreparation = [
+  "BioPlastic Preparation",
+  "Chitosan Extraction from Shrimp Shells",
+  "Sugarcane Fiber Preparation",
+  "3-Layer Composite Film Fabrication",
+  "Hydrogel Sample Preparation",
+  "Electrospun Nanofiber Production",
+  "Toxic Dye Removal Composite",
+  "Wound-Healing Bandage Material Development",
+  "Antibacterial Insole Prototype"
 ];
 
-// Equipment Used
-const equipmentUsed = [
-  { name: "FTIR (Fourier Transform Infrared Spectroscopy)", icon: <FiTool /> },
-  { name: "XRD (X-ray Diffraction)", icon: <FiCpu /> },
-  { name: "SEM (Scanning Electron Microscope)", icon: <FiCamera  /> },
-  { name: "HPLC (High-Performance Liquid Chromatography)", icon: <FiActivity /> },
-  { name: "AAS (Atomic Absorption Spectrophotometer)", icon: <FiZap /> },
-  { name: "Cell Culture Facility", icon: <FiBox /> },
-  { name: "Mechanical Testing Equipment", icon: <FiLayers /> },
-  { name: "Thermal Analysis System (DSC/TGA)", icon: <FiPackage  /> }
+// Analytical & Testing Procedures
+const analyticalProcedures = [
+  "HPLC Filtration & Analysis",
+  "AAS (Atomic Absorption Spectroscopy)",
+  "pH Adjustment & ISO Standard pH Check",
+  "UV Spectrophotometry",
+  "Bacterial Media Preparation & Culture Counting",
+  "Pathogen Identification & Microbial Analysis",
+  "Antibacterial Activity Testing",
+  "Pesticide Identification",
+  "Data Checking & Validation"
 ];
 
-// Research Techniques
-const techniques = [
-  "Polymer Synthesis & Characterization",
-  "Biomaterials Development",
-  "Microbial Culture & Identification",
-  "Antibacterial Activity Analysis",
-  "Cell Viability & Cytotoxicity Testing",
-  "Spectroscopy (FTIR, AAS)",
-  "Chromatography (HPLC)",
-  "Microscopy (SEM, Optical)",
-  "Mechanical Property Testing",
-  "Thermal Analysis (DSC/TGA)"
+// Field & Supporting Processes
+const fieldProcesses = [
+  "Shrimp Shell Collection",
+  "Chemical Loading & Weighing",
+  "Hot Spot Visit & Sampling",
+  "Sampling and Method Checking"
 ];
 
 export default function LabExperimentationsPage() {
@@ -248,13 +168,13 @@ export default function LabExperimentationsPage() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.h1
             key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase mb-6 text-center"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 text-center leading-tight"
             initial="hidden"
             animate="visible"
             variants={{
               visible: {
                 transition: {
-                  staggerChildren: 0.05,
+                  staggerChildren: 0.03,
                 },
               },
             }}
@@ -279,7 +199,7 @@ export default function LabExperimentationsPage() {
             transition={{ delay: 1.2, duration: 1 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto text-center"
           >
-            {labPage?.description || "Hands-on laboratory work focusing on industrial waste valorization, polymer composite development, and advanced material characterization"}
+            Hands-On Science: From Waste to Innovation
           </motion.p>
         </div>
       </section>
@@ -292,122 +212,73 @@ export default function LabExperimentationsPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
-          <h2 className="text-3xl font-light text-gray-900 mb-4">Overview</h2>
-          <p className="text-gray-700 leading-relaxed text-justify">
-            My laboratory research focuses on transforming waste materials into high-value products through sustainable chemical and biological processes. Working across multiple institutions including KUET, BUET, and University of Dhaka, I have developed expertise in polymer synthesis, biomaterial fabrication, microbial analysis, and advanced characterization techniques. This interdisciplinary approach enables the development of innovative solutions for environmental sustainability and biomedical applications.
+          <p className="text-gray-700 leading-relaxed text-justify text-lg">
+            This section showcases the practical laboratory work behind my research. Here you will find real-time experimentations, material preparation processes, analytical testing, and prototype development—all captured in videos from the various labs. I have worked across KUET, BUET, and the University of Dhaka. Every video reflects my commitment to transforming industrial and biological waste into sustainable, high-value biomaterials for environmental remediation, biomedical applications, and circular economy solutions.
           </p>
         </motion.section>
 
-        {/* Lab Experiments Grid */}
+        {/* Material Preparation & Processing */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiCamera className="text-primary" />
-            Key Experiments
+            <FiTool className="text-primary" />
+            Material Preparation & Processing
           </h2>
           
-          <div className="space-y-12">
-            {labExperiments.map((exp) => (
-              <div key={exp.id} className="border-l-4 border-primary pl-6 py-2 hover:bg-gray-50 transition-colors">
-                <div className="flex flex-col md:flex-row gap-6">
-                  {/* Image */}
-                  <div className="md:w-1/3">
-                    <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
-                      <img
-                        src={exp.image}
-                        alt={exp.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="md:w-2/3">
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-2">{exp.title}</h3>
-                    <p className="text-gray-600 mb-3">{exp.description}</p>
-                    
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-3">
-                      <span className="flex items-center gap-1"><FiCalendar className="w-4 h-4" /> {exp.duration}</span>
-                      <span className="flex items-center gap-1"><FiMapPin className="w-4 h-4" /> {exp.location}</span>
-                      <span className="flex items-center gap-1"><FiUsers className="w-4 h-4" /> {exp.supervisor}</span>
-                    </div>
-                    
-                    <div className="mb-3">
-                      <p className="text-sm font-semibold text-gray-700 mb-2">Techniques Used:</p>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.techniques.map((tech, i) => (
-                          <span key={i} className="px-2 py-1 bg-gray-100 text-gray-600 rounded-md text-xs">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <p className="text-sm font-semibold text-gray-700 mb-2">Key Outcomes:</p>
-                      <ul className="space-y-1">
-                        {exp.outcomes.map((outcome, i) => (
-                          <li key={i} className="flex gap-2 text-sm text-gray-600">
-                            <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                            <span>{outcome}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {materialPreparation.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-gray-700">{item}</span>
               </div>
             ))}
           </div>
         </motion.section>
 
-        {/* Equipment Used */}
+        {/* Analytical & Testing Procedures */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiTool className="text-primary" />
-            Equipment Used
+            <FiActivity className="text-primary" />
+            Analytical & Testing Procedures
           </h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {equipmentUsed.map((equip, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                    {equip.icon}
-                  </div>
-                  <span className="text-sm text-gray-700">{equip.name}</span>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {analyticalProcedures.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-gray-700">{item}</span>
               </div>
             ))}
           </div>
         </motion.section>
 
-        {/* Research Techniques */}
+        {/* Field & Supporting Processes */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mb-16"
+          className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiActivity className="text-primary" />
-            Research Techniques & Methods
+            <FiMapPin className="text-primary" />
+            Field & Supporting Processes
           </h2>
           
-          <div className="flex flex-wrap gap-3">
-            {techniques.map((tech, idx) => (
-              <span key={idx} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-primary hover:text-white transition-colors">
-                {tech}
-              </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
+            {fieldProcesses.map((item, idx) => (
+              <div key={idx} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-gray-700">{item}</span>
+              </div>
             ))}
           </div>
         </motion.section>
@@ -420,12 +291,12 @@ export default function LabExperimentationsPage() {
           className="mb-12"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiImage className="text-primary" />
-            Laboratory Gallery
+            <FiCamera className="text-primary" />
+            Video Gallery
           </h2>
-          <p className="text-gray-600 mb-8">
-            Visual documentation of laboratory experiments, equipment, and research activities
-          </p>
+          {/* <p className="text-gray-600 mb-8">
+            Visual documentation of laboratory experiments, material preparation, analytical testing, and prototype development
+          </p> */}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryImages.map((item, index) => (
@@ -434,16 +305,16 @@ export default function LabExperimentationsPage() {
                 className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
                 onClick={() => openLightbox(index)}
               >
-                <div className="relative aspect-[4/3]">
+                <div className="relative aspect-video">
                   <img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   {item.video && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                        <FiZap className="w-6 h-6 fill-current" />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors">
+                      <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-primary shadow-lg">
+                        <FiZap className="w-7 h-7 ml-0.5" />
                       </div>
                     </div>
                   )}
@@ -457,8 +328,6 @@ export default function LabExperimentationsPage() {
             ))}
           </div>
         </motion.section>
-
-      
       </div>
 
       {/* Lightbox Modal */}

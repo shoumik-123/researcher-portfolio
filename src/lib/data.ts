@@ -2,7 +2,7 @@ import { Publication, Mentor } from '@/types';
 
 export const researcherInfo = {
   name: 'Hasan Ahmed',
-  title: 'Interdisciplinary Researcher',
+  title: 'Environmental Specialist &  Interdisciplinary Researcher',
   shortBio: 'Specializing in transforming waste into value-added, health-enhancing materials through lab-based chemical modification of industrial, biomedical, and natural food waste.',
   longBio: `I'm Hasan Ahmed, an interdisciplinary researcher specializing in transforming waste into value-added, health-enhancing materials...`,
   location: 'Dhaka, Bangladesh',
@@ -49,14 +49,50 @@ export const education = [
 ];
 
 export const expertise = [
-  { name: 'Bioplastics & Polymer Technology', icon: '🧪' },
+  { name: 'Project and Grant Management (including Results-Based Management and donor compliance)', icon: '📋' },
+  { name: 'Project Proposal Writing and Fund Management', icon: '✍️' },
+  { name: 'Technical Documentation, Reporting, and MEAL Frameworks', icon: '📊' },
+  { name: 'Bioplastics & Polymer Technology for Sustainable Materials', icon: '🧪' },
   { name: 'Environmental Toxicology & Remediation', icon: '🌱' },
   { name: 'Soil & Water Quality Management', icon: '💧' },
-  { name: 'Circular Economy Systems', icon: '♻️' },
-  { name: 'ESMP, EIA, ESS', icon: '📊' },
-  { name: 'Plastic Recycling & Materials Recovery', icon: '🔄' },
-  { name: 'Solid Waste Management', icon: '🗑️' },
-  { name: 'Piloting Circular Economy Innovations', icon: '📱' }
+  { name: 'Circular Economy Systems and Waste-to-Resource Innovation', icon: '♻️' },
+  { name: 'Environmental & Social Safeguards (ESMP, EIA, ESS) aligned with World Bank and UN standards', icon: '🛡️' },
+  { name: 'Plastic Recycling Systems & Materials Recovery Facilities (MRFs)', icon: '🔄' },
+  { name: 'Solid Waste Management & Pollution Prevention', icon: '🗑️' },
+  { name: 'Piloting Circular Economy Innovations (AI-based data management, digital validation, and mobile app-based payment systems)', icon: '📱' }
+];
+
+export const professionalMentors = [
+  { name: 'Jaime Alarma Olmos', role: 'Project Management Specialist', project: 'PLEASE Project, UNOPS' },
+  { name: 'Sivakumaran Sithamparanathan', role: 'Technical Specialist', project: 'PLEASE Project, UNOPS SAMCO' },
+  { name: 'Obidul Islam', role: 'Project Manager', project: 'SACEP PLEASE Project, UNOPS SAMCO' },
+  { name: 'Labio Bala', role: 'Finance Specialist', project: 'UNOPS Vienna' },
+  { name: 'Khadem Yousuf', role: 'MD & CEO', project: 'BPCL' },
+  { name: 'Nusrat Jahan', role: 'Project Management Officer', project: 'UNOPS PLEASE Project, Bangladesh' },
+  { name: 'Nusrat Shaheen', role: 'Technical Expert (Environment)', project: 'UNOPS PLEASE Project, Bhutan' }
+];
+
+export const academicMentors = [
+  { 
+    name: 'Dr. Tarek Arafat', 
+    role: 'Head of BME, BUET', 
+    description: 'In challenging times, his generosity and mentorship reignited my passion for research.' 
+  },
+  { 
+    name: 'Dr. Latiful Bari', 
+    role: 'Chief Scientist, CARS, University of Dhaka', 
+    description: 'As his research assistant, I learned discipline and impactful research, making him my lifelong role model.' 
+  },
+  { 
+    name: 'Dr. Asma Rahman', 
+    role: 'Principal Scientist, CARS, University of Dhaka', 
+    description: 'Provided invaluable opportunities to work in her lab, greatly enhancing my skills and knowledge.' 
+  },
+  { 
+    name: 'Suman Dewanjee', 
+    role: 'PhD Fellow, Virginia Tech', 
+    description: 'A pivotal figure who reshaped my life\'s trajectory, bringing clarity, purpose, and dedication to research.' 
+  }
 ];
 
 export const publications: Publication[] = [
@@ -313,19 +349,23 @@ export const images = [
 // Achievements data
 export const achievements = {
   researchImpact: [
-    "Published 8+ peer-reviewed research articles in high-impact journals",
-    "Developed innovative polymer composites from industrial waste materials",
-    "Led research on antibiotic-resistant microbes in leather processing waste",
-    "Collaborated with international researchers on biomedical material studies",
-    "Contributed to environmental policy and sustainability initiatives",
-    "Guided master's research in biomedicine and physics at multiple universities"
+    "Published 10+ peer-reviewed research articles in high-impact international journals on biodegradable composites, antimicrobial biomaterials, waste-to-resource technologies, and environmental remediation.",
+    "Designed and executed laboratory experiments and developed advanced methodologies for 20+ research innovations in sustainable materials and environmental science.",
+    "Developed innovative polymer composites and green materials from industrial and tannery waste through detoxification and valorization processes.",
+    "Led targeted research on antibiotic-resistant microbes in leather processing waste and environmental microbiology.",
+    "Collaborated with international researchers on biomedical material studies, including hydrogels and wound-healing applications.",
+    "Contributed to environmental policy and sustainability initiatives through waste minimization and circular economy research.",
+    "Guided and mentored master's and undergraduate research students in biomedicine and physics at multiple universities.",
+    "Served as keynote speaker for the university and trainer for UNYSAB, promoting environmental leadership and youth empowerment.",
+    "Mentored junior researchers and fostered academic collaborations across institutions."
   ],
   professionalLeadership: [
-    "Technical Expert - Environment at UNOPS Bangladesh (World Bank-funded PLEASE project)",
-    "Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank",
-    "Bangladesh country technical focal point for $3.18M international development project",
-    "Research Consultant at BPCL, focusing on energy efficiency and sustainable practices",
-    "Team Lead at Maskeeters, managing research and development initiatives",
-    "Mentored junior researchers and contributed to academic collaborations"
+    "Served as technical expert (environment) and Bangladesh country technical focal point at UNOPS for the World Bank-funded PLEASE Project.",
+    "Led the development of 11+ Environmental and Social Management Plans (ESMPs) approved by the World Bank.",
+    "Developed 5+ Environmental and Social Standards (ESS) for five key grantees: Red Orange, IMS, Arannyak Foundation, BRAC, and BPCL.",
+    "Provided key technical inputs, monitoring, and oversight for the setup of 9 plastic recycling facilities, including business models, operational regulations, and material recovery systems under the UNOPS PLEASE Project.",
+    "Developed 10+ innovations under the UNOPS PLEASE Project, including innovation assessment, verification, and testing protocols for scalable circular plastic solutions and advanced material recovery models.",
+    "Managed Environmental Sustainability and MEAL for the $1.3 million World Bank-funded PLEASE Project at BPCL, focusing on plastic recovery, Recycling Business Unit (RBU) establishment, and sustainable practices.",
+    "Serving as Technical Head – Environment, Sustainability & MEAL at Musketeers Idea Ltd., leading grant proposal development for more than 10 projects for NGOs, INGOs, and CSOs, while providing environmental consultancy for policy development and new sustainability initiatives."
   ]
 };

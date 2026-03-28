@@ -76,22 +76,21 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
   return videoUrl;
 };
 
-// Experience data based on your content
 const experiences = [
   {
     id: 'unops',
-    title: "Technical Expert - Environment",
-    organization: "UNOPS South Asia Multi-country Office (SAMCO)",
-    project: "Support to the SACEP PLEASE Project",
-    timeline: "1st April 2024 - 30th June 2025 · 1 yr 3 mos",
+    title: "Technical Expert (Environment)",
+    organization: "United Nations Office for Project Services (UNOPS)",
+    project: "PLEASE Project (Plastic-free Rivers and Seas for South Asia)",
+    timeline: "April 2024 – June 2025",
     location: "Dhaka, Bangladesh",
-    description: "As Technical Expert – Environment for the $3.18M PLEASE Project (Plastic-free Rivers and Seas for South Asia) at UNOPS Bangladesh, I serve as the environmental technical lead for national implementation. I spearhead efforts to reduce plastic pollution in transboundary river and marine ecosystems through strategies that promote environmental sustainability and circular economy practices. In close coordination with the UNOPS South Asia Multi-Country Office and under regional guidance, my role includes promoting innovation, building institutional and community capacity, supporting policy advocacy, ensuring compliance with World Bank and SACEP Environmental and Social Standards (ESS), and fostering effective regional collaboration.",
+    description: "Served as national environmental technical lead for the $3.18M PLEASE Project (Plastic-free Rivers and Seas for South Asia). Designed, implemented, and monitored environmental and social safeguards (ESS, ESMPs, EIA) in alignment with World Bank and SACEP standards. Guided national partners and grantees on environmental compliance, risk screening, and sustainability integration. Supported innovation, prototyping, and validation of circular plastic solutions through community and private-sector engagement. Coordinated with regional UNOPS offices to align national implementation with South Asia–wide objectives. Conducted site assessments and environmental audits across 25+ project locations. Delivered training on source segregation, waste handling, and leakage prevention to local governments and enterprises. Developed SOPs for Material Recovery Facilities (MRFs) and advised on environmentally appropriate machinery specifications.",
     achievements: [
-      "Guided national technical implementation of a $3.18M regional plastic waste initiative, contributing to coordinated efforts across South Asia.",
-      "Supported a 20% reduction in plastic leakage into rivers and seas by promoting community-led, data-driven interventions.",
-      "Strengthened capacity of community-based and women-led enterprises to integrate circular economy practices into their operations.",
-      "Led technical development and contextualization of innovative solutions for plastic pollution mitigation in Bangladesh.",
-      "Facilitated the environmental compliance and technical review of large-scale recycling infrastructure, ensuring alignment with sustainability and safeguard standards."
+      "Directed implementation leading to 20% reduction in plastic leakage into riverine and marine ecosystems.",
+      "Developed 11 ESMPs, 4 ESS reports, and 1 EIA, ensuring full donor compliance.",
+      "Supported establishment of 8 plastic recycling business units, embedding circular economy principles.",
+      "Strengthened environmental capacity of community and women-led enterprises through structured training and mentoring.",
+      "Represented Bangladesh in regional dialogues with World Bank, SACEP, and UNOPS on sustainable waste management strategies."
     ],
     image: resolveImageUrl(unopsPage?.image),
     video: unopsPage?.video,
@@ -104,20 +103,18 @@ const experiences = [
     id: 'bpcl',
     title: "Manager – Environment, Sustainability & MEAL",
     organization: "Bangladesh Petrochemical Company Limited (BPCL)",
-    timeline: "October 2025 – January 2026",
+    project: "PLEASE Project (Plastic-free Rivers and Seas for South Asia)",
+    timeline: "July 2025 – January 2026",
     location: "Bangladesh",
-    description: "BPCL is a leading petrochemical company in Bangladesh, advancing sustainable industrial development and promoting circular economy solutions in plastics recycling. Provide strategic leadership and managerial oversight for the $1.3M Plastic-free Rivers and Seas for South Asia (PLEASE) Project, implemented in partnership with UNOPS and SACEP.",
+    description: "Provide strategic leadership and managerial oversight for the $1.3M Plastic-free Rivers and Seas for South Asia (PLEASE) Project, implemented in partnership with UNOPS and SACEP, ensuring alignment with UNOPS operational guidelines and World Bank Environmental and Social Standards (ESS). Oversee environmental, social, and sustainability management, integrating risk mitigation, compliance monitoring, and stakeholder engagement in line with UN and World Bank project management frameworks. Lead a multidisciplinary team, applying Results-Based Management (RBM), Key Performance Indicators (KPIs), and performance measurement tools to ensure effective project implementation and accountability. Ensure donor compliance by managing project budgeting, financial reporting, and procurement processes according to UNOPS rules and international best practices. Develop and implement circular economy strategies and low-carbon solutions within BPCL operations, promoting SDG-aligned sustainable development outcomes. Coordinate and liaise with government authorities, private sector partners, UN agencies, and local communities to harmonize project execution with national sustainability policies and international standards. Facilitate capacity-building, learning, and knowledge-sharing initiatives to strengthen institutional sustainability, data-driven decision-making, and organizational resilience. Apply UNOPS/World Bank managerial standards, including adaptive project management, risk assessment, stakeholder engagement, and periodic project audits for transparency and impact.",
     achievements: [
-      "Provide strategic leadership and managerial oversight for the $1.3M PLEASE Project, ensuring alignment with UNOPS operational guidelines and World Bank Environmental and Social Standards (ESS).",
-      "Oversee environmental, social, and sustainability management, integrating risk mitigation, compliance monitoring, and stakeholder engagement.",
-      "Lead a multidisciplinary team, applying Results-Based Management (RBM), Key Performance Indicators (KPIs), and performance measurement tools.",
-      "Ensure donor compliance by managing project budgeting, financial reporting, and procurement processes according to SACEP/UNOPS rules.",
-      "Develop and implement circular economy strategies and low-carbon solutions within BPCL operations, promoting SDG-aligned sustainable development outcomes.",
-      "Coordinate and liaise with government authorities, private sector partners, UN agencies, and local communities.",
-      "Facilitate capacity-building, learning, and knowledge-sharing initiatives to strengthen institutional sustainability.",
-      "Apply UNOPS/World Bank managerial standards, including adaptive project management, risk assessment, stakeholder engagement, and periodic project audits."
+      "Designed and operationalized a comprehensive MEAL system aligned with UNOPS accountability and World Bank ESS, enhancing learning, transparency, and impact measurement.",
+      "Positioned BPCL as a national leader in sustainable plastic recycling and circular economy practices, supporting SDG 12 (Responsible Consumption and Production) and SDG 13 (Climate Action).",
+      "Strengthened multi-stakeholder collaboration among government, private sector, and development partners, improving sustainable waste management and policy coherence.",
+      "Successfully integrated international compliance standards, managerial oversight, and data analytics, increasing project efficiency, transparency, and donor confidence.",
+      "Implemented risk mitigation and adaptive management approaches consistent with UNOPS operational guidance, improving responsiveness to environmental and social challenges."
     ],
-    image: bpclPage?.image ,
+    image: bpclPage?.image,
     video: bpclPage?.video,
     videoEmbed: bpclPage?.videoEmbed,
     type: "bpcl",
@@ -125,47 +122,46 @@ const experiences = [
     color: "bg-green-100 text-green-600"
   },
   {
-    id: 'cars1',
-    title: "Research Associate",
-    organization: "Centre for Advanced Research in Sciences (CARS), University of Dhaka",
-    supervisor: "Dr. Latiful Bari",
-    timeline: "Jan 2023 - Apr 2024 · 1 yr 4 mos",
-    location: "Dhaka, Bangladesh",
-    description: "As a Research Associate under the direct supervision of Dr. Latiful Bari, I developed a strong foundation in applied microbiological research and scientific innovation. This role strengthened my ability to identify critical research gaps, design problem-oriented studies, and translate laboratory findings into real-world applications.",
+    id: 'maskeeters',
+    title: "Technical Head – Environment, Sustainability & MEAL",
+    organization: "Maskeeters Idea Limited",
+    timeline: "Current",
+    location: "Bangladesh",
+    description: "Lead grant proposal development and provide advisory support for innovation-driven applications. Conduct project evaluations ensuring technical soundness, contextual relevance, and alignment with best practices. Serve as team lead for training sessions, workshops, and field studies. Develop business models and field implementation guidelines. Oversee research and development on environmental and social aspects. Integrate circular economy approaches, climate resilience, and ESG considerations into projects.",
     achievements: [
-      "Conducted microbial identification, culture, and analysis to support food safety and environmental microbiology studies.",
-      "Applied innovative research methodologies to address gaps in existing literature and experimental designs.",
-      "Developed skills in laboratory safety, sterile techniques, and microbial risk assessment.",
-      "Contributed to research publications focused on sustainable materials and health-related microbial studies.",
-      "Promoted interdisciplinary thinking by linking microbiological data to broader environmental and biomedical outcomes."
+      "Lead grant proposal development for more than 10 projects for NGOs, INGOs, and CSOs.",
+      "Provide environmental consultancy for policy development and new sustainability initiatives.",
+      "Conduct project evaluations ensuring technical soundness and contextual relevance.",
+      "Develop business models and field implementation guidelines for sustainable projects.",
+      "Integrate circular economy approaches, climate resilience, and ESG considerations into project frameworks."
+    ],
+    image: maskeetersPage?.image,
+    video: maskeetersPage?.video,
+    videoEmbed: maskeetersPage?.videoEmbed,
+    type: "maskeeters",
+    icon: <FiBriefcase className="w-6 h-6" />,
+    color: "bg-teal-100 text-teal-600"
+  },
+  {
+    id: 'cars',
+    title: "Research Assistant",
+    organization: "Center for Advanced Research in Sciences (CARS), University of Dhaka",
+    timeline: "Jun 2022 – April 2024",
+    location: "Dhaka, Bangladesh",
+    description: "Conducted laboratory research on biodegradable polymers, bioplastics, and advanced composite materials from tannery waste and natural polymers. Performed FTIR, XRD, SEM, PCR, AAS, and HPLC analyses for chemical and environmental characterization. Supported projects on antibacterial biomaterials and heavy metal remediation using bio-based adsorbents. Assisted in technical documentation, literature reviews, and preparation of research manuscripts for publication. Coordinated laboratory operations ensuring safety, accuracy, and reproducibility of results.",
+    achievements: [
+      "Co-authored 8+ peer-reviewed scientific papers in international journals (e.g., Cleaner Chemical Engineering, Polymer Composites).",
+      "Contributed to development of biodegradable chitosan-based materials and tannery waste-derived composites for pollution mitigation.",
+      "Presented findings in academic seminars and mentored undergraduate students on research methods.",
+      "Strengthened interdisciplinary collaboration between environmental engineering and materials science research groups."
     ],
     image: resolveImageUrl(researchLabPage?.image || researchYouthPage?.image),
     type: "research",
     icon: <FiBook className="w-6 h-6" />,
     color: "bg-purple-100 text-purple-600"
-  },
-  {
-    id: 'cars2',
-    title: "Research Associate",
-    organization: "Center for Advanced Research in Sciences (CARS), University of Dhaka",
-    supervisor: "Dr. Asma Rahman",
-    timeline: "Jun 2022 - Dec 2022 · 7 mos",
-    location: "Dhaka, Bangladesh",
-    description: "As a Research Associate under the direct supervision of Dr. Asma Rahman, I engaged in laboratory-based research at the intersection of food safety and environmental health. My work emphasized analytical detection of contaminants and contributed to advancing knowledge in the fields of environmental microbiology and sustainable food systems.",
-    achievements: [
-      "Conducted laboratory-based research focusing on food safety and environmental contaminants.",
-      "Utilized High-Performance Liquid Chromatography (HPLC) for the identification and quantification of antibiotics in food items.",
-      "Applied Atomic Absorption Spectrophotometry (AAS) to detect the presence of heavy metals in food matrices.",
-      "Contributed to investigations on the occurrence of microplastics and antibiotic residues in various food products.",
-      "Performed microbial identification and culture for foodborne pathogen surveillance.",
-      "Addressed research gaps by applying innovative and interdisciplinary approaches to experimental design and data interpretation."
-    ],
-    image: resolveImageUrl(researchPhdPage?.image),
-    type: "research",
-    icon: <FiFileText className="w-6 h-6" />,
-    color: "bg-orange-100 text-orange-600"
   }
 ];
+
 
 // Training & Workshops data
 const trainings = [
@@ -243,13 +239,13 @@ export default function ExperiencePage() {
         <div className="max-w-4xl mx-auto px-6">
           <motion.h1
             key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase mb-6"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 leading-tight"
             initial="hidden"
             animate="visible"
             variants={{
               visible: {
                 transition: {
-                  staggerChildren: 0.05,
+                  staggerChildren: 0.03,
                 },
               },
             }}
@@ -348,12 +344,6 @@ export default function ExperiencePage() {
                         <FiMapPin className="w-4 h-4" />
                         <span>{exp.location}</span>
                       </div>
-                      {exp.supervisor && (
-                        <div className="flex items-center gap-2">
-                          <FiUsers className="w-4 h-4" />
-                          <span>Supervisor: {exp.supervisor}</span>
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -402,7 +392,7 @@ export default function ExperiencePage() {
         </div>
 
         {/* TRAINING & WORKSHOPS SECTION */}
-        <section className="mt-24 space-y-12">
+        {/* <section className="mt-24 space-y-12">
           <h2 className="text-4xl font-bold uppercase tracking-wide text-center">
             Lectures, Training & Workshops
           </h2>
@@ -433,7 +423,7 @@ export default function ExperiencePage() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </section> */}
 
       
       </div>

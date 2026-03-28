@@ -16,6 +16,7 @@ export const navItems: NavItem[] = [
       { name: 'UNOPS Experience', path: '/experience/unops' },
       { name: 'BPCL Experience', path: '/experience/bpcl' },
       { name: 'Maskeeters Experience', path: '/experience/maskeeters' },
+      { name: 'Advanced Research', path: '/experience/advanced-research' },
     ]
   },
   {
@@ -32,7 +33,7 @@ export const navItems: NavItem[] = [
     path: '/about',
     children: [
       { name: 'Achievements', path: '/achievements' },
-      { name: 'Training & Consultancy', path: '/achievements/training' },
+      { name: 'Training & Consultancy', path: '/training' },
       { name: 'Education', path: '/education' },
     ]
   },

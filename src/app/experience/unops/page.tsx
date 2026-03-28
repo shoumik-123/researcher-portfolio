@@ -22,20 +22,14 @@ import {
   FiX,
   FiChevronLeft,
   FiChevronRight,
-  FiZap
+  FiExternalLink
 } from 'react-icons/fi';
+import { images } from "@/lib/data";
 
-import { 
-  researcherInfo,
-  images 
-} from '@/lib/data';
 
-// Get UNOPS page data from images array (all items matching the ID)
-const unopsMediaItems = images.filter(page => page.id === 'experience-unops');
-// Main page data (use the first one for title/description)
-const unopsPage = unopsMediaItems[0];
+// Get UNOPS page data from pages array
+const unopsPage = images.find(page => page.id === 'experience-unops');
 
-// Image URL resolver
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/achievement-1.jpg';
 
@@ -52,44 +46,15 @@ const resolveImageUrl = (image?: string): string => {
   return image;
 };
 
-// Video URL resolver - converts YouTube watch/youtu.be URLs to embed format
-const resolveVideoEmbed = (videoUrl?: string): string => {
-  if (!videoUrl) return '';
-  
-  try {
-    // Handle youtu.be short URLs
-    if (videoUrl.includes('youtu.be/')) {
-      const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
-      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-    }
-    
-    // Handle standard youtube.com URLs
-    if (videoUrl.includes('youtube.com')) {
-      const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
-      const videoId = urlParams.get('v');
-      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-    }
-    
-    // Already an embed URL
-    if (videoUrl.includes('youtube.com/embed/')) {
-      return videoUrl;
-    }
-  } catch {
-    // return original if parsing fails
-  }
-  
-  return videoUrl;
-};
-
-// Gallery Images from images array
-const galleryImages = unopsMediaItems.map((item) => ({ 
-  id: item.id || `unops-${Math.random()}`,
-  title: item.title || item.name || 'UNOPS Experience',
-  description: item.description || 'UNOPS gallery',
-  image: resolveImageUrl(item.image),
-  video: !!item.video || !!item.videoEmbed,
-  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
-}));
+const galleryImages = unopsPage?.image ? [{
+      id: 'unops-default-1',
+      title: unopsPage.title || 'UNOPS Experience',
+      description: unopsPage.description || 'UNOPS gallery',
+      image: resolveImageUrl(unopsPage.image),
+      alt: unopsPage.name,
+      video: unopsPage.video || '',
+      videoEmbed: unopsPage.videoEmbed || ''
+    }] : [];
 
 // Published ESMPs List
 const publishedESMPs = [
@@ -158,13 +123,13 @@ export default function UNOPSExperiencePage() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.h1
             key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase mb-6 text-center"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 text-center leading-tight"
             initial="hidden"
             animate="visible"
             variants={{
               visible: {
                 transition: {
-                  staggerChildren: 0.05,
+                  staggerChildren: 0.03,
                 },
               },
             }}
@@ -189,7 +154,7 @@ export default function UNOPSExperiencePage() {
             transition={{ delay: 1.2, duration: 1 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto text-center"
           >
-            {unopsPage?.description || "Technical Expert - Environment at UNOPS South Asia Multi-country Office, leading environmental initiatives for the $3.18M PLEASE Project"}
+            Technical Expert - Environment | Support to the SACEP PLEASE Project | UNOPS South Asia Multi-country Office (SAMCO)
           </motion.p>
         </div>
       </section>
@@ -210,9 +175,9 @@ export default function UNOPSExperiencePage() {
                 </div>
                 <div>
                   <h2 className="text-2xl font-semibold text-gray-900">
-                    Support to the SACEP PLEASE Project
+                    Technical Expert - Environment
                   </h2>
-                  <p className="text-gray-600">UNOPS South Asia Multi-country Office (SAMCO)</p>
+                  <p className="text-gray-600">Support to the SACEP PLEASE Project | UNOPS South Asia Multi-country Office (SAMCO)</p>
                 </div>
               </div>
               <div className="flex flex-wrap gap-6 text-sm text-gray-600 mt-4">
@@ -234,8 +199,19 @@ export default function UNOPSExperiencePage() {
                 </div>
               </div>
             </div>
-            <div className="bg-primary/10 px-6 py-3 rounded-full">
-              <span className="text-primary font-semibold">UNOPS SAMCO</span>
+            <div className="flex flex-col items-end gap-2">
+              <div className="bg-primary/10 px-6 py-3 rounded-full">
+                <span className="text-primary font-semibold">UNOPS SAMCO</span>
+              </div>
+              <a 
+                href="https://please-project.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-primary hover:underline"
+              >
+                <FiExternalLink className="w-4 h-4" />
+                please-project.org
+              </a>
             </div>
           </div>
         </motion.div>
@@ -281,7 +257,7 @@ export default function UNOPSExperiencePage() {
         </motion.section>
 
         {/* Published ESMPs */}
-        <motion.section
+        {/* <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -301,7 +277,7 @@ export default function UNOPSExperiencePage() {
           <p className="text-sm text-gray-500 mt-4">
             * All ESMPs developed and monitored in compliance with World Bank Environmental and Social Standards (ESS)
           </p>
-        </motion.section>
+        </motion.section> */}
 
         {/* Image Gallery Section */}
         <motion.section
@@ -312,11 +288,11 @@ export default function UNOPSExperiencePage() {
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
             <FiImage className="text-primary" />
-            Gallery
+            Photo Gallery
           </h2>
-          <p className="text-gray-600 mb-8">
+          {/* <p className="text-gray-600 mb-8">
             Visual documentation of engagements, field visits, and collaborative activities during UNOPS tenure
-          </p>
+          </p> */}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {galleryImages.map((item, index) => (
@@ -326,17 +302,25 @@ export default function UNOPSExperiencePage() {
                 onClick={() => openLightbox(index)}
               >
                 <div className="relative aspect-[4/3]">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {item.video && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                        <FiZap className="w-6 h-6 fill-current" />
+                  {item.video ? (
+                    <div className="relative w-full h-full">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                          <FiStar className="w-8 h-8 text-primary" />
+                        </div>
                       </div>
                     </div>
+                  ) : (
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
@@ -349,7 +333,7 @@ export default function UNOPSExperiencePage() {
           </div>
         </motion.section>
 
-        {/* Video Section (if video exists in images array) */}
+        {/* Video Section (if video exists in pages array) */}
         {unopsPage?.videoEmbed && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
@@ -370,8 +354,6 @@ export default function UNOPSExperiencePage() {
             </div>
           </motion.section>
         )}
-
-       
       </div>
 
       {/* Lightbox Modal */}
@@ -395,23 +377,24 @@ export default function UNOPSExperiencePage() {
             {galleryImages[currentImage].video ? (
               <div className="aspect-video">
                 <iframe
-                  src={`${galleryImages[currentImage].videoEmbed}?autoplay=1`}
+                  src={galleryImages[currentImage].videoEmbed}
                   title={galleryImages[currentImage].title}
-                  className="absolute inset-0 w-full h-full border-0"
+                  className="w-full h-full rounded-lg"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </div>
             ) : (
               <img
-                src={galleryImages[currentImage]?.image}
-                alt={galleryImages[currentImage]?.title}
-                className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg shadow-2xl"
+                src={galleryImages[currentImage].image}
+                alt={galleryImages[currentImage].title}
+                className="max-w-full max-h-[80vh] object-contain rounded-lg"
               />
             )}
             <div className="mt-4 text-center text-white">
-              <h3 className="text-xl font-semibold">{galleryImages[currentImage]?.title}</h3>
-              <p className="text-gray-300 mt-2">{galleryImages[currentImage]?.description}</p>
+              <h3 className="text-xl font-semibold">{galleryImages[currentImage].title}</h3>
+              <p className="text-gray-300 mt-2">{galleryImages[currentImage].description}</p>
             </div>
           </div>
           

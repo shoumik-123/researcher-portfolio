@@ -23,62 +23,51 @@ import {
   FiTool,
   FiCpu,
   FiUserCheck,
-  FiZap
+  FiBookOpen,
+  FiAward
 } from 'react-icons/fi';
+import { images } from "@/lib/data";
 
-import { 
-  researcherInfo,
-  images 
-} from '@/lib/data';
 
-// Get Research page data from images array (all items matching the ID)
-const researchMediaItems = images.filter(page => page.id === 'research');
-// Main page data
-const researchPage = researchMediaItems[0];
+// Get Research page data from pages array
+const researchPage = images.find(page => page.id === 'research');
 
+// Image URL resolver
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/research/default.jpg';
   return image;
 };
 
-// Video URL resolver - converts YouTube watch/youtu.be URLs to embed format
-const resolveVideoEmbed = (videoUrl?: string): string => {
-  if (!videoUrl) return '';
-  
-  try {
-    // Handle youtu.be short URLs
-    if (videoUrl.includes('youtu.be/')) {
-      const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
-      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-    }
-    
-    // Handle standard youtube.com URLs
-    if (videoUrl.includes('youtube.com')) {
-      const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
-      const videoId = urlParams.get('v');
-      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
-    }
-    
-    // Already an embed URL
-    if (videoUrl.includes('youtube.com/embed/')) {
-      return videoUrl;
-    }
-  } catch {
-    // return original if parsing fails
-  }
-  
-  return videoUrl;
-};
+// Gallery Images from pages array
+const galleryImages = researchPage?.image ? [{
+      id: 'research-default-1',
+      title: researchPage.title || 'Research Journey',
+      description: researchPage.description || 'Building a Sustainable Future Through Science',
+      image: resolveImageUrl(researchPage.image),
+      video: researchPage.video,
+      videoEmbed: researchPage.videoEmbed
+    }] : [];
 
-// Gallery Images from images array
-const galleryImages = researchMediaItems.map((item) => ({ 
-  id: item.id || `research-${Math.random()}`,
-  title: item.title || item.name || 'Research Journey',
-  description: item.description || 'Research gallery',
-  image: resolveImageUrl(item.image),
-  video: !!item.video || !!item.videoEmbed,
-  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
-}));
+// Laboratories
+const laboratories = [
+  { name: "Automotive Lab, KUET", supervisor: "Dr. Mizan Sir (Professor, Mechanical Engineering Department)" },
+  { name: "Chemistry Lab, KUET", supervisor: "Dr. Mamun Jamal Sir — co-author on a peer-reviewed publication" },
+  { name: "Physics Lab, KUET", supervisor: "" },
+  { name: "Software Learning Lab, KUET", supervisor: "" },
+  { name: "Mechanical Workshop Lab, KUET", supervisor: "" },
+  { name: "Basic Lab, BUET", supervisor: "" },
+  { name: "Biomedical Engineering Lab, BUET", supervisor: "Dr. Tarek Arafat" },
+  { name: "Instrumentation Lab, BMBT, University of Dhaka", supervisor: "Lecturer Imran Sir" },
+  { name: "Microbiology Lab, Centre for Advanced Research in Sciences (CARS), University of Dhaka", supervisor: "Dr. Latiful Bari" }
+];
+
+// Lab Skills
+const labSkills = [
+  "FTIR", "XRD", "SEM", "HPLC", "AAS", "Cell Culture", 
+  "Cell Viability & Cytotoxicity Assays", "Antibacterial Activity Analysis", 
+  "UV Spectrophotometry", "pH Meter", "Vortex Mixer", "Electrospinning", 
+  "Magnetic Stirring", "Hot Plate", "ISO Standard Testing"
+];
 
 // Publications Data
 const publications = [
@@ -89,7 +78,6 @@ const publications = [
     year: 2024,
     type: "Q1 Journal",
     impactFactor: "5.2",
-    link: "#",
     highlights: [
       "Fabricated composite sheets from waste BD and SF",
       "Strong bonding and uniform surface quality were observed",
@@ -105,7 +93,6 @@ const publications = [
     year: 2024,
     type: "Q1 Journal",
     impactFactor: "4.996",
-    link: "#",
     highlights: [
       "Automated system for detecting and analyzing prolapsed lumbar intervertebral discs (PLID) in MRI images",
       "YOLOv8 framework for accurate region-of-interest detection (up to 99.50% mAP50)",
@@ -122,7 +109,6 @@ const publications = [
     volume: "11",
     issue: "21",
     pages: "100157",
-    link: "#",
     highlights: [
       "Biodegradable plastic film developed using chitosan from shrimp shells",
       "Material naturally breaks down in soil (81% in 2 months) and is safe for crops",
@@ -135,7 +121,6 @@ const publications = [
     authors: "Suman Dewanjee, Hasan Ahmed, Mohammad Ali Tanvir, Muttakee Bin Ali, Safia Aktar Dipa, and Md. Ibrahim Al Imran",
     journal: "Biomedical Materials Journal",
     year: 2024,
-    link: "#",
     highlights: [
       "Biocompatible hydrogel developed using waste materials like shrimp shells and sugarcane bagasse",
       "Sustainable approach transforms discarded resources into valuable biomaterials",
@@ -147,7 +132,6 @@ const publications = [
     authors: "Md Abu Sayed, Ashiqur Rahman, Sadman Mohammad Nasif, Sudipto Halder, Akram Hossain, Hasan Ahmed, Muhammad Abdul Kadir",
     journal: "Medical Image Analysis Journal",
     year: 2024,
-    link: "#",
     highlights: [
       "Automated deep learning system for detecting and classifying lumbar intervertebral disc herniation",
       "YOLO framework for disc identification (up to 99.50% mAP50)",
@@ -159,120 +143,95 @@ const publications = [
     title: "Tannery Shaving Dust-Based Charcoal Blended Adsorbents for Efficient Heavy Metal Remediation: An Experimental and Machine Learning Approach",
     authors: "Md. Sabbir Hosen, Md. Sahariar Sahen, Hasan Ahmed, Md. Selim Reza, Pranta Bhowmik, Farzana Mim, Md. Badrul Islam, Md. Azizul Haque Khan Naim, Mohammad Majibur Rahman, Md. Mostafizur Rahman",
     journal: "Journal of Environmental Management",
-    year: 2024,
-    link: "#"
+    year: 2024
+  },
+  {
+    title: "Fabrication of Tannic Acid-Functionalized Sugarcane Fiber Reinforced Chitosan-Based Biocomposite Sheet: A Sustainable Antibacterial Solution for Shoe Insoles",
+    authors: "Rama Kanta Layek, Md. Sabbir Hosen, Md. Elias Uddin, Sadia Mim, Md. Ashikur Rahaman Noyon, Hasan Ahmed, Mst. Farhana Yeasmin, Subrata Paul",
+    journal: "Bioresource Technology Reports (Elsevier)",
+    volume: "32",
+    year: 2025,
+    highlights: [
+      "Developed high-performance antibacterial biocomposite sheet using chitosan and tannic acid-functionalized cellulose fibers from sugarcane bagasse",
+      "Achieved tensile strength of 29.58 MPa, 86% elongation, Shore D hardness of 54, and low water absorption (4.53%)",
+      "Demonstrated strong antibacterial activity against 1.5 × 10⁵ CFU/mL bacterial suspension",
+      "Effective, sustainable, and biodegradable solution for antibacterial shoe insoles and biomedical applications"
+    ]
   }
 ];
 
-// Conference Presentations
-const conferences = [
+// Conference Papers
+const conferencePapers = [
   {
-    title: "Preparation of Biocomposite Sheet Incorporation of Buffing Dust and Sugarcane Fiber: Its Application for Footwear as a Reinforcing Material",
-    event: "ICMIEE 2022, KUET",
-    date: "22-24 December 2022",
-    location: "Khulna, Bangladesh",
-    role: "Corresponding Author",
-    link: "#"
-  },
-  {
-    title: "Cr removed collagen from leather waste-based chitosan composite to remove dye: A novel reusable adsorbent",
-    event: "ICME 2023, BUET",
-    date: "18-19 December 2023",
+    title: "Secure Remote Patient Monitoring in Smart Wards using Blockchain and Encryption Techniques: A Functional Prototype",
+    authors: "Md. Abu Sayed, Md. Alimul Islam, Hasan Ahmed, Muhammad Abdul Kadir, et al.",
+    event: "International Conference on Telecommunications and Photonics (ICTP)",
+    date: "December 2025",
     location: "Dhaka, Bangladesh",
-    role: "Corresponding Author",
-    link: "#"
+    highlights: ["Developed a functional prototype integrating blockchain and encryption for secure, real-time remote patient monitoring in smart hospital wards."]
   },
   {
-    title: "Fine Sand Blended with Phase Change Materials (PCM): Evaluation of Freeze-Thaw Performance",
-    event: "ICME 2023, BUET",
-    date: "18-19 December 2023",
-    location: "Dhaka, Bangladesh",
-    role: "Corresponding Author",
-    link: "#"
+    title: "Mechanical Behavior of Hybrid Glass-Jute Fiber Composite Sheet in Honeycomb Core Sandwich Panels",
+    authors: "Shafat Hasan, Hasan Ahmed, Md. Abu Sayed, Ahmed Seam, et al.",
+    event: "15th International Conference on Mechanical Engineering (ICME 2025)",
+    date: "December 2025"
   },
   {
-    title: "Biodegradable and Antibacterial Chitosan-Based Tannic Acid-Coated Cellulosic Composite Insole for Wound Dressing",
-    event: "ICME 2023, BUET",
-    date: "18-19 December 2023",
-    location: "Dhaka, Bangladesh",
-    authors: "Mohammad Ali Tanvir, Popi Khatun, Aniqa Tasnim, Hasan Ahmed, Md Sabbir Hosen, Mustafizur Rahman, Md Elias Uddin",
-    link: "#"
-  },
-  {
-    title: "Conversion and Characterization of Biodiesel from Tannery Solid Waste",
-    event: "ICTSE 2024, BUTEX",
-    date: "23-24 May 2024",
-    location: "Dhaka, Bangladesh",
-    authors: "Saad Ahmed, Iftehaj Rafa Rian, Hasan Ahmed, Sadman Sadik, Pranta Bhowmik, Md Ashikul Islam, Shoeb Rahman, Md Sabbir Hosen",
-    link: "#"
-  },
-  {
-    title: "Sustainable and eco-friendly development of tannery solid waste-based chitosan/eggshell antibacterial composite sheets",
-    event: "ICACE 2024, CUET",
-    date: "12-14 December 2024",
-    location: "Chittagong, Bangladesh",
-    role: "Corresponding Author",
-    link: "#"
+    title: "Sustainable and Eco-Friendly Development of Tannery Solid Waste-Based Chitosan/Eggshell Antibacterial Composite Sheets",
+    authors: "Hasan Ahmed*, Engr. Md. Sabbir Hosen, Muttakee Bin Ali et al.",
+    event: "7th International Conference on Advances in Civil Engineering (ICACE 2024)",
+    date: "December 2024"
   },
   {
     title: "Antibacterial Biocomposite Sheet from Tannery Waste: A Sustainable Waste-to-Worth Solution",
-    event: "ICACE 2024, CUET",
-    date: "12-14 December 2024",
-    location: "Chittagong, Bangladesh",
-    role: "Corresponding Author",
-    link: "#"
+    authors: "Muttakee Bin Ali, Md. Ibrahim Al Imran, Rupok Kumar Nayak, Hasan Ahmed, et al.",
+    event: "7th International Conference on Advances in Civil Engineering (ICACE 2024)",
+    date: "December 2024"
   },
   {
-    title: "Development and performance analysis of biodegradable, transparent antimicrobial bioplastic from tannery solid waste",
-    event: "ICACE 2024, CUET",
-    date: "12-14 December 2024",
-    location: "Chittagong, Bangladesh",
-    role: "Corresponding Author",
-    link: "#"
+    title: "Development and Performance Analysis of Biodegradable, Transparent Antimicrobial Bioplastic from Tannery Solid Waste",
+    authors: "Nusrat Jahan, Aniqa Tasnim, Mohammad Ali Tanvir, Hasan Ahmed, et al.",
+    event: "7th International Conference on Advances in Civil Engineering (ICACE 2024)",
+    date: "December 2024"
+  },
+  {
+    title: "Conversion and Characterization of Bio-Diesel from Tannery Solid Waste",
+    authors: "Saad Ahmed, Iftehaj Rafa Rian, Hasan Ahmed, Engr. Md. Sabbir Hosen et al.",
+    event: "2nd International Conference on Textile Science and Engineering (ICTSE 2024)",
+    date: "May 2024"
+  },
+  {
+    title: "Gentamicin-Loaded Sugarcane Fiber-Chitosan Hydrogel Sponge for Enhanced Skin Wound Healing",
+    authors: "Hasan Ahmed, Md. Ibrahim Al Imran, Bipasha Sur, Kumar Paul, et al.",
+    event: "International Conference on Physics in Medicine (ICPM-2025)",
+    date: "October 2025",
+    type: "Poster"
+  },
+  {
+    title: "Biodegradable and Antibacterial Chitosan-Based Tannic Acid-Coated Cellulosic Composite Film for Wound Dressing",
+    authors: "Mohammad Ali Tanvir, Popi Khatun, Aniqa Tasnim, Hasan Ahmed, Md. Elias Uddin et al.",
+    event: "International Conference on Mechanical Engineering (ICME 2023), BUET",
+    date: "December 2023",
+    type: "Poster"
   }
 ];
 
 // Thesis Mentorship
-const thesisMentorship = [
-  {
-    level: "Master's Student",
-    institution: "University of Dhaka",
-    department: "Biomedical and Physics Department",
-    title: "Supervised the development and fabrication of antibacterial sandwich composites, leading to a publication in a peer-reviewed journal",
-    count: 1
+const thesisMentorship = {
+  masters: {
+    title: "Supervised one master's student from the Biomedical and Physics Departments, University of Dhaka",
+    description: "Led the development and fabrication of antibacterial sandwich composites, resulting in a publication in a peer-reviewed journal."
   },
-  {
-    level: "Undergraduate Students",
-    institution: "Jessore University of Science and Technology",
-    department: "Biomedical Departments",
+  undergraduate: {
+    title: "Guided four undergraduate students from the Biomedical Engineering Department, Jessore University of Science and Technology",
     projects: [
-      "Guided the fabrication of non-toxic resin, enhancing the project's safety and sustainability",
-      "The creation of antibacterial customized shoes from water hyacinth, reducing material costs by 20%",
-      "Oversaw the extraction of chitosan from crab shell using waste eggshells as chemical, improving the efficiency",
-      "Identified and mitigated threats from cigarette filters, developing footwear that functions as a heavy metal separator, contributing to environmental protection"
-    ],
-    count: 4
+      "Developed non-toxic resin for improved project safety and sustainability",
+      "Created customized antibacterial shoes from water hyacinth, reducing material costs by 20%",
+      "Optimized chitosan extraction from crab shells using waste eggshells, enhancing efficiency",
+      "Designed footwear using cigarette filters as a heavy metal separator, contributing to environmental protection"
+    ]
   }
-];
-
-// Laboratories
-const laboratories = [
-  { name: "Auto, KUET", supervisor: "Dr. Mizan Sir (Professor, Mechanical Department, KUET)", link: "#" },
-  { name: "Chemistry Lab, KUET", supervisor: "Dr. Mamun Jamal Sir (Publication collaboration)", link: "#" },
-  { name: "Physics Lab, KUET", supervisor: "", link: "#" },
-  { name: "Software Learning Lab, KUET", supervisor: "Dr. Elias Uddin", link: "#" },
-  { name: "Mechanical Workshop Lab, KUET", supervisor: "", link: "#" },
-  { name: "Basic Lab, BUET", supervisor: "", link: "#" },
-  { name: "Biomedical Weight Lab, BUET", supervisor: "Dr. Tarek Arafat", link: "#" },
-  { name: "Instrumentation Lab, BMBT, DU", supervisor: "Lecturer Imran Sir", link: "#" },
-  { name: "Microbiology Lab, CARS, University of Dhaka", supervisor: "Dr. Latiful Bari", link: "#" }
-];
-
-// Advanced Lab Equipment
-const labEquipment = [
-  "FTIR", "XRD", "SEM", "HPLC", "AAS Machine", 
-  "Cell Culture", "Cell Viability", "Cell Cytotoxicity", "Antibacterial Activity Analysis"
-];
+};
 
 export default function ResearchPage() {
   const [key, setKey] = useState(0);
@@ -323,13 +282,13 @@ export default function ResearchPage() {
         <div className="max-w-5xl mx-auto px-6">
           <motion.h1
             key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight uppercase mb-6 text-center"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight uppercase mb-6 text-center leading-tight"
             initial="hidden"
             animate="visible"
             variants={{
               visible: {
                 transition: {
-                  staggerChildren: 0.05,
+                  staggerChildren: 0.03,
                 },
               },
             }}
@@ -356,23 +315,6 @@ export default function ResearchPage() {
           >
             Building a Sustainable Future Through Science
           </motion.p>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5 }}
-            className="flex flex-wrap justify-center gap-6 mt-8"
-          >
-            <a href="#" className="flex items-center gap-2 text-primary hover:underline">
-              <FiGlobe /> Google Scholar
-            </a>
-            <a href="#" className="flex items-center gap-2 text-primary hover:underline">
-              <FiGlobe /> Research Gate
-            </a>
-            <a href="#" className="flex items-center gap-2 text-primary hover:underline">
-              <FiGlobe /> ORCID ID
-            </a>
-          </motion.div>
         </div>
       </section>
 
@@ -384,27 +326,24 @@ export default function ResearchPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-16"
         >
-          <h2 className="text-3xl font-light text-gray-900 mb-6">My Story in Biopolymers and Environment</h2>
+          <h2 className="text-3xl font-light text-gray-900 mb-6">My Story in Biomaterials and Environment</h2>
           <div className="prose prose-lg max-w-none text-gray-700 space-y-4">
             <p>
-              My journey as a researcher began in 2020 when I joined KUET as a research associate under the mentorship of Dr. Elias Uddin. That year became a turning point in my life—I discovered my passion for biopolymers and began shaping my ability to conduct independent research.
+              My research journey began in 2020 at Khulna University of Engineering & Technology (KUET), where I joined as a research associate under the mentorship of Dr. Elias Uddin. That year marked a turning point — it was where I discovered my deep passion for biopolymers and developed the skills to conduct independent, high-quality research.
             </p>
             <p>
-              I started by exploring polymer composites and biodegradable alternatives to conventional plastics, with the aim of creating sustainable materials for real-world challenges. Over time, my work expanded into biomedical applications, where I contributed to the development of wound-healing biomaterials and hydrogels. Collaborating with Md. Ibrahim al Imran (University of Dhaka) and later working with Dr. Tarik Arafat (BUET), I gained valuable experience in biomedical engineering and mentored master's students in the same field.
+              I began by exploring polymer composites and biodegradable alternatives to conventional plastics, focusing on sustainable materials that address real-world environmental challenges. Over time, my work expanded into biomedical applications, where I contributed to the development of wound-healing biomaterials and hydrogels. Through collaborations with Md. Ibrahim Al Imran (University of Dhaka) and Dr. Tarek Arafat (BUET), I gained strong expertise in biomedical engineering while also mentoring master's students in the field.
             </p>
             <p>
-              To push my research further, I realized the importance of microbiology and advanced analytical skills. This led me to join the Centre for Advanced Research in Sciences (CARS), University of Dhaka, first as a Research Fellow under Dr. Asma Rahman and later as a Research Associate under Dr. Latiful Bari. Here, I immersed myself in microbial studies, microbial identification, and advanced techniques such as AAS and HPLC, enabling me to design innovative biomaterials from waste resources.
+              Recognizing the critical role of microbiology and advanced analytical techniques, I joined the Centre for Advanced Research in Sciences (CARS) at the University of Dhaka—first as a research fellow under Dr. Asma Rahman and later as a research associate under Dr. Latiful Bari. There, I specialized in microbial identification, antibiotic-resistant microorganisms, and analytical methods such as AAS and HPLC, enabling me to design innovative biomaterials derived from waste resources.
             </p>
             <p>
-              Alongside these experiences, I collaborated with scientists like Bipasha Sur (BORI) on antibiotic-resistant microbial identification and worked with Dr. Noor Hosain while participating in specialized training on food security and pathogen culture. My research journey also branched into phase-change materials for road construction, bioplastic development, and sustainable drainage sludge management models, broadening my expertise in sustainable material science.
-            </p>
-            <p>
-              From transforming waste into high-value materials to engineering next-generation biomedical solutions, my research is driven by a single vision: to create sustainable biomaterials that protect both human health and the environment.
+              My research has also extended into phase-change materials for construction, bioplastic development, sustainable drainage sludge management, and marine microbial studies. From transforming industrial waste into high-value green materials to engineering next-generation biomedical solutions, my work is guided by a clear vision: to create sustainable biomaterials that protect both human health and the environment.
             </p>
           </div>
         </motion.section>
 
-        {/* Thesis Mentorship Section */}
+        {/* Laboratories Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -412,37 +351,89 @@ export default function ResearchPage() {
           className="mb-16"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiUserCheck className="text-primary" />
-            Thesis Mentorship
+            <FiTool className="text-primary" />
+            Labs Where I Have Worked
           </h2>
           
-          <div className="space-y-8">
-            {thesisMentorship.map((mentor, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                    <FiUsers className="w-5 h-5" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {laboratories.map((lab, idx) => (
+              <div key={idx} className="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <div className="flex items-start gap-3">
+                  <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+                    <FiMic className="w-4 h-4" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900">{mentor.level}</h3>
-                    <p className="text-gray-600">{mentor.institution} | {mentor.department}</p>
+                    <h3 className="font-medium text-gray-900">{lab.name}</h3>
+                    {lab.supervisor && <p className="text-xs text-gray-500 mt-1">{lab.supervisor}</p>}
                   </div>
                 </div>
-                
-                {mentor.projects ? (
-                  <ul className="space-y-3 pl-4">
-                    {mentor.projects.map((project, i) => (
-                      <li key={i} className="flex gap-2 text-gray-700">
-                        <FiCheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                        <span>{project}</span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="text-gray-700">{mentor.title}</p>
-                )}
               </div>
             ))}
+          </div>
+        </motion.section>
+
+        {/* Lab Skills Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+            <FiCpu className="text-primary" />
+            Lab Skills
+          </h2>
+          
+          <div className="flex flex-wrap gap-3">
+            {labSkills.map((skill, idx) => (
+              <span key={idx} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-primary hover:text-white transition-colors">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Thesis Mentorship Section */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-16"
+        >
+          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+            <FiUserCheck className="text-primary" />
+            Thesis Mentorship & Student Guidance
+          </h2>
+          
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-xl p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                  <FiUsers className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900">Master's Student</h3>
+              </div>
+              <p className="text-gray-700 font-medium mb-2">{thesisMentorship.masters.title}</p>
+              <p className="text-gray-600">{thesisMentorship.masters.description}</p>
+            </div>
+            
+            <div className="bg-gray-50 rounded-xl p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
+                  <FiUsers className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900">Undergraduate Students</h3>
+              </div>
+              <p className="text-gray-700 font-medium mb-3">{thesisMentorship.undergraduate.title}</p>
+              <ul className="space-y-2">
+                {thesisMentorship.undergraduate.projects.map((project, i) => (
+                  <li key={i} className="flex gap-2 text-gray-600">
+                    <FiCheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
+                    <span>{project}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </motion.section>
 
@@ -450,7 +441,7 @@ export default function ResearchPage() {
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.4 }}
           className="mb-16"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
@@ -468,6 +459,7 @@ export default function ResearchPage() {
                   <span>{pub.year}</span>
                   {pub.type && <span className="text-primary font-medium">{pub.type}</span>}
                   {pub.impactFactor && <span>IF: {pub.impactFactor}</span>}
+                  {pub.volume && <span>Vol. {pub.volume}</span>}
                 </div>
                 {pub.highlights && (
                   <ul className="space-y-1 mt-3">
@@ -479,77 +471,12 @@ export default function ResearchPage() {
                     ))}
                   </ul>
                 )}
-                <a href={pub.link} className="inline-flex items-center gap-1 text-primary text-sm mt-3 hover:underline">
-                  View Publication <FiExternalLink className="w-3 h-3" />
-                </a>
               </div>
             ))}
           </div>
         </motion.section>
 
-        {/* International Conferences */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiMic className="text-primary" />
-            International Conference Presentations
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {conferences.map((conf, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow">
-                <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{conf.title}</h3>
-                <p className="text-sm text-primary font-medium">{conf.event}</p>
-                <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500">
-                  <span className="flex items-center gap-1"><FiCalendar className="w-3 h-3" /> {conf.date}</span>
-                  <span className="flex items-center gap-1"><FiMapPin className="w-3 h-3" /> {conf.location}</span>
-                </div>
-                {conf.role && <p className="text-xs text-gray-400 mt-2">Role: {conf.role}</p>}
-                <a href={conf.link} className="inline-flex items-center gap-1 text-primary text-sm mt-3 hover:underline">
-                  View Paper <FiExternalLink className="w-3 h-3" />
-                </a>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Laboratories Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiTool className="text-primary" />
-            Laboratories
-          </h2>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {laboratories.map((lab, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                    <FiMic className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-gray-900">{lab.name}</h3>
-                    {lab.supervisor && <p className="text-xs text-gray-500 mt-1">{lab.supervisor}</p>}
-                    <a href={lab.link} className="inline-flex items-center gap-1 text-primary text-xs mt-2 hover:underline">
-                      Learn More <FiExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Advanced Lab Equipment */}
+        {/* International Conference Papers */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -557,20 +484,37 @@ export default function ResearchPage() {
           className="mb-16"
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiCpu className="text-primary" />
-            Skills in Advanced Lab Equipment
+            <FiMic className="text-primary" />
+            International Conference Papers
           </h2>
           
-          <div className="flex flex-wrap gap-3">
-            {labEquipment.map((equipment, idx) => (
-              <span key={idx} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-primary hover:text-white transition-colors">
-                {equipment}
-              </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {conferencePapers.map((paper, idx) => (
+              <div key={idx} className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow">
+                <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{paper.title}</h3>
+                <p className="text-sm text-gray-600 mb-2">{paper.authors}</p>
+                <p className="text-sm text-primary font-medium">{paper.event}</p>
+                <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500">
+                  <span className="flex items-center gap-1"><FiCalendar className="w-3 h-3" /> {paper.date}</span>
+                  {paper.location && <span className="flex items-center gap-1"><FiMapPin className="w-3 h-3" /> {paper.location}</span>}
+                  {paper.type && <span className="text-primary">{paper.type}</span>}
+                </div>
+                {paper.highlights && (
+                  <ul className="mt-3 space-y-1">
+                    {paper.highlights.map((highlight, i) => (
+                      <li key={i} className="text-gray-600 text-xs flex gap-2">
+                        <FiStar className="w-3 h-3 text-primary flex-shrink-0 mt-0.5" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             ))}
           </div>
         </motion.section>
 
-        {/* Gallery Section */}
+        {/* Photo Gallery Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -579,7 +523,7 @@ export default function ResearchPage() {
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
             <FiImage className="text-primary" />
-            Research Gallery
+            Photo Gallery
           </h2>
           <p className="text-gray-600 mb-8">
             Visual documentation of laboratory work, experiments, and research activities
@@ -598,13 +542,6 @@ export default function ResearchPage() {
                     alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  {item.video && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                        <FiZap className="w-6 h-6 fill-current" />
-                      </div>
-                    </div>
-                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
@@ -616,7 +553,27 @@ export default function ResearchPage() {
           </div>
         </motion.section>
 
-
+        {/* Video Section (if video exists) */}
+        {researchPage?.videoEmbed && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl font-light text-gray-900 mb-6">Research Overview Video</h2>
+            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src={researchPage.videoEmbed}
+                title="Research Overview"
+                className="w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </motion.section>
+        )}
       </div>
 
       {/* Lightbox Modal */}
@@ -636,23 +593,12 @@ export default function ResearchPage() {
             <FiChevronLeft className="w-8 h-8" />
           </button>
           
-          <div className="max-w-5xl max-h-[90vh] mx-4 w-full" onClick={(e) => e.stopPropagation()}>
-            {galleryImages[currentImage]?.video && galleryImages[currentImage]?.videoEmbed ? (
-              <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-black shadow-2xl">
-                <iframe
-                  src={`${galleryImages[currentImage].videoEmbed}?autoplay=1`}
-                  className="absolute inset-0 w-full h-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            ) : (
-              <img
-                src={galleryImages[currentImage]?.image}
-                alt={galleryImages[currentImage]?.title}
-                className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg shadow-2xl"
-              />
-            )}
+          <div className="max-w-5xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
+            <img
+              src={galleryImages[currentImage]?.image}
+              alt={galleryImages[currentImage]?.title}
+              className="max-w-full max-h-[80vh] object-contain rounded-lg"
+            />
             <div className="mt-4 text-center text-white">
               <h3 className="text-xl font-semibold">{galleryImages[currentImage]?.title}</h3>
               <p className="text-gray-300 mt-2">{galleryImages[currentImage]?.description}</p>
