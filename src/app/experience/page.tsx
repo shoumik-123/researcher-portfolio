@@ -22,14 +22,26 @@ import {
 } from '@/lib/data';
 
 // Get experience page data from images array
-const experiencePage = images.find(page => page.id === 'experience');
-const unopsPage = images.find(page => page.id === 'experience-unops');
+const experienceMediaItems = images.filter(page => page.id === 'experience');
+const experiencePage = experienceMediaItems[0];
+
 const unopsMediaItems = images.filter(page => page.id === 'experience-unops');
-const bpclPage = images.find(page => page.id === 'experience-bpcl');
-const maskeetersPage = images.find(page => page.id === 'experience-maskeeters');
-const researchLabPage = images.find(page => page.id === 'research-lab');
-const researchYouthPage = images.find(page => page.id === 'research-youth');
-const researchPhdPage = images.find(page => page.id === 'research-phd');
+const unopsPage = unopsMediaItems[0];
+
+const bpclMediaItems = images.filter(page => page.id === 'experience-bpcl');
+const bpclPage = bpclMediaItems[0];
+
+const maskeetersMediaItems = images.filter(page => page.id === 'experience-maskeeters');
+const maskeetersPage = maskeetersMediaItems[0];
+
+const researchLabMediaItems = images.filter(page => page.id === 'research-lab');
+const researchLabPage = researchLabMediaItems[0];
+
+const researchYouthMediaItems = images.filter(page => page.id === 'research-youth');
+const researchYouthPage = researchYouthMediaItems[0];
+
+const researchPhdMediaItems = images.filter(page => page.id === 'research-phd');
+const researchPhdPage = researchPhdMediaItems[0];
 
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/achievement-1.jpg';
@@ -92,12 +104,12 @@ const experiences = [
       "Strengthened environmental capacity of community and women-led enterprises through structured training and mentoring.",
       "Represented Bangladesh in regional dialogues with World Bank, SACEP, and UNOPS on sustainable waste management strategies."
     ],
-    image: resolveImageUrl(unopsPage?.image),
-    video: unopsPage?.video,
-    videoEmbed: unopsPage?.videoEmbed,
-    type: "unops",
+    type: "UNOPS",
     icon: <FiBriefcase className="w-6 h-6" />,
-    color: "bg-blue-100 text-blue-600"
+    color: "bg-blue-100 text-blue-600",
+    image: resolveImageUrl(experienceMediaItems.find(item => item.type === 'UNOPS')?.image),
+    video: experienceMediaItems.find(item => item.type === 'UNOPS')?.video,
+    videoEmbed: experienceMediaItems.find(item => item.type === 'UNOPS')?.videoEmbed
   },
   {
     id: 'bpcl',
@@ -114,12 +126,12 @@ const experiences = [
       "Successfully integrated international compliance standards, managerial oversight, and data analytics, increasing project efficiency, transparency, and donor confidence.",
       "Implemented risk mitigation and adaptive management approaches consistent with UNOPS operational guidance, improving responsiveness to environmental and social challenges."
     ],
-    image: bpclPage?.image,
-    video: bpclPage?.video,
-    videoEmbed: bpclPage?.videoEmbed,
-    type: "bpcl",
+    type: "BPCL",
     icon: <FiTrendingUp className="w-6 h-6" />,
-    color: "bg-green-100 text-green-600"
+    color: "bg-green-100 text-green-600",
+    image: resolveImageUrl(experienceMediaItems.find(item => item.type === 'BPCL')?.image),
+    video: experienceMediaItems.find(item => item.type === 'BPCL')?.video,
+    videoEmbed: experienceMediaItems.find(item => item.type === 'BPCL')?.videoEmbed
   },
   {
     id: 'maskeeters',
@@ -135,12 +147,12 @@ const experiences = [
       "Develop business models and field implementation guidelines for sustainable projects.",
       "Integrate circular economy approaches, climate resilience, and ESG considerations into project frameworks."
     ],
-    image: maskeetersPage?.image,
-    video: maskeetersPage?.video,
-    videoEmbed: maskeetersPage?.videoEmbed,
-    type: "maskeeters",
+    type: "Maskeeters",
     icon: <FiBriefcase className="w-6 h-6" />,
-    color: "bg-teal-100 text-teal-600"
+    color: "bg-teal-100 text-teal-600",
+    image: resolveImageUrl(experienceMediaItems.find(item => item.type === 'Maskeeters')?.image),
+    video: experienceMediaItems.find(item => item.type === 'Maskeeters')?.video,
+    videoEmbed: experienceMediaItems.find(item => item.type === 'Maskeeters')?.videoEmbed
   },
   {
     id: 'cars',
@@ -155,10 +167,12 @@ const experiences = [
       "Presented findings in academic seminars and mentored undergraduate students on research methods.",
       "Strengthened interdisciplinary collaboration between environmental engineering and materials science research groups."
     ],
-    image: resolveImageUrl(researchLabPage?.image || researchYouthPage?.image),
-    type: "research",
+    type: "CARS",
     icon: <FiBook className="w-6 h-6" />,
-    color: "bg-purple-100 text-purple-600"
+    color: "bg-purple-100 text-purple-600",
+    image: resolveImageUrl(experienceMediaItems.find(item => item.type === 'CARS')?.image),
+    video: experienceMediaItems.find(item => item.type === 'CARS')?.video,
+    videoEmbed: experienceMediaItems.find(item => item.type === 'CARS')?.videoEmbed
   }
 ];
 

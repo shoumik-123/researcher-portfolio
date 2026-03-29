@@ -20,10 +20,11 @@ import {
 
 // Image paths
 const profileImage = "/images/profile.jpg";
-const achievementImages = [
-  "/images/achievement-1.jpg",
-  "/images/achievement-2.jpg",
-];
+
+// Use all home images from the shared data array.
+const achievementImages = images
+  .filter((item) => item.id === 'home')
+  .map((item) => item.image || '/images/achievement-1.jpg');
 
 export default function Home() {
   const [key, setKey] = useState(0);
@@ -300,29 +301,7 @@ export default function Home() {
 
       {/* Main content */}
       <div className="max-w-4xl mx-auto px-6 pb-32 space-y-28 text-lg leading-relaxed text-gray-800">
-        {/* RESEARCH METRICS - FLEX ROW */}
-        <section className="w-screen relative left-1/2 right-1/2 -mx-[50vw] bg-gray-50 py-20 my-16">
-          <div className="max-w-4xl mx-auto px-6">
-            <h2 className="text-4xl font-bold uppercase tracking-wide text-center mb-12">
-              Research Metrics
-            </h2>
-            <div className="flex flex-row flex-wrap justify-center items-center gap-x-12 gap-y-6">
-              {stats.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex-shrink-0 text-center min-w-[120px]"
-                >
-                  <div className="text-5xl font-light text-gray-900">
-                    {item.value}
-                  </div>
-                  <div className="text-sm uppercase tracking-wider text-gray-500 mt-2 whitespace-nowrap">
-                    {item.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
         {/* AREAS OF EXPERTISE */}
         <section className="space-y-10">
@@ -447,27 +426,7 @@ export default function Home() {
           )}
         </section>
 
-        {/* ACADEMIC MENTORS */}
-        <section className="space-y-16">
-          <h2 className="text-5xl font-bold uppercase tracking-wide text-center">
-            Academic Mentors & Influences
-          </h2>
 
-          <div className="space-y-16">
-            {mentors.map((mentor, i) => (
-              <div key={i} className="border-l-4 border-gray-400 pl-6 py-2">
-                <p className="text-2xl font-semibold">{mentor.name}</p>
-                <p className="text-gray-600 mt-1">
-                  {mentor.title}{" "}
-                  {mentor.organization && `, ${mentor.organization}`}
-                </p>
-                <p className="italic text-gray-700 mt-4">
-                  "{mentor.description}"
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
       </div>
     </div>
   );

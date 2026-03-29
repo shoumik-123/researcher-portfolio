@@ -236,57 +236,8 @@ export default function AboutPage() {
           </div>
         </motion.section>
 
-        {/* Current & Previous Roles */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiCareer className="text-primary" />
-            Current & Previous Roles
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {roles.map((role, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                    {role.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900">{role.title}</h3>
-                    <p className="text-sm text-gray-600">{role.organization}</p>
-                  </div>
-                </div>
-                <p className="text-xs text-gray-400">{role.period}</p>
-              </div>
-            ))}
-          </div>
-        </motion.section>
+        
 
-        {/* Professional Background Highlights */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiStar className="text-primary" />
-            Professional Background
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {backgroundHighlights.map((highlight, idx) => (
-              <div key={idx} className="flex gap-3 items-start">
-                <FiCheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
-                <p className="text-gray-700">{highlight}</p>
-              </div>
-            ))}
-          </div>
-        </motion.section>
 
         {/* Open to Opportunities */}
         <motion.section

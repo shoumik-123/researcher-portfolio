@@ -161,8 +161,118 @@ export const images = [
     "title": "Hasan Ahmed - Researcher & Technical Expert",
     "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
     "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "home",
+    "page": "/"
+  },
+  {
+    "id": "home",
+    "name": "Home",
+    "title": "Hasan Ahmed - Researcher & Technical Expert",
+    "description": "Environmental technical expert with experience in project management, research, and sustainable development across Bangladesh.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
     "type": "home",
     "page": "/"
   },
@@ -174,8 +284,42 @@ export const images = [
     "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
     "video": "",
     "videoEmbed": "",
-    "type": "experience",
+    "type": "CARS",
     "page": "/experience"
+  },
+  {
+    "id": "experience",
+    "name": "Professional Experience",
+    "title": "Professional Journey",
+    "description": "Overview of my professional experience across international organizations and corporate sectors.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "Maskeeters",
+    "page": "/experience"
+  },
+  {
+    "id": "experience",
+    "name": "Professional Experience",
+    "title": "Professional Journey",
+    "description": "Overview of my professional experience across international organizations and corporate sectors.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fprofile.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "BPCL",
+    "page": "/experience"
+  },
+
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
   },
   {
     "id": "experience-unops",
@@ -190,7 +334,7 @@ export const images = [
   },
   {
     "id": "experience-unops",
-    "name": "UNOPS Experience 2",
+    "name": "UNOPS Experience",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
     "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
@@ -198,6 +342,149 @@ export const images = [
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-unops",
+    "name": "UNOPS Experience",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "experience-bpcl",
+    "name": "BPCL Experience",
+    "title": "Research Consultant at BPCL",
+    "description": "Worked on research projects related to energy efficiency and sustainable practices in the corporate sector.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/bpcl"
   },
   {
     "id": "experience-bpcl",
@@ -226,8 +513,8 @@ export const images = [
     "name": "Maskeeters Experience",
     "title": "Team Lead at Maskeeters",
     "description": "Led a team of researchers and developers on innovative projects and research initiatives.",
-    "image": "",
-    "video": "https://youtu.be/21E3MNWz5m4?list=RD21E3MNWz5m4",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/maskeeters"
@@ -238,8 +525,41 @@ export const images = [
     "title": "My Research Journey",
     "description": "Overview of my research work, publications, and academic contributions.",
     "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "video": "",
+    "videoEmbed": "",
+    "type": "research",
+    "page": "/research"
+  },
+  {
+    "id": "research",
+    "name": "Research Journey",
+    "title": "My Research Journey",
+    "description": "Overview of my research work, publications, and academic contributions.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "research",
+    "page": "/research"
+  },
+  {
+    "id": "research",
+    "name": "Research Journey",
+    "title": "My Research Journey",
+    "description": "Overview of my research work, publications, and academic contributions.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "research",
+    "page": "/research"
+  },
+  {
+    "id": "research",
+    "name": "Research Journey",
+    "title": "My Research Journey",
+    "description": "Overview of my research work, publications, and academic contributions.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
     "type": "research",
     "page": "/research"
   },
@@ -249,8 +569,8 @@ export const images = [
     "title": "Laboratory Research",
     "description": "Hands-on laboratory work focusing on industrial waste valorization and polymer composite development.",
     "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "video": "",
+    "videoEmbed": "",
     "type": "research",
     "page": "/research/lab"
   },
@@ -260,10 +580,32 @@ export const images = [
     "title": "Mentoring Young Researchers",
     "description": "Supervising and mentoring undergraduate and graduate students in environmental research projects.",
     "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
-    "videoEmbed": "https://www.youtube.com/embed/xxxxxxxxxxx",
+    "video": "",
+    "videoEmbed": "",
     "type": "research",
     "page": "/research/youth"
+  },
+  {
+    "id": "research-youth",
+    "name": "Youth Engagement",
+    "title": "Mentoring Young Researchers",
+    "description": "Supervising and mentoring undergraduate and graduate students in environmental research projects.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "research",
+    "page": "/research/youth"
+  },
+  {
+    "id": "research-phd",
+    "name": "My PhD Journey",
+    "title": "PhD in Environmental Science",
+    "description": "Doctoral research focusing on valorization of industrial waste for sustainable polymer composites.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "research",
+    "page": "/research/phd"
   },
   {
     "id": "research-phd",
@@ -288,6 +630,17 @@ export const images = [
     "page": "/about"
   },
   {
+    "id": "about",
+    "name": "About Me",
+    "title": "Hasan Ahmed",
+    "description": "Environmental researcher and technical expert passionate about sustainability, waste management, and mentoring young scientists.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "about",
+    "page": "/about"
+  },
+  {
     "id": "achievements",
     "name": "Achievements",
     "title": "Key Achievements",
@@ -297,6 +650,28 @@ export const images = [
     "videoEmbed": "",
     "type": "achievements",
     "page": "/achievements"
+  },
+  {
+    "id": "achievements",
+    "name": "Achievements",
+    "title": "Key Achievements",
+    "description": "A comprehensive list of my professional achievements, awards, and recognitions.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-2.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "achievements",
+    "page": "/achievements"
+  },
+  {
+    "id": "training",
+    "name": "Training & Consultancy",
+    "title": "Training Programs & Consultancy Work",
+    "description": "Professional training programs delivered and consultancy services provided to organizations.",
+    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
+    "video": "",
+    "videoEmbed": "",
+    "type": "training",
+    "page": "/achievements/training"
   },
   {
     "id": "training",

@@ -30,7 +30,8 @@ import { images } from "@/lib/data";
 
 
 // Get Research page data from pages array
-const researchPage = images.find(page => page.id === 'research');
+const researchMediaItems = images.filter(page => page.id === 'research');
+const researchPage = researchMediaItems[0];
 
 // Image URL resolver
 const resolveImageUrl = (image?: string): string => {
@@ -38,15 +39,44 @@ const resolveImageUrl = (image?: string): string => {
   return image;
 };
 
+// Video URL resolver - converts YouTube watch/youtu.be URLs to embed format
+const resolveVideoEmbed = (videoUrl?: string): string => {
+  if (!videoUrl) return '';
+  
+  try {
+    // Handle youtu.be short URLs
+    if (videoUrl.includes('youtu.be/')) {
+      const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
+      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    }
+    
+    // Handle standard youtube.com URLs
+    if (videoUrl.includes('youtube.com')) {
+      const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
+      const videoId = urlParams.get('v');
+      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+    }
+    
+    // Already an embed URL
+    if (videoUrl.includes('youtube.com/embed/')) {
+      return videoUrl;
+    }
+  } catch {
+    // return original if parsing fails
+  }
+  
+  return videoUrl;
+};
+
 // Gallery Images from pages array
-const galleryImages = researchPage?.image ? [{
-      id: 'research-default-1',
-      title: researchPage.title || 'Research Journey',
-      description: researchPage.description || 'Building a Sustainable Future Through Science',
-      image: resolveImageUrl(researchPage.image),
-      video: researchPage.video,
-      videoEmbed: researchPage.videoEmbed
-    }] : [];
+const galleryImages = researchMediaItems.map((item, index) => ({
+  id: item.id ? `${item.id}-${index}` : `research-${index}`,
+  title: item.title || item.name || 'Research Journey',
+  description: item.description || 'Building a Sustainable Future Through Science',
+  image: resolveImageUrl(item.image),
+  video: !!item.video || !!item.videoEmbed,
+  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
+}));
 
 // Laboratories
 const laboratories = [

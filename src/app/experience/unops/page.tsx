@@ -28,7 +28,8 @@ import { images } from "@/lib/data";
 
 
 // Get UNOPS page data from pages array
-const unopsPage = images.find(page => page.id === 'experience-unops');
+const unopsMediaItems = images.filter(page => page.id === 'experience-unops');
+const unopsPage = unopsMediaItems[0];
 
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/achievement-1.jpg';
@@ -46,15 +47,15 @@ const resolveImageUrl = (image?: string): string => {
   return image;
 };
 
-const galleryImages = unopsPage?.image ? [{
-      id: 'unops-default-1',
-      title: unopsPage.title || 'UNOPS Experience',
-      description: unopsPage.description || 'UNOPS gallery',
-      image: resolveImageUrl(unopsPage.image),
-      alt: unopsPage.name,
-      video: unopsPage.video || '',
-      videoEmbed: unopsPage.videoEmbed || ''
-    }] : [];
+const galleryImages = unopsMediaItems.map((item, index) => ({
+  id: item.id ? `${item.id}-${index}` : `unops-${index}`,
+  title: item.title || item.name || 'UNOPS Experience',
+  description: item.description || 'UNOPS gallery',
+  image: resolveImageUrl(item.image),
+  alt: item.name || unopsPage?.name,
+  video: item.video || '',
+  videoEmbed: item.videoEmbed || ''
+}));
 
 // Published ESMPs List
 const publishedESMPs = [

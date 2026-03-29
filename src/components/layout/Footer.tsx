@@ -52,17 +52,17 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/research/journey" className="text-white/80 hover:text-white transition-colors">
+                <Link href="/research" className="text-white/80 hover:text-white transition-colors">
                   Research Journey
                 </Link>
               </li>
               <li>
-                <Link href="/publications" className="text-white/80 hover:text-white transition-colors">
-                  Publications
+                <Link href="/experience/unops" className="text-white/80 hover:text-white transition-colors">
+                  UN Experience
                 </Link>
               </li>
               <li>
-                <Link href="/achievements/career" className="text-white/80 hover:text-white transition-colors">
+                <Link href="/achievements" className="text-white/80 hover:text-white transition-colors">
                   Achievements
                 </Link>
               </li>
