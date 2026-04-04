@@ -244,23 +244,23 @@ export default function Header() {
                     
                     {isOpen && (
                       <div className="absolute top-full left-0 mt-1 w-72 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.path}
-                            href={child.path!}
-                            className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200 ${
-                              isActive(child.path) 
-                                ? 'text-primary bg-primary/5' 
-                                : 'text-gray-600 hover:text-primary hover:bg-primary/5'
-                            }`}
-                            onClick={() => setOpenDropdown(null)}
-                          >
-                            <span className={isActive(child.path) ? 'text-primary' : 'text-gray-400'}>
-                              {getMenuIcon(child.name, true, false)}
-                            </span>
-                            <span>{child.name}</span>
-                          </Link>
-                        ))}
+                        {item.children && item.children.map((child) => (
+  <Link
+    key={child.path}
+    href={child.path!}
+    className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200 ${
+      isActive(child.path) 
+        ? 'text-primary bg-primary/5' 
+        : 'text-gray-600 hover:text-primary hover:bg-primary/5'
+    }`}
+    onClick={() => setOpenDropdown(null)}
+  >
+    <span className={isActive(child.path) ? 'text-primary' : 'text-gray-400'}>
+      {getMenuIcon(child.name, true, false)}
+    </span>
+    <span>{child.name}</span>
+  </Link>
+))}
                       </div>
                     )}
                   </div>
