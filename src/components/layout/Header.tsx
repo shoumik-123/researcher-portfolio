@@ -149,7 +149,7 @@ export default function Header() {
           </div>
           
           {/* Children */}
-          {isSubmenuOpen && (
+          {isSubmenuOpen && item.children && (
             <div className="pl-8 pb-2 space-y-1">
               {item.children.map((child) => (
                 <button
