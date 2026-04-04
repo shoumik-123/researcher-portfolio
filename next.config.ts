@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         hostname: 'researcher-portfolio-nu.vercel.app',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'drive.google.com',
+        pathname: '**',
+      },
     ],
   },
 };

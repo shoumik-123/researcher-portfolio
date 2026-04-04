@@ -44,6 +44,41 @@ const maskeetersPage = maskeetersMediaItems[0];
 // Image URL resolver
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/achievement-1.jpg';
+
+  try {
+    const url = new URL(image);
+    
+    // Handle Next.js image optimization URLs
+    if (url.pathname === '/_next/image' && url.searchParams.has('url')) {
+      const inner = url.searchParams.get('url');
+      if (inner) return decodeURIComponent(inner);
+    }
+    
+    // Handle Google Drive URLs
+    if (url.hostname.includes('drive.google.com')) {
+      let fileId = null;
+      
+      // Extract file ID from /file/d/FILE_ID/view format
+      const fileMatch = image.match(/\/file\/d\/([^/]+)/);
+      if (fileMatch) {
+        fileId = fileMatch[1];
+      }
+      
+      // Extract file ID from ?id=FILE_ID format
+      const idMatch = image.match(/[?&]id=([^&]+)/);
+      if (idMatch) {
+        fileId = idMatch[1];
+      }
+      
+      if (fileId) {
+        // Convert to working thumbnail URL
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      }
+    }
+  } catch {
+    // keep original
+  }
+
   return image;
 };
 

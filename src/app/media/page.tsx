@@ -251,25 +251,6 @@ export default function MediaPage() {
           </p>
         </motion.section>
 
-        {/* Media Statistics */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
-          className="mb-12"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {mediaStats.map((stat, idx) => (
-              <div key={idx} className="bg-white border border-gray-200 rounded-xl p-4 text-center hover:shadow-md transition-shadow">
-                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-2">
-                  {stat.icon}
-                </div>
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
 
         {/* Key Highlights Section */}
         <motion.section

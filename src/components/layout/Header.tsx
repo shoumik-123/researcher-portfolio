@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 import { 
   FiChevronDown, FiMenu, FiX, FiHome, FiBriefcase, 
@@ -13,8 +13,10 @@ import { navItems, NavItem } from '../../lib/navigation';
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -43,9 +45,9 @@ export default function Header() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
+    setOpenMobileSubmenu(null);
   }, [pathname]);
 
-  // Handle mouse enter with delay
   const handleMouseEnter = (itemName: string) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -65,12 +67,18 @@ export default function Header() {
     return pathname.startsWith(path);
   };
 
-  // Get icon for menu items with better matching
+  const handleMobileNavigation = (path: string) => {
+    console.log('Navigating to:', path);
+    setIsMobileMenuOpen(false);
+    setOpenMobileSubmenu(null);
+    // Use router.push for client-side navigation
+    router.push(path);
+  };
+
   const getMenuIcon = (itemName: string, isChild: boolean = false, isWhite: boolean = false) => {
     const iconColor = isWhite ? "text-white" : "text-primary";
     const size = isChild ? 14 : 16;
     
-    // More flexible icon matching using includes and lower case
     const nameLower = itemName.toLowerCase();
     
     if (nameLower.includes('home')) 
@@ -81,229 +89,101 @@ export default function Header() {
       if (nameLower.includes('maskeeters')) return <FiUsers size={size} className={iconColor} />;
       return <FiBriefcase size={size} className={iconColor} />;
     }
-    if (nameLower.includes('research') || nameLower.includes('publication') || nameLower.includes('conference')) {
-      if (nameLower.includes('publication')) return <FiFileText size={size} className={iconColor} />;
-      if (nameLower.includes('conference')) return <FiCalendar size={size} className={iconColor} />;
-      if (nameLower.includes('laboratory')) return <FiMapPin size={size} className={iconColor} />;
-      if (nameLower.includes('mentor')) return <FiUsers size={size} className={iconColor} />;
+    if (nameLower.includes('research')) {
       if (nameLower.includes('phd')) return <FiStar size={size} className={iconColor} />;
       return <FiBook size={size} className={iconColor} />;
     }
-    if (nameLower.includes('about') || nameLower.includes('achievement') || nameLower.includes('training')) {
-      if (nameLower.includes('achievement')) return <FiAward size={size} className={iconColor} />;
-      if (nameLower.includes('training')) return <FiUsers size={size} className={iconColor} />;
+    if (nameLower.includes('about')) {
       return <FiUser size={size} className={iconColor} />;
     }
-    if (nameLower.includes('media') || nameLower.includes('blog')) {
-      if (nameLower.includes('blog')) return <FiEdit size={size} className={iconColor} />;
+    if (nameLower.includes('media')) {
       return <FiMic size={size} className={iconColor} />;
     }
+    if (nameLower.includes('achievement')) return <FiAward size={size} className={iconColor} />;
+    if (nameLower.includes('training')) return <FiUsers size={size} className={iconColor} />;
     
-    // Default icon
     return <FiFileText size={size} className={iconColor} />;
   };
 
-const NavLink = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean }) => {
-  if (item.children) {
-    const isOpen = openDropdown === item.name;
-    
-    // If item has both path and children, make it a link with dropdown
-    if (item.path) {
+  // Mobile menu item renderer
+  const renderMobileMenuItem = (item: NavItem) => {
+    const hasChildren = item.children && item.children.length > 0;
+    const isSubmenuOpen = openMobileSubmenu === item.name;
+
+    if (hasChildren) {
       return (
-        <div 
-          className="relative"
-          onMouseEnter={() => !isMobile && handleMouseEnter(item.name)}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="flex items-center">
-            <Link
-              href={item.path}
-              className={`
-                flex items-center gap-2 transition-all duration-200
-                ${isMobile 
-                  ? 'py-3 px-4 text-white/80 hover:text-white flex-1' 
-                  : 'px-3 py-2 rounded-l-md text-sm font-medium text-white/80 hover:text-white'
-                }
-                ${isActive(item.path) ? 'text-white' : ''}
-                relative group
-              `}
-              onClick={() => isMobile && setIsMobileMenuOpen(false)}
-            >
-              {getMenuIcon(item.name, false, true)}
-              <span>{item.name}</span>
-              {isActive(item.path) && !isMobile && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-white rounded-full"></span>
-              )}
-            </Link>
+        <div key={item.name} className="border-b border-white/10">
+          {/* Parent item */}
+          <div className="flex items-center justify-between">
+            {item.path ? (
+              <button
+                onClick={() => handleMobileNavigation(item.path!)}
+                className="flex-1 py-3 px-4 text-white/80 hover:text-white text-left transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  {getMenuIcon(item.name, false, true)}
+                  <span>{item.name}</span>
+                </div>
+              </button>
+            ) : (
+              <div className="flex-1 py-3 px-4 text-white/80">
+                <div className="flex items-center gap-2">
+                  {getMenuIcon(item.name, false, true)}
+                  <span>{item.name}</span>
+                </div>
+              </div>
+            )}
             
-            {/* Dropdown toggle button */}
             <button
-              onClick={() => setOpenDropdown(isOpen ? null : item.name)}
-              className={`
-                transition-all duration-200
-                ${isMobile 
-                  ? 'p-3 text-white/80 hover:text-white' 
-                  : 'px-2 py-2 rounded-r-md text-sm font-medium text-white/80 hover:text-white border-l border-white/20'
-                }
-                ${isOpen ? 'text-white' : ''}
-              `}
-              aria-label="Toggle dropdown"
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenMobileSubmenu(isSubmenuOpen ? null : item.name);
+              }}
+              className="p-3 text-white/80 hover:text-white"
             >
               <FiChevronDown 
-                className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                size={14} 
+                className={`transition-transform duration-200 ${isSubmenuOpen ? 'rotate-180' : ''}`}
+                size={16} 
               />
             </button>
           </div>
           
-          {/* Dropdown menu */}
-          {isOpen && (
-            <div 
-              className={`
-                ${isMobile 
-                  ? 'pl-6 space-y-1 mt-1 bg-white/5' 
-                  : 'absolute top-full left-0 mt-1 w-72 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50'
-                }
-              `}
-              onMouseEnter={() => !isMobile && setOpenDropdown(item.name)}
-              onMouseLeave={handleMouseLeave}
-            >
-              {item.children.map((child) => {
-                const active = isActive(child.path);
-                
-                return (
-                  <Link
-                    key={child.path}
-                    href={child.path || '#'}
-                    className={`
-                      flex items-center gap-3 transition-all duration-200
-                      ${isMobile 
-                        ? 'py-2.5 px-4 text-sm text-white/80 hover:text-white hover:bg-white/5' 
-                        : 'px-4 py-2.5 text-sm hover:bg-primary/5'
-                      }
-                      ${active ? (isMobile ? 'text-white bg-white/10' : 'text-primary bg-primary/5') : (isMobile ? 'text-white/80' : 'text-gray-600 hover:text-primary')}
-                      group/item
-                    `}
-                    onClick={() => {
-                      setOpenDropdown(null);
-                      setIsMobileMenuOpen(false);
-                    }}
-                  >
-                    <span className={active ? 'text-primary' : 'text-gray-400 group-hover/item:text-primary transition-colors'}>
-                      {getMenuIcon(child.name, true, false)}
-                    </span>
-                    <span className="flex-1">{child.name}</span>
-                    {active && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                    )}
-                  </Link>
-                );
-              })}
+          {/* Children */}
+          {isSubmenuOpen && (
+            <div className="pl-8 pb-2 space-y-1">
+              {item.children.map((child) => (
+                <button
+                  key={child.path}
+                  onClick={() => handleMobileNavigation(child.path!)}
+                  className="w-full text-left block py-2 px-4 text-sm text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                >
+                  <div className="flex items-center gap-2">
+                    {getMenuIcon(child.name, true, false)}
+                    <span>{child.name}</span>
+                  </div>
+                </button>
+              ))}
             </div>
           )}
         </div>
       );
     }
-    
-    // If item has only children (no path), render as button only
+
+    // Regular item (no children)
     return (
-      <div 
-        className="relative"
-        onMouseEnter={() => !isMobile && handleMouseEnter(item.name)}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div key={item.name} className="border-b border-white/10">
         <button
-          onClick={() => isMobile ? setOpenDropdown(isOpen ? null : item.name) : null}
-          className={`
-            flex items-center gap-1.5 w-full text-left transition-all duration-200
-            ${isMobile ? 'py-3 px-4 text-white/80 hover:text-white' : 'px-3 py-2 rounded-md text-sm font-medium text-white/80 hover:text-white'}
-            ${isOpen ? 'text-white' : ''}
-            group
-          `}
+          onClick={() => handleMobileNavigation(item.path!)}
+          className="w-full text-left py-3 px-4 text-white/80 hover:text-white transition-colors"
         >
-          <span className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             {getMenuIcon(item.name, false, true)}
             <span>{item.name}</span>
-          </span>
-          <FiChevronDown 
-            className={`transition-transform duration-200 ml-auto ${isOpen ? 'rotate-180 text-white' : 'text-white/60'}`}
-            size={14} 
-          />
-        </button>
-        
-        {/* Dropdown menu */}
-        {isOpen && (
-          <div 
-            className={`
-              ${isMobile 
-                ? 'pl-6 space-y-1 mt-1 bg-white/5' 
-                : 'absolute top-full left-0 mt-1 w-72 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50'
-              }
-            `}
-            onMouseEnter={() => !isMobile && setOpenDropdown(item.name)}
-            onMouseLeave={handleMouseLeave}
-          >
-            {item.children.map((child) => {
-              const active = isActive(child.path);
-              
-              return (
-                <Link
-                  key={child.path}
-                  href={child.path || '#'}
-                  className={`
-                    flex items-center gap-3 transition-all duration-200
-                    ${isMobile 
-                      ? 'py-2.5 px-4 text-sm text-white/80 hover:text-white hover:bg-white/5' 
-                      : 'px-4 py-2.5 text-sm hover:bg-primary/5'
-                    }
-                    ${active ? (isMobile ? 'text-white bg-white/10' : 'text-primary bg-primary/5') : (isMobile ? 'text-white/80' : 'text-gray-600 hover:text-primary')}
-                    group/item
-                  `}
-                  onClick={() => {
-                    setOpenDropdown(null);
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  <span className={active ? 'text-primary' : 'text-gray-400 group-hover/item:text-primary transition-colors'}>
-                    {getMenuIcon(child.name, true, false)}
-                  </span>
-                  <span className="flex-1">{child.name}</span>
-                  {active && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary"></span>
-                  )}
-                </Link>
-              );
-            })}
           </div>
-        )}
+        </button>
       </div>
     );
-  }
-
-  // Regular nav item (no children)
-  if (!item.path) return null;
-  
-  const active = isActive(item.path);
-  
-  return (
-    <Link
-      href={item.path}
-      className={`
-        flex items-center gap-2 transition-all duration-200
-        ${isMobile ? 'py-3 px-4 text-white/80 hover:text-white' : 'px-3 py-2 rounded-md text-sm font-medium text-white/80 hover:text-white'}
-        ${active ? 'text-white' : ''}
-        relative group
-      `}
-      onClick={() => setIsMobileMenuOpen(false)}
-    >
-      {getMenuIcon(item.name, false, true)}
-      <span>{item.name}</span>
-      {active && !isMobile && (
-        <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-white rounded-full"></span>
-      )}
-    </Link>
-  );
-};
+  };
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -320,13 +200,92 @@ const NavLink = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean
           </Link>
           
           <nav className="flex items-center space-x-1" ref={dropdownRef}>
-            {navItems.map((item) => (
-              <NavLink key={item.name} item={item} />
-            ))}
+            {navItems.map((item) => {
+              const hasChildren = item.children && item.children.length > 0;
+              const isOpen = openDropdown === item.name;
+              
+              if (hasChildren) {
+                return (
+                  <div 
+                    key={item.name}
+                    className="relative"
+                    onMouseEnter={() => handleMouseEnter(item.name)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <div className="flex items-center">
+                      {item.path ? (
+                        <Link
+                          href={item.path}
+                          className={`px-3 py-2 rounded-l-md text-sm font-medium text-white/80 hover:text-white transition-all duration-200 ${
+                            isActive(item.path) ? 'text-white' : ''
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            {getMenuIcon(item.name, false, true)}
+                            <span>{item.name}</span>
+                          </div>
+                        </Link>
+                      ) : (
+                        <div className="px-3 py-2 text-sm font-medium text-white/80">
+                          <div className="flex items-center gap-2">
+                            {getMenuIcon(item.name, false, true)}
+                            <span>{item.name}</span>
+                          </div>
+                        </div>
+                      )}
+                      
+                      <button
+                        onClick={() => setOpenDropdown(isOpen ? null : item.name)}
+                        className="px-2 py-2 rounded-r-md text-white/80 hover:text-white border-l border-white/20"
+                      >
+                        <FiChevronDown className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} size={14} />
+                      </button>
+                    </div>
+                    
+                    {isOpen && (
+                      <div className="absolute top-full left-0 mt-1 w-72 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50">
+                        {item.children.map((child) => (
+                          <Link
+                            key={child.path}
+                            href={child.path!}
+                            className={`flex items-center gap-3 px-4 py-2.5 text-sm transition-all duration-200 ${
+                              isActive(child.path) 
+                                ? 'text-primary bg-primary/5' 
+                                : 'text-gray-600 hover:text-primary hover:bg-primary/5'
+                            }`}
+                            onClick={() => setOpenDropdown(null)}
+                          >
+                            <span className={isActive(child.path) ? 'text-primary' : 'text-gray-400'}>
+                              {getMenuIcon(child.name, true, false)}
+                            </span>
+                            <span>{child.name}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              
+              return (
+                <Link
+                  key={item.name}
+                  href={item.path!}
+                  className={`px-3 py-2 rounded-md text-sm font-medium text-white/80 hover:text-white transition-all duration-200 ${
+                    isActive(item.path) ? 'text-white' : ''
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    {getMenuIcon(item.name, false, true)}
+                    <span>{item.name}</span>
+                  </div>
+                </Link>
+              );
+            })}
           </nav>
         </div>
 
-        {/* Tablet/Mobile Header */}
+        {/* Mobile Header */}
         <div className="lg:hidden">
           <div className="flex justify-between items-center h-16">
             <Link 
@@ -340,7 +299,6 @@ const NavLink = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-white/80 hover:text-white transition-colors"
-              aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
@@ -348,14 +306,11 @@ const NavLink = ({ item, isMobile = false }: { item: NavItem; isMobile?: boolean
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="py-4 pb-6 bg-primary/95 backdrop-blur-md rounded-b-2xl">
-              <nav className="space-y-1">
-                {navItems.map((item) => (
-                  <NavLink key={item.name} item={item} isMobile />
-                ))}
+            <div className="py-4 pb-6 bg-primary/95 backdrop-blur-md rounded-b-2xl max-h-[calc(100vh-64px)] overflow-y-auto">
+              <nav className="space-y-0">
+                {navItems.map((item) => renderMobileMenuItem(item))}
               </nav>
               
-              {/* Decorative line */}
               <div className="h-px mt-6 bg-white/20 w-full"></div>
               <p className="text-center text-white/40 text-xs mt-4">
                 © {new Date().getFullYear()} Hasan Ahmed

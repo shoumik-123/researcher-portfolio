@@ -73,9 +73,9 @@ const galleryImages = aboutMediaItems.map((item) => ({
 
 // Contact Information
 const contactInfo = {
-  linkedin: "https://www.linkedin.com/in/hasan-ahmed-",
+  linkedin: "https://www.linkedin.com/in/hasanahmed27/",
   email: "hasan.ahmed@email.com",
-  phone: "+880 1234 567890"
+  phone: "01747137476"
 };
 
 // Key Expertise Areas

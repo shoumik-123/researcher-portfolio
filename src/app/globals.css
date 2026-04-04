@@ -160,3 +160,21 @@
 .animate-fadeIn {
   animation: fadeIn 0.2s ease-out forwards;
 }
+
+/* Remove default triangle from details/summary */
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Ensure clicks pass through properly */
+details summary {
+  cursor: pointer;
+}
+
+details[open] summary {
+  margin-bottom: 0.5rem;
+}
