@@ -33,9 +33,9 @@ import {
   images 
 } from '@/lib/data';
 
-// Get BPCL page data from images array (all items matching the ID)
-const bpclMediaItems = images.filter(page => page.id === 'experience-bpcl');
-// Main page data
+// Get BPCL page data from images array - filter by page = "/experience/bpcl"
+const bpclMediaItems = images.filter(item => item.page === "/experience/bpcl" && item.type === "experience");
+// Main page data (first item for description)
 const bpclPage = bpclMediaItems[0];
 
 // Image URL resolver
@@ -43,20 +43,12 @@ const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/achievement-1.jpg';
 
   try {
-    const url = new URL(image);
-    
-    // Handle Next.js image optimization URLs
-    if (url.pathname === '/_next/image' && url.searchParams.has('url')) {
-      const inner = url.searchParams.get('url');
-      if (inner) return decodeURIComponent(inner);
-    }
-    
     // Handle Google Drive URLs
-    if (url.hostname.includes('drive.google.com')) {
+    if (image.includes('drive.google.com')) {
       let fileId = null;
       
       // Extract file ID from /file/d/FILE_ID/view format
-      const fileMatch = image.match(/\/file\/d\/([^/]+)/);
+      const fileMatch = image.match(/\/d\/([^/]+)/);
       if (fileMatch) {
         fileId = fileMatch[1];
       }
@@ -70,6 +62,14 @@ const resolveImageUrl = (image?: string): string => {
       if (fileId) {
         // Convert to working thumbnail URL
         return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      }
+    }
+    
+    // Handle Next.js image optimization URLs
+    if (image.includes('/_next/image') && image.includes('url=')) {
+      const urlMatch = image.match(/url=([^&]+)/);
+      if (urlMatch) {
+        return decodeURIComponent(urlMatch[1]);
       }
     }
   } catch {
@@ -108,12 +108,13 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
   return videoUrl;
 };
 
-const galleryImages = bpclMediaItems.map((item) => ({ 
-  id: item.id || `bpcl-${Math.random()}`,
-  title: item.title || item.name || 'BPCL Experience',
-  description: item.description || 'BPCL gallery',
+// Process gallery images from BPCL items
+const galleryImages = bpclMediaItems.map((item, index) => ({ 
+  id: item.id || `bpcl-${index}`,
+  title: item.name || item.title || 'BPCL Experience',
+  description: item.description || 'BPCL gallery image',
   image: resolveImageUrl(item.image),
-  video: !!item.video || !!item.videoEmbed,
+  video: !!(item.video || item.videoEmbed),
   videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
 }));
 
@@ -218,7 +219,7 @@ export default function BPCLExperiencePage() {
             transition={{ delay: 1.2, duration: 1 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto text-center"
           >
-            {bpclPage?.description || "Manager – Environment, Sustainability & MEAL at Bangladesh Petrochemical Company Limited (BPCL)"}
+            Manager – Environment, Sustainability & MEAL at Bangladesh Petrochemical Company Limited (BPCL)
           </motion.p>
         </div>
       </section>
@@ -317,111 +318,57 @@ export default function BPCLExperiencePage() {
           </div>
         </motion.section>
 
-        {/* Key Focus Areas */}
-        {/* <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6">Key Focus Areas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-gray-50 rounded-xl p-5">
-              <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mb-3">
-                <FiTarget className="w-5 h-5" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Strategic Leadership</h3>
-              <p className="text-sm text-gray-600">Leading multidisciplinary teams with Results-Based Management (RBM) and KPIs for effective project implementation</p>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-5">
-              <div className="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-3">
-                <FiGlobe className="w-5 h-5" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Circular Economy</h3>
-              <p className="text-sm text-gray-600">Developing and implementing circular economy strategies and low-carbon solutions aligned with SDGs</p>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-5">
-              <div className="w-10 h-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mb-3">
-                <FiUsers className="w-5 h-5" />
-              </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Stakeholder Coordination</h3>
-              <p className="text-sm text-gray-600">Liaising with government, private sector, UN agencies, and local communities for harmonized execution</p>
-            </div>
-          </div>
-        </motion.section> */}
-
         {/* Photo Gallery Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiImage className="text-primary" />
-            Photo Gallery
-          </h2>
-          {/* <p className="text-gray-600 mb-8">
-            Visual documentation of leadership activities, stakeholder engagements, and project implementations during BPCL tenure
-          </p> */}
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((item, index) => (
-              <div
-                key={item.id}
-                className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
-                onClick={() => openLightbox(index)}
-              >
-                <div className="relative aspect-[4/3]">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {item.video && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                        <FiZap className="w-6 h-6 fill-current" />
-                      </div>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="font-semibold text-sm">{item.title}</h3>
-                  <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Video Section (if video exists in pages array) */}
-        {bpclPage?.videoEmbed && (
+        {galleryImages.length > 0 && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.3 }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-light text-gray-900 mb-6">Project Overview Video</h2>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <iframe
-                src={bpclPage.videoEmbed}
-                title="BPCL PLEASE Project Overview"
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiImage className="text-primary" />
+              Photo Gallery
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryImages.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="relative aspect-[4/3]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                      }}
+                    />
+                    {item.video && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
+                        <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+                          <FiZap className="w-6 h-6 fill-current" />
+                        </div>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-semibold text-sm">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.section>
         )}
-
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxOpen && (
+      {lightboxOpen && galleryImages.length > 0 && (
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={closeLightbox}>
           <button
             onClick={closeLightbox}
@@ -453,6 +400,9 @@ export default function BPCLExperiencePage() {
                 src={galleryImages[currentImage]?.image}
                 alt={galleryImages[currentImage]?.title}
                 className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg shadow-2xl"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                }}
               />
             )}
             <div className="mt-4 text-center text-white">

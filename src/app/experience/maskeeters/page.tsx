@@ -36,30 +36,20 @@ import {
   images
 } from '@/lib/data';
 
-// Get Maskeeters page data from images array (all items matching the ID)
-const maskeetersMediaItems = images.filter(page => page.id === 'experience-maskeeters');
-// Main page data
-const maskeetersPage = maskeetersMediaItems[0];
+// Get Maskeeters page data from images array - filter by page = "/experience/maskeeters"
+const maskeetersMediaItems = images.filter(item => item.page === "/experience/maskeeters" && item.type === "experience");
 
 // Image URL resolver
 const resolveImageUrl = (image?: string): string => {
-  if (!image) return '/images/achievement-1.jpg';
+  if (!image) return '/images/placeholder.jpg';
 
   try {
-    const url = new URL(image);
-    
-    // Handle Next.js image optimization URLs
-    if (url.pathname === '/_next/image' && url.searchParams.has('url')) {
-      const inner = url.searchParams.get('url');
-      if (inner) return decodeURIComponent(inner);
-    }
-    
     // Handle Google Drive URLs
-    if (url.hostname.includes('drive.google.com')) {
+    if (image.includes('drive.google.com')) {
       let fileId = null;
       
       // Extract file ID from /file/d/FILE_ID/view format
-      const fileMatch = image.match(/\/file\/d\/([^/]+)/);
+      const fileMatch = image.match(/\/d\/([^/]+)/);
       if (fileMatch) {
         fileId = fileMatch[1];
       }
@@ -75,6 +65,14 @@ const resolveImageUrl = (image?: string): string => {
         return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
       }
     }
+    
+    // Handle Next.js image optimization URLs
+    if (image.includes('/_next/image') && image.includes('url=')) {
+      const urlMatch = image.match(/url=([^&]+)/);
+      if (urlMatch) {
+        return decodeURIComponent(urlMatch[1]);
+      }
+    }
   } catch {
     // keep original
   }
@@ -82,11 +80,23 @@ const resolveImageUrl = (image?: string): string => {
   return image;
 };
 
-// Video URL resolver - converts YouTube watch/youtu.be URLs to embed format
+// Video URL resolver - converts Google Drive and YouTube URLs to embed format
 const resolveVideoEmbed = (videoUrl?: string): string => {
   if (!videoUrl) return '';
   
   try {
+    // Handle Google Drive video URLs
+    if (videoUrl.includes('drive.google.com')) {
+      let fileId = null;
+      const fileMatch = videoUrl.match(/\/d\/([^/]+)/);
+      if (fileMatch) {
+        fileId = fileMatch[1];
+      }
+      if (fileId) {
+        return `https://drive.google.com/file/d/${fileId}/preview`;
+      }
+    }
+    
     // Handle youtu.be short URLs
     if (videoUrl.includes('youtu.be/')) {
       const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
@@ -111,13 +121,15 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
   return videoUrl;
 };
 
-const galleryImages = maskeetersMediaItems.map((item) => ({ 
-  id: item.id || `maskeeters-${Math.random()}`,
-  title: item.title || item.name || 'Maskeeters Experience',
+// Process gallery images from Maskeeters items
+const galleryImages = maskeetersMediaItems.map((item, index) => ({ 
+  id: item.id || `maskeeters-${index}`,
+  title: item.name || item.title || 'Maskeeters Experience',
   description: item.description || 'Maskeeters gallery',
   image: resolveImageUrl(item.image),
-  video: !!item.video || !!item.videoEmbed,
-  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
+  video: !!(item.video || item.videoEmbed),
+  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video),
+  thumbnail: item.video ? `https://img.youtube.com/vi/${item.video?.match(/[?&]v=([^&]+)/)?.[1] || item.video?.split('youtu.be/')[1]?.split('?')[0]}/maxresdefault.jpg` : null
 }));
 
 // Key Contributions Data
@@ -128,46 +140,6 @@ const keyContributions = [
   "Develop business models and field implementation guidelines.",
   "Oversee research and development on environmental and social aspects.",
   "Integrate circular economy approaches, climate resilience, and ESG considerations into projects."
-];
-
-// Focus Areas
-const focusAreas = [
-  { 
-    title: "Grant Proposal Development", 
-    description: "Leading innovation-driven applications and providing strategic advisory support",
-    icon: <FiPenTool className="w-5 h-5" />,
-    color: "bg-blue-100 text-blue-600"
-  },
-  { 
-    title: "Project Evaluation", 
-    description: "Ensuring technical soundness, contextual relevance, and alignment with best practices",
-    icon: <FiClipboard className="w-5 h-5" />,
-    color: "bg-green-100 text-green-600"
-  },
-  { 
-    title: "Training & Capacity Building", 
-    description: "Leading training sessions, workshops, and field studies for skill development",
-    icon: <FiUsers className="w-5 h-5" />,
-    color: "bg-purple-100 text-purple-600"
-  },
-  { 
-    title: "Business Model Development", 
-    description: "Creating sustainable business models and field implementation guidelines",
-    icon: <FiCompass className="w-5 h-5" />,
-    color: "bg-orange-100 text-orange-600"
-  },
-  { 
-    title: "R&D on Environmental & Social Aspects", 
-    description: "Overseeing research and development for sustainable solutions",
-    icon: <FiBook className="w-5 h-5" />,
-    color: "bg-red-100 text-red-600"
-  },
-  { 
-    title: "Circular Economy & ESG Integration", 
-    description: "Integrating circular economy approaches, climate resilience, and ESG considerations",
-    icon: <FiGlobe className="w-5 h-5" />,
-    color: "bg-teal-100 text-teal-600"
-  }
 ];
 
 export default function MaskeetersExperiencePage() {
@@ -251,7 +223,7 @@ export default function MaskeetersExperiencePage() {
             transition={{ delay: 1.2, duration: 1 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto text-center"
           >
-            {maskeetersPage?.description || "Technical Head – Environment & Sustainability at Maskeeters Idea Limited, leading innovation-driven environmental solutions and sustainability initiatives"}
+            Technical Head – Environment & Sustainability at Maskeeters Idea Limited
           </motion.p>
         </div>
       </section>
@@ -332,99 +304,68 @@ export default function MaskeetersExperiencePage() {
           </div>
         </motion.section>
 
-        {/* Focus Areas */}
-        {/* <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6">Key Focus Areas</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {focusAreas.map((area, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow">
-                <div className={`w-10 h-10 rounded-full ${area.color} flex items-center justify-center mb-3`}>
-                  {area.icon}
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">{area.title}</h3>
-                <p className="text-sm text-gray-600">{area.description}</p>
-              </div>
-            ))}
-          </div>
-        </motion.section> */}
-
-        {/* Photo Gallery Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiImage className="text-primary" />
-            Photo Gallery
-          </h2>
-          {/* <p className="text-gray-600 mb-8">
-            Visual documentation of training sessions, workshops, field studies, and sustainability initiatives during Maskeeters tenure
-          </p> */}
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((item, index) => (
-              <div
-                key={item.id}
-                className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
-                onClick={() => openLightbox(index)}
-              >
-                <div className="relative aspect-[4/3]">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {item.video && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                      <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                        <FiZap className="w-6 h-6 fill-current" />
-                      </div>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="font-semibold text-sm">{item.title}</h3>
-                  <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Video Section (if video exists in pages array) */}
-        {(maskeetersPage?.videoEmbed || maskeetersPage?.video) && (
+        {/* Photo & Video Gallery Section */}
+        {galleryImages.length > 0 && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.3 }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-light text-gray-900 mb-6">Project Overview Video</h2>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <iframe
-                src={resolveVideoEmbed(maskeetersPage.videoEmbed || maskeetersPage.video)}
-                title="Maskeeters Sustainability Initiatives"
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiImage className="text-primary" />
+              Media Gallery
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryImages.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="relative aspect-[4/3]">
+                    {item.video ? (
+                      <>
+                        <img
+                          src={item.thumbnail || item.image || '/images/placeholder.jpg'}
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                          }}
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-colors">
+                          <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                            <FiZap className="w-7 h-7 text-primary ml-1" />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                        }}
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-semibold text-sm line-clamp-1">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.section>
         )}
-
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxOpen && (
+      {lightboxOpen && galleryImages.length > 0 && (
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={closeLightbox}>
           <button
             onClick={closeLightbox}
@@ -444,7 +385,7 @@ export default function MaskeetersExperiencePage() {
             {galleryImages[currentImage]?.video && galleryImages[currentImage]?.videoEmbed ? (
               <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-black shadow-2xl">
                 <iframe
-                  src={`${galleryImages[currentImage].videoEmbed}?autoplay=1`}
+                  src={`${galleryImages[currentImage].videoEmbed}${galleryImages[currentImage].videoEmbed.includes('youtube') ? '?autoplay=1' : ''}`}
                   title={galleryImages[currentImage].title}
                   className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -456,6 +397,9 @@ export default function MaskeetersExperiencePage() {
                 src={galleryImages[currentImage]?.image}
                 alt={galleryImages[currentImage]?.title}
                 className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg shadow-2xl"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                }}
               />
             )}
             <div className="mt-4 text-center text-white">

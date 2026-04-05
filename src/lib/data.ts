@@ -10,10 +10,10 @@ export const researcherInfo = {
   phone: '+8801747137476',
   social: {
     linkedin: 'https://www.linkedin.com/in/hasanahmed27/',
-    googleScholar: 'https://scholar.google.com/...',
-    researchGate: 'https://researchgate.net/profile/hasan-ahmed', // ✅ ADD THIS
-    publons: 'https://publons.com/researcher/your-id', // ✅ ADD THIS
-    orcid: 'https://orcid.org/...',
+    googleScholar: 'https://scholar.google.com/citations?user=0DuQk4wAAAAJ&hl=en',
+    researchGate: 'https://www.researchgate.net/profile/Hasan-Ahmed-25', // ✅ ADD THIS
+    // publons: 'https://publons.com/researcher/your-id', // ✅ ADD THIS
+    orcid: 'https://orcid.org/0009-0006-9120-0957',
     whatsapp: '+8801747137476'
   }
 };
@@ -148,8 +148,8 @@ export const mentors: Mentor[] = [
 ];
 export const socialLinks = [
   { name: "LinkedIn", url: researcherInfo.social.linkedin, icon: "in", title: "LinkedIn" },
-  { name: "ResearchGate", url: "https://researchgate.net/profile/hasan-ahmed", icon: "RG", title: "ResearchGate" }, // ✅ Hardcoded
-  { name: "Web of Science", url: "https://publons.com/researcher/your-id", icon: "WoS", title: "Web of Science" }, // ✅ Hardcoded
+  { name: "ResearchGate", url: "https://www.researchgate.net/profile/Hasan-Ahmed-25", icon: "RG", title: "ResearchGate" }, // ✅ Hardcoded
+  // { name: "Web of Science", url: "https://publons.com/researcher/your-id", icon: "WoS", title: "Web of Science" }, // ✅ Hardcoded
   { name: "ORCID", url: researcherInfo.social.orcid, icon: "ORCID", title: "ORCID" },
   { name: "Google Scholar", url: researcherInfo.social.googleScholar, icon: "GS", title: "Google Scholar" },
   { name: "Institutional", url: "https://ki.se", icon: "I", title: "Institutional Web Page" }
@@ -311,259 +311,141 @@ export const images = [
   },
 
   // unops start
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-retreat-2024-1",
+    "name": "UNOPS Colleague Retreat 2024",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pWDb6S_dMd0HzSw2CPKxE4lNsLTTZ1Ma/view?usp=drive_link",
-    // "image": "https://drive.google.com/thumbnail?id=1qng31G3zsdViPWfj2lCKlx9wZ_T_BoAp&sz=w1000",
-
+    "image": "https://drive.google.com/file/d/1dTD6nFmqfo7RVlhRadT6DIyOocnoIhEs/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-retreat-2025-1",
+    "name": "UNOPS Colleague Retreat 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qng31G3zsdViPWfj2lCKlx9wZ_T_BoAp/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/190xIDYnUa9hP9ejmlBnakFcxbO9iQLEa/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-retreat-2025-2",
+    "name": "UNOPS Colleague Retreat 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pjjihx-Y48G4EVjaezYqKAN89_kLhENs/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1mujlSjX8vOCV1NTW_xQyzHI_AbH8lIAH/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-retreat-2024-2",
+    "name": "UNOPS Colleague Retreat 2024",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pyFV-yPWZ23dagvGd7OC_nZ_c9vfeOL_/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1314LBg16ZhcVfWwqU0wWx-VqF095RPBs/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-bd-colleague-2024",
+    "name": "UNOPS BD Colleague 2024",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1q9hispaa2f--PPCWchookn1iwXD-kGwa/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1gn2yue7EkCFY2MDWhcA8KD6gf-TIZyHY/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-bd-visit-2025-1",
+    "name": "UNOPS Colleague BD Visit 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1q9hispaa2f--PPCWchookn1iwXD-kGwa/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1CrByPOQyoU_H2MegIj9tmhFqIlJZktoj/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-bd-visit-2025-2",
+    "name": "UNOPS Colleague BD Visit 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qWGlqNnNC4WxuV1XORwmFR99ps2GOCi7/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1i5s-UqaXNJqyilIGvPak-hKVIoMHDkrS/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "bd-gob-meeting-2025-1",
+    "name": "BD GOB Stakeholder Meeting 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qcusuKWt2cxlQUFJww_kqdz6hfTAXtx2/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/10YRLLvZfkDFkypJ0GTccDzbjr9yxyNZ-/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-bd-visit-2025-3",
+    "name": "UNOPS Colleague BD Visit 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qgu7Z5EiE-eP2N5VigsDLPRVGWRWjTeN/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1qP_R1CDMlUo--B6LHuNY9PlEkxEt2p91/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-bd-visit-2025-4",
+    "name": "UNOPS Colleague BD Visit 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pi1wBl9jmAvzRcdo190KIpNBmYKoG7NJ/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1qE_zB6aHU3KYBezTABarOtBnsFE4NAnN/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "bd-gob-meeting-2025-2",
+    "name": "BD GOB Stakeholder Meeting 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1Dif8dem8WrudEKrkt69KWUpunlc7c_eJ/view?usp=drive_link",
-
+    "image": "https://drive.google.com/file/d/1qlKkCL84blpd8IOiCI7mB2I8ngG6rl6o/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "unops-bd-visit-2025-5",
+    "name": "UNOPS Colleague BD Visit 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1MQQ7H6RJuPOOCNToTYwFyR7u91a7qWPO/view?usp=drive_link",
-
+    "image": "https://drive.google.com/file/d/1pfcDNdW7RYFdVse-MYjkjdWERb7j4CxS/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1MQQ7H6RJuPOOCNToTYwFyR7u91a7qWPO/view?usp=drive_link",
-
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pWDb6S_dMd0HzSw2CPKxE4lNsLTTZ1Ma/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qng31G3zsdViPWfj2lCKlx9wZ_T_BoAp/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pjjihx-Y48G4EVjaezYqKAN89_kLhENs/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pyFV-yPWZ23dagvGd7OC_nZ_c9vfeOL_/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1q9hispaa2f--PPCWchookn1iwXD-kGwa/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1q9hispaa2f--PPCWchookn1iwXD-kGwa/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qWGlqNnNC4WxuV1XORwmFR99ps2GOCi7/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qcusuKWt2cxlQUFJww_kqdz6hfTAXtx2/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "field-monitoring-2025",
+    "name": "Field Monitoring with UNOPS Colleague at BD 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
     "image": "https://drive.google.com/file/d/1qgu7Z5EiE-eP2N5VigsDLPRVGWRWjTeN/view?usp=drive_link",
@@ -572,67 +454,9 @@ export const images = [
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pi1wBl9jmAvzRcdo190KIpNBmYKoG7NJ/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1Dif8dem8WrudEKrkt69KWUpunlc7c_eJ/view?usp=drive_link",
-
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1MQQ7H6RJuPOOCNToTYwFyR7u91a7qWPO/view?usp=drive_link",
-
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1MQQ7H6RJuPOOCNToTYwFyR7u91a7qWPO/view?usp=drive_link",
-
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-
-
-
-
-
-
-
-
-
-
-
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "closure-mission-2025-1",
+    "name": "Project Closure Mission with UNOPS Colleague at BD 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
     "image": "https://drive.google.com/file/d/1pWDb6S_dMd0HzSw2CPKxE4lNsLTTZ1Ma/view?usp=drive_link",
@@ -641,9 +465,9 @@ export const images = [
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "closure-mission-2025-2",
+    "name": "Project Closure Mission with UNOPS Colleague at BD 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
     "image": "https://drive.google.com/file/d/1qng31G3zsdViPWfj2lCKlx9wZ_T_BoAp/view?usp=drive_link",
@@ -652,20 +476,9 @@ export const images = [
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
-    "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pjjihx-Y48G4EVjaezYqKAN89_kLhENs/view?usp=drive_link",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/unops"
-  },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "closure-mission-2025-3",
+    "name": "Project Closure Mission with UNOPS Colleague at BD 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
     "image": "https://drive.google.com/file/d/1pyFV-yPWZ23dagvGd7OC_nZ_c9vfeOL_/view?usp=drive_link",
@@ -674,155 +487,389 @@ export const images = [
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "closure-mission-2025-4",
+    "name": "Project Closure Mission with UNOPS Colleague at BD 2025",
     "title": "Technical Expert - Environment at UNOPS",
     "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1q9hispaa2f--PPCWchookn1iwXD-kGwa/view?usp=drive_link",
+    "image": "https://drive.google.com/file/d/1qBeyXyTr25sSgPoGYFppeepFuZTyrbzQ/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-1",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1q9hispaa2f--PPCWchookn1iwXD-kGwa/view?usp=drive_link",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/12Kv_CIa4VYTv93wuxBWvjlbOaKeL2Mer/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-2",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qWGlqNnNC4WxuV1XORwmFR99ps2GOCi7/view?usp=drive_link",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1vRz8Yap9Ky9VEBrkQj_sHCTf8VV9imD9/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-3",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qcusuKWt2cxlQUFJww_kqdz6hfTAXtx2/view?usp=drive_link",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/11ypxaABRBfBmT7D2ZoW3pFV9CU0T1cZV/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-4",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1qgu7Z5EiE-eP2N5VigsDLPRVGWRWjTeN/view?usp=drive_link",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1MKG1WUTfzT5bQgQ9_bLmPr6aBAoPLLUZ/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-5",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1pi1wBl9jmAvzRcdo190KIpNBmYKoG7NJ/view?usp=drive_link",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1Mo2N3xVFYxvX8UhfRIYl9KRVskA8yayp/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-6",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image":"https://drive.google.com/file/d/1Dif8dem8WrudEKrkt69KWUpunlc7c_eJ/view?usp=drive_link",
-
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1MlFYEX1aUHEakxuWx3--l6UoAL7c_l0M/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-7",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1MQQ7H6RJuPOOCNToTYwFyR7u91a7qWPO/view?usp=drive_link",
-
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1Mph35FMe05Kegn6586rmClJ5e-ZAuAIF/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
-{
-    "id": "experience-unops",
-    "name": "UNOPS Experience",
+  {
+    "id": "please-field-visit-8",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
     "title": "Technical Expert - Environment at UNOPS",
-    "description": "Bangladesh country technical focal point for the World Bank-funded $3.18M PLEASE project. Led development of 11+ Environmental and Social Management Plans (ESMPs) approved by World Bank.",
-    "image": "https://drive.google.com/file/d/1MQQ7H6RJuPOOCNToTYwFyR7u91a7qWPO/view?usp=drive_link",
-
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1_D4hf_U_To1sQ4NDcMhl0sx3qPphorzb/view?usp=drive_link",
     "video": "",
     "videoEmbed": "",
     "type": "experience",
     "page": "/experience/unops"
   },
+  {
+    "id": "please-field-visit-9",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1_KPtPK9CWtifCIWrvrCSzi3M3Je-abA6/view?usp=drive_link",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "please-field-visit-10",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1_JuHZcSyrtVvwwg13izWMd-EpZZENmPj/view?usp=drive_link",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "please-field-visit-11",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1_BQHznWrUDgaDp0IvP8HcSAGlivgiQxY/view?usp=drive_link",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "please-field-visit-12",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1Lc-bJ_Dp0n_z2hktBqnrnYYaaF0EnT7h/view?usp=drive_link",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "please-field-visit-13",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1Ll6cu1fLc77q0RUlRrwm_obJoWEZxET_/view?usp=drive_link",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+  {
+    "id": "please-field-visit-14",
+    "name": "PLEASE Project Field Visit and Guidance on ESMP",
+    "title": "Technical Expert - Environment at UNOPS",
+    "description": "Field visit providing guidance on Environmental and Social Management Plans (ESMPs) and project activities.",
+    "image": "https://drive.google.com/file/d/1RaeEiKVnjD826N_n6s4AxuqXMeAi_TfB/view?usp=drive_link",
+    "video": "",
+    "videoEmbed": "",
+    "type": "experience",
+    "page": "/experience/unops"
+  },
+   {
+      "id": "video-retreat-sri-lanka-2025",
+      "title": "Retreat Program in Sri Lanka 2025",
+      "url": "https://youtu.be/rXG6oEWm3ZI",
+      "embedUrl": "https://www.youtube.com/embed/rXG6oEWm3ZI",
+      "thumbnail": "https://img.youtube.com/vi/rXG6oEWm3ZI/maxresdefault.jpg",
+      "type": "video"
+    },
+    {
+      "id": "video-innovation-guidance-1",
+      "title": "Innovation Guidance to IMS Team at Chittagong University",
+      "url": "https://youtu.be/0esuC1X2A60",
+      "embedUrl": "https://www.youtube.com/embed/0esuC1X2A60",
+      "thumbnail": "https://img.youtube.com/vi/0esuC1X2A60/maxresdefault.jpg",
+      "type": "video"
+    },
+    {
+      "id": "video-waste-mapping",
+      "title": "Waste Mapping and Field Verification on IMS",
+      "url": "https://youtube.com/shorts/X3aq2e97a0A",
+      "embedUrl": "https://www.youtube.com/embed/X3aq2e97a0A",
+      "thumbnail": "https://img.youtube.com/vi/X3aq2e97a0A/maxresdefault.jpg",
+      "type": "video"
+    },
+    {
+      "id": "video-innovation-guidance-2",
+      "title": "Innovation Guidance to IMS Team at Chittagong 2025 University",
+      "url": "https://youtu.be/1iLcE7K-UZk",
+      "embedUrl": "https://www.youtube.com/embed/1iLcE7K-UZk",
+      "thumbnail": "https://img.youtube.com/vi/1iLcE7K-UZk/maxresdefault.jpg",
+      "type": "video"
+    },
+    {
+      "id": "video-innovation-esmp",
+      "title": "Innovation Guidance and ESMP to IMS Team at Chittagong University",
+      "url": "https://youtu.be/NXXi0QyoHDQ",
+      "embedUrl": "https://www.youtube.com/embed/NXXi0QyoHDQ",
+      "thumbnail": "https://img.youtube.com/vi/NXXi0QyoHDQ/maxresdefault.jpg",
+      "type": "video"
+    },
+    {
+      "id": "video-arannyak-foundation",
+      "title": "Innovation Guidance and ESMP to Arannyak Foundation",
+      "url": "https://youtu.be/SXkreMpHneg",
+      "embedUrl": "https://www.youtube.com/embed/SXkreMpHneg",
+      "thumbnail": "https://img.youtube.com/vi/SXkreMpHneg/maxresdefault.jpg",
+      "type": "video"
+    },
+    {
+      "id": "video-local-stakeholder",
+      "title": "Local Stakeholder Meeting at Chittagong 2025",
+      "url": "https://youtu.be/-Mm3FUgydvs",
+      "embedUrl": "https://www.youtube.com/embed/-Mm3FUgydvs",
+      "thumbnail": "https://img.youtube.com/vi/-Mm3FUgydvs/maxresdefault.jpg",
+      "type": "video"
+    },
   // unops end
 
 
-  {
-    "id": "experience-bpcl",
-    "name": "BPCL Experience",
-    "title": "Research Consultant at BPCL",
-    "description": "Worked on research projects related to energy efficiency and sustainable practices in the corporate sector.",
-    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/bpcl"
-  },
-  {
-    "id": "experience-bpcl",
-    "name": "BPCL Experience",
-    "title": "Research Consultant at BPCL",
-    "description": "Worked on research projects related to energy efficiency and sustainable practices in the corporate sector.",
-    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/bpcl"
-  },
-  {
-    "id": "experience-maskeeters",
-    "name": "Maskeeters Experience",
-    "title": "Team Lead at Maskeeters",
-    "description": "Led a team of researchers and developers on innovative projects and research initiatives.",
-    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/maskeeters"
-  },
-  {
-    "id": "experience-maskeeters",
-    "name": "Maskeeters Experience",
-    "title": "Team Lead at Maskeeters",
-    "description": "Led a team of researchers and developers on innovative projects and research initiatives.",
-    "image": "https://researcher-portfolio-nu.vercel.app/_next/image?url=%2Fimages%2Fachievement-1.jpg&w=1920&q=75",
-    "video": "",
-    "videoEmbed": "",
-    "type": "experience",
-    "page": "/experience/maskeeters"
-  },
+{
+  "id": "bpcl-meal-1",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/11ntM1EtuD2kfsZRX5bFDKmJFUfaeIAlZ/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-2",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/1icVmRG4daiNMKODpHXUM0ls7Sp4JC5eg/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-3",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/1KWSM_IMZkHSGDjLOYzqnZCR34ZFwpV6U/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-4",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/1OTPiGOj_m0EKfhDwDAtpHKrjyxTBtgbv/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-5",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/1RnSiD2q7Z-AyBh9-fc10jXH7tL39dEtF/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-6",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/19gZGZZMhoA7kqEFIeiasO_zlyXPEdcI1/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-7",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/1kEQNWBTKYDSd2V_EO2RhyYSV5qPwCOpH/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-8",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/1VA0_NQNtrc9t_6nDaOFxUFj8oy3cGBGQ/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+{
+  "id": "bpcl-meal-9",
+  "name": "BPCL Project Management and MEAL Guidance",
+  "title": "Research Consultant at BPCL",
+  "description": "Project Management and Monitoring, Evaluation, Accountability, and Learning (MEAL) guidance at BPCL.",
+  "image": "https://drive.google.com/file/d/1p579fWNzvYEegVaH3Vx5GQ-zaF_iTVcv/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/bpcl"
+},
+
+// experience/bpcl end
+// experience/maskeeters start
+{
+  "id": "maskeeters-image-1",
+  "name": "Maskeeters Idea Limited Technical Sustainability and MEAL Lead",
+  "title": "Technical Head – Environment & Sustainability at Maskeeters",
+  "description": "Technical Sustainability and MEAL Lead at Maskeeters Idea Limited, leading innovation-driven environmental solutions and sustainability initiatives.",
+  "image": "https://drive.google.com/file/d/1iIsLsrK2OwLbFTTkIf_Ee4rxSc8AqtqE/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/maskeeters"
+},
+{
+  "id": "maskeeters-video-1",
+  "name": "Maskeeters Idea Limited Technical Sustainability and MEAL Lead",
+  "title": "Technical Head – Environment & Sustainability at Maskeeters",
+  "description": "Video documentation of Technical Sustainability and MEAL Lead activities at Maskeeters Idea Limited.",
+  "image": "",
+  "video": "https://drive.google.com/file/d/1yafDKSA3r0zPwJ2lEewA56HOSoyFeBaL/view?usp=drive_link",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/maskeeters"
+},
+{
+  "id": "maskeeters-video-2",
+  "name": "Maskeeters Idea Limited Technical Sustainability and MEAL Lead",
+  "title": "Technical Head – Environment & Sustainability at Maskeeters",
+  "description": "Video documentation of Technical Sustainability and MEAL Lead activities at Maskeeters Idea Limited.",
+  "image": "https://drive.google.com/file/d/1QJqwIzzXYP26N8wbNjmPAPMynPvFGq8Q/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/maskeeters"
+},
+{
+  "id": "maskeeters-video-3",
+  "name": "Maskeeters Idea Limited Technical Sustainability and MEAL Lead",
+  "title": "Technical Head – Environment & Sustainability at Maskeeters",
+  "description": "Video documentation of Technical Sustainability and MEAL Lead activities at Maskeeters Idea Limited.",
+  "image": "https://drive.google.com/file/d/1vWIqLXWZ7XgyaJvOGCloBc9NxjENItbv/view?usp=drive_link",
+  "video": "",
+  "videoEmbed": "",
+  "type": "experience",
+  "page": "/experience/maskeeters"
+},
+{
+  "id": "maskeeters-video-4",
+  "name": "200 NGOs Stakeholder Meeting",
+  "title": "200 NGOs Stakeholder Meeting",
+  "description": "Stakeholder meeting with 200+ NGOs discussing sustainability initiatives and collaborative opportunities.",
+  "image": "",
+  "video": "https://youtu.be/6h0a43X2ER8",
+  "videoEmbed": "https://www.youtube.com/embed/6h0a43X2ER8",
+  "type": "experience",
+  "page": "/experience/maskeeters"
+},
+// experience/maskeeters end
+
   {
     "id": "research",
     "name": "Research Journey",

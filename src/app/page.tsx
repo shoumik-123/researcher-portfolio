@@ -7,32 +7,41 @@ import { useEffect, useState } from "react";
 
 import {
   researcherInfo,
-  stats,
   expertise,
-  publications,
-  mentors,
-  images,
-  socialLinks, // ✅ Add this
+  socialLinks,
   achievements,
   professionalMentors,
-  academicMentors, // ✅ Add this
+  academicMentors,
 } from "@/lib/data";
 
 // Image paths
 const profileImage = "/images/profile.jpg";
 
-// Use all home images from the shared data array.
-const achievementImages = images
-  .filter((item) => item.id === 'home')
-  .map((item) => item.image || '/images/achievement-1.jpg');
+// Helper function to get Google Drive direct image URL
+const getDriveImageUrl = (driveUrl: string) => {
+  const fileIdMatch = driveUrl.match(/\/d\/(.+?)\//);
+  if (fileIdMatch) {
+    return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+  }
+  return driveUrl;
+};
+
+// Convert YouTube URL to embed URL
+const getYoutubeEmbedUrl = (youtubeUrl: string) => {
+  const videoIdMatch = youtubeUrl.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&]+)/);
+  if (videoIdMatch) {
+    return `https://www.youtube.com/embed/${videoIdMatch[1]}`;
+  }
+  return youtubeUrl;
+};
 
 export default function Home() {
   const [key, setKey] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setKey((prev) => prev + 1); // restart animation
-    }, 4000); // duration of full typing cycle
+      setKey((prev) => prev + 1);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -109,7 +118,7 @@ export default function Home() {
               {/* CV Link */}
               <div className="text-center lg:text-left">
                 <Link
-                  href="/cv"
+                  href="https://drive.google.com/file/d/1sw7Ny71Z5Aw4NrmSQynX4tfx-1rzuQCl/view"
                   className="inline-flex items-center gap-2 text-primary hover:text-primary-dark transition-colors text-sm font-medium"
                 >
                   <span>Curriculum vitae</span>
@@ -173,17 +182,6 @@ export default function Home() {
             {/* Home Section */}
             <section className="space-y-8">
               <div className="space-y-8">
-                {/* Welcome note */}
-                {/* <div>
-                  <h3 className="text-2xl font-light text-gray-900 mb-4">
-                    Welcome note:
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed text-justify">
-                    {researcherInfo.longBio?.split('\n\n')[0] || 
-                      `I am ${researcherInfo.name}, an interdisciplinary environmental researcher working at the intersection of sustainable materials science, waste-to-resource innovation, and circular economy systems.`}
-                  </p>
-                </div> */}
-
                 {/* My research */}
                 <div>
                   <h3 className="text-2xl font-light text-gray-900 mb-4">
@@ -191,7 +189,7 @@ export default function Home() {
                   </h3>
 
                   <p className="text-gray-700 leading-relaxed mb-4 text-justify">
-                    I’m Hasan Ahmed, an Environmental Specialist and
+                    I'm Hasan Ahmed, an Environmental Specialist and
                     Interdisciplinary Researcher with over 4 years of combined
                     research and professional experience, including 15 months as
                     Technical Expert (Environment) and Bangladesh Country
@@ -224,6 +222,82 @@ export default function Home() {
                     solutions that contribute to global environmental and
                     climate goals.
                   </p>
+
+                  {/* UN Team Images Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                    <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src={getDriveImageUrl("https://drive.google.com/file/d/11QX4SMGthPfa53crD0T5AYg77ZwvjETW/view?usp=drive_link")}
+                        alt="UNOPS Bangladesh Country Team"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                        UNOPS Bangladesh Country Team
+                      </div>
+                    </div>
+                    <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src={getDriveImageUrl("https://drive.google.com/file/d/1vEchfAZYqX2o5QjfGy3QlVGmkqZMPgdn/view?usp=drive_link")}
+                        alt="UNOPS Bangladesh Country Team"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                        UNOPS Bangladesh Country Team
+                      </div>
+                    </div>
+                    <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src={getDriveImageUrl("https://drive.google.com/file/d/1KZQzTHTvV7xMIsEJY76L63LmpwCZQx8L/view?usp=drive_link")}
+                        alt="UNOPS Regional Team in Sri Lanka"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                        UNOPS Regional Team in Sri Lanka
+                      </div>
+                    </div>
+                    <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+                      <Image
+                        src={getDriveImageUrl("https://drive.google.com/file/d/1qP_R1CDMlUo--B6LHuNY9PlEkxEt2p91/view?usp=drive_link")}
+                        alt="UNOPS Regional Team in Bangladesh"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                        UNOPS Regional Team in Bangladesh
+                      </div>
+                    </div>
+                    <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 sm:col-span-2">
+                      <Image
+                        src={getDriveImageUrl("https://drive.google.com/file/d/1vEchfAZYqX2o5QjfGy3QlVGmkqZMPgdn/view?usp=drive_link")}
+                        alt="UNOPS Bangladesh Country Team"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                        UNOPS Bangladesh Country Team
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Government Stakeholder Engagement Video */}
+                  <div className="my-6">
+                    <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
+                      <iframe
+                        src={getYoutubeEmbedUrl("https://youtu.be/ClhzjGj2f9s")}
+                        title="Government Stakeholder Engagement of Plastic Pollution"
+                        className="absolute inset-0 w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    <p className="text-sm text-gray-500 text-center mt-2">
+                      Government Stakeholder Engagement of Plastic Pollution
+                    </p>
+                  </div>
+
                   <p className="text-gray-700 leading-relaxed mb-4 text-justify p-4 bg-fuchsia-50">
                     My mission is to pursue rigorous, multidisciplinary research
                     that bridges science, technology, and real-world
@@ -275,6 +349,63 @@ export default function Home() {
                   waste resources, integrating environmental science, material
                   engineering, and public health considerations.
                 </p>
+
+                {/* Early Research Images */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+                  <div className="relative h-64 rounded-lg overflow-hidden bg-gray-100">
+                    <Image
+                      src={getDriveImageUrl("https://drive.google.com/file/d/1JfUYXfhUN66rZD-3g-CrcCvnVXJRUEL5/view?usp=drive_link")}
+                      alt="Early Research Life"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                      Early Research Life
+                    </div>
+                  </div>
+                  <div className="relative h-64 rounded-lg overflow-hidden bg-gray-100">
+                    <Image
+                      src={getDriveImageUrl("https://drive.google.com/file/d/1VR60zDoFhrpQtBMePQRzkhCFFLhECjIZ/view?usp=drive_link")}
+                      alt="Early Research Life"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                      Early Research Life
+                    </div>
+                  </div>
+                </div>
+
+                {/* International Research Collaboration */}
+                <div className="my-6">
+                  <div className="relative h-64 rounded-lg overflow-hidden bg-gray-100">
+                    <Image
+                      src={getDriveImageUrl("https://drive.google.com/file/d/1SO3GRUst7OnSwtCU_DyvrU9WZ9JMyvMY/view?usp=drive_link")}
+                      alt="International Research Collaboration"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+                      International Research Collaboration
+                    </div>
+                  </div>
+                </div>
+
+                {/* Cattle Edible Bioplastic Video */}
+                <div className="my-6">
+                  <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
+                    <iframe
+                      src={getYoutubeEmbedUrl("https://youtu.be/YbxtEDs144g")}
+                      title="Cattle Edible Bioplastic from waste valorization"
+                      className="absolute inset-0 w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                  <p className="text-sm text-gray-500 text-center mt-2">
+                    Cattle Edible Bioplastic from waste valorization
+                  </p>
+                </div>
               </div>
             </section>
 
@@ -302,7 +433,6 @@ export default function Home() {
       {/* Main content */}
       <div className="max-w-4xl mx-auto px-6 pb-32 space-y-28 text-lg leading-relaxed text-gray-800">
 
-
         {/* AREAS OF EXPERTISE */}
         <section className="space-y-10">
           <h2 className="text-5xl font-bold uppercase tracking-wide text-center">
@@ -320,7 +450,7 @@ export default function Home() {
           </ul>
         </section>
 
-        <section className="space-y-16">
+<section className="space-y-16">
   <h2 className="text-5xl font-bold uppercase tracking-wide text-center">
     Mentors & Colleagues
   </h2>
@@ -328,8 +458,92 @@ export default function Home() {
   <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
     {/* Professional Mentors - Left Column */}
     <div className="flex-1">
-      <h3 className="text-3xl font-semibold mb-6">Professional Mentors & Colleagues</h3>
-      <ul className="space-y-5">
+      <h3 className="text-3xl font-semibold mb-6 text-center lg:text-left">
+        Professional Mentors & Colleagues
+      </h3>
+      
+      <div className="space-y-8">
+        {/* Mentor 1 - Sivakumaran Sithamparanathan */}
+        <div>
+          <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
+            <Image
+              src={getDriveImageUrl("https://drive.google.com/file/d/1x0e4p5pFlZMUTNKgkdV7eGfGG8UQOXkN/view?usp=drive_link")}
+              alt="Sivakumaran Sithamparanathan"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="text-xl font-light border-l-4 border-gray-300 pl-6 py-1">
+            <span className="font-medium">Sivakumaran Sithamparanathan</span>
+            <span className="text-gray-600"> — Technical Specialist, PLEASE Project, UNOPS SAMCO</span>
+          </div>
+        </div>
+
+        {/* Mentor 2 */}
+        <div>
+          <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
+            <Image
+              src={getDriveImageUrl("https://drive.google.com/file/d/1314LBg16ZhcVfWwqU0wWx-VqF095RPBs/view?usp=drive_link")}
+              alt="Professional Colleague"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="text-xl font-light border-l-4 border-gray-300 pl-6 py-1">
+            <span className="font-medium">Professional Colleague</span>
+          </div>
+        </div>
+
+        {/* Mentor 3 - Labio Bala */}
+        <div>
+          <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
+            <Image
+              src={getDriveImageUrl("https://drive.google.com/file/d/1UCBNNZTbo8nZCQY3REqAgchE53oKv005/view?usp=drive_link")}
+              alt="Labio Bala"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="text-xl font-light border-l-4 border-gray-300 pl-6 py-1">
+            <span className="font-medium">Labio Bala</span>
+            <span className="text-gray-600"> — Finance Specialist, UNOPS Vienna</span>
+          </div>
+        </div>
+
+        {/* Mentor 4 - Jaime Alarma Olmos */}
+        <div>
+          <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
+            <Image
+              src={getDriveImageUrl("https://drive.google.com/file/d/1dTD6nFmqfo7RVlhRadT6DIyOocnoIhEs/view?usp=drive_link")}
+              alt="Jaime Alarma Olmos"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="text-xl font-light border-l-4 border-gray-300 pl-6 py-1">
+            <span className="font-medium">Jaime Alarma Olmos</span>
+            <span className="text-gray-600"> — Project Management Specialist, PLEASE Project, UNOPS</span>
+          </div>
+        </div>
+
+        {/* Mentor 5 - SACEP Colleague */}
+        <div>
+          <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
+            <Image
+              src={getDriveImageUrl("https://drive.google.com/file/d/1pfFLdaC36na0CuBSr0wIQG4vDlnWKzKI/view?usp=drive_link")}
+              alt="SACEP Colleague"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="text-xl font-light border-l-4 border-gray-300 pl-6 py-1">
+            <span className="font-medium">SACEP Colleague</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Original list from data (if needed) */}
+      {/* <ul className="space-y-5 mt-8">
         {professionalMentors.map((item, i) => (
           <li
             key={i}
@@ -341,13 +555,35 @@ export default function Home() {
             <span className="text-gray-500 text-lg">{item.project}</span>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
 
     {/* Academic Mentors - Right Column */}
     <div className="flex-1">
-      <h3 className="text-3xl font-semibold mb-6">Academic Mentors</h3>
-      <ul className="space-y-5">
+      <h3 className="text-3xl font-semibold mb-6 text-center lg:text-left">
+        Academic Mentors
+      </h3>
+      
+      <div className="space-y-8">
+        {/* Academic Mentor - Dr. Tarek Arafat */}
+        <div>
+          <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
+            <Image
+              src={getDriveImageUrl("https://drive.google.com/file/d/1gbouezwLhz26pf9Zaf78NPr5sn6SPOpe/view?usp=drive_link")}
+              alt="Dr. Tarek Arafat"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="text-xl font-light border-l-4 border-gray-300 pl-6 py-1">
+            <span className="font-medium">Dr. Tarek Arafat</span>
+            <span className="text-gray-600"> (Department Head BME, BUET)</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Original list from data */}
+      <ul className="space-y-5 mt-8">
         {academicMentors.map((item, i) => (
           <li
             key={i}
@@ -363,10 +599,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-
-
-
-
         {/* KEY ACHIEVEMENTS */}
         <section className="space-y-16">
           <h2 className="text-5xl font-bold uppercase tracking-wide text-center">
@@ -406,26 +638,7 @@ export default function Home() {
               </ul>
             </div>
           </div>
-
-          {achievementImages.length > 0 && (
-            <div className="grid sm:grid-cols-2 gap-10 mt-12">
-              {achievementImages.map((src, idx) => (
-                <div
-                  key={idx}
-                  className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-md"
-                >
-                  <Image
-                    src={src}
-                    alt={`Professional achievement ${idx + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
         </section>
-
 
       </div>
     </div>

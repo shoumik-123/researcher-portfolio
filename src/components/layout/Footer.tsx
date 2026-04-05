@@ -32,7 +32,7 @@ export default function Footer() {
                 <FiTwitter size={18} />
               </a>
               <a 
-                href="https://scholar.google.com" 
+                href="https://scholar.google.com/citations?user=0DuQk4wAAAAJ&hl=en" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-white/80 hover:text-white transition-colors bg-white/10 p-2 rounded-full hover:bg-white/20"

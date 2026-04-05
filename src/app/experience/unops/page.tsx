@@ -26,60 +26,73 @@ import {
 } from 'react-icons/fi';
 import { images } from "@/lib/data";
 
-
-// Get UNOPS page data from pages array
-const unopsMediaItems = images.filter(page => page.id === 'experience-unops');
-const unopsPage = unopsMediaItems[0];
+// Get UNOPS page data - filter by page = "/experience/unops" and type = "experience"
+const unopsMediaItems = images.filter(item => item.page === "/experience/unops" && item.type === "experience");
+const unopsVideos = images.filter(item => item.type === "video");
 
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/achievement-1.jpg';
 
   try {
-    const url = new URL(image);
-    
-    // Handle Next.js image optimization URLs
-    if (url.pathname === '/_next/image' && url.searchParams.has('url')) {
-      const inner = url.searchParams.get('url');
-      if (inner) return decodeURIComponent(inner);
-    }
-    
     // Handle Google Drive URLs
-    if (url.hostname.includes('drive.google.com')) {
+    if (image.includes('drive.google.com')) {
       let fileId = null;
       
-      // Extract file ID from /file/d/FILE_ID/view format
-      const fileMatch = image.match(/\/file\/d\/([^/]+)/);
+      // Extract file ID from various Google Drive URL formats
+      const fileMatch = image.match(/\/d\/([^/]+)/);
       if (fileMatch) {
         fileId = fileMatch[1];
       }
       
-      // Extract file ID from ?id=FILE_ID format
       const idMatch = image.match(/[?&]id=([^&]+)/);
       if (idMatch) {
         fileId = idMatch[1];
       }
       
       if (fileId) {
-        // Convert to working thumbnail URL
+        // Use the thumbnail format which works best
         return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
       }
     }
-  } catch {
-    // keep original
+    
+    // Handle Next.js image optimization URLs
+    if (image.includes('/_next/image') && image.includes('url=')) {
+      const urlMatch = image.match(/url=([^&]+)/);
+      if (urlMatch) {
+        return decodeURIComponent(urlMatch[1]);
+      }
+    }
+  } catch (error) {
+    console.error('Error parsing image URL:', error);
   }
 
   return image;
 };
 
+// Process gallery images from UNOPS items
 const galleryImages = unopsMediaItems.map((item, index) => ({
-  id: item.id ? `${item.id}-${index}` : `unops-${index}`,
-  title: item.title || item.name || 'UNOPS Experience',
-  description: item.description || 'UNOPS gallery',
+  id: item.id || `unops-${index}`,
+  title: item.name || item.title || 'UNOPS Experience',
+  description: item.description || 'UNOPS gallery image',
   image: resolveImageUrl(item.image),
-  alt: item.name || unopsPage?.name,
+  alt: item.name || 'UNOPS Experience',
   video: item.video || '',
   videoEmbed: item.videoEmbed || ''
 }));
+
+// Process videos separately
+const videoItems = unopsVideos.map((video, index) => ({
+  id: video.id || `video-${index}`,
+  title: video.title || 'UNOPS Video',
+  description: video.description || '',
+  image: video.thumbnail || `https://img.youtube.com/vi/${video.id?.split('-').pop()}/maxresdefault.jpg`,
+  video: video.url || '',
+  videoEmbed: video.embedUrl || '',
+  type: 'video'
+}));
+
+// Combine images and videos for gallery
+const allGalleryItems = [...galleryImages, ...videoItems];
 
 // Published ESMPs List
 const publishedESMPs = [
@@ -96,12 +109,10 @@ const publishedESMPs = [
   "ESMP for Plastic Collection Hub - Rangpur"
 ];
 
-
-
 export default function UNOPSExperiencePage() {
   const [key, setKey] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentItem, setCurrentItem] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -111,7 +122,7 @@ export default function UNOPSExperiencePage() {
   }, []);
 
   const openLightbox = (index: number) => {
-    setCurrentImage(index);
+    setCurrentItem(index);
     setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -121,20 +132,20 @@ export default function UNOPSExperiencePage() {
     document.body.style.overflow = 'auto';
   };
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % galleryImages.length);
+  const nextItem = () => {
+    setCurrentItem((prev) => (prev + 1) % allGalleryItems.length);
   };
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  const prevItem = () => {
+    setCurrentItem((prev) => (prev - 1 + allGalleryItems.length) % allGalleryItems.length);
   };
 
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextItem();
+      if (e.key === 'ArrowLeft') prevItem();
       if (e.key === 'Escape') closeLightbox();
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -281,30 +292,7 @@ export default function UNOPSExperiencePage() {
           </div>
         </motion.section>
 
-        {/* Published ESMPs */}
-        {/* <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6">Published Environmental and Social Management Plans (ESMPs)</h2>
-          <div className="bg-gray-50 rounded-xl p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {publishedESMPs.map((esmp, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <FiFileText className="w-4 h-4 text-primary" />
-                  <span className="text-gray-700 text-sm">{esmp}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <p className="text-sm text-gray-500 mt-4">
-            * All ESMPs developed and monitored in compliance with World Bank Environmental and Social Standards (ESS)
-          </p>
-        </motion.section> */}
-
-        {/* Image Gallery Section */}
+        {/* Image & Video Gallery Section */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -313,76 +301,63 @@ export default function UNOPSExperiencePage() {
         >
           <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
             <FiImage className="text-primary" />
-            Photo Gallery
+            Photo & Video Gallery
           </h2>
-          {/* <p className="text-gray-600 mb-8">
-            Visual documentation of engagements, field visits, and collaborative activities during UNOPS tenure
-          </p> */}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((item, index) => (
-              <div
-                key={item.id}
-                className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
-                onClick={() => openLightbox(index)}
-              >
-                <div className="relative aspect-[4/3]">
-                  {item.video ? (
-                    <div className="relative w-full h-full">
+          {allGalleryItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {allGalleryItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => openLightbox(index)}
+                >
+                  <div className="relative aspect-[4/3]">
+                    {item.video ? (
+                      <>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                          <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
+                            <FiStar className="w-8 h-8 text-primary" />
+                          </div>
+                        </div>
+                      </>
+                    ) : (
                       <img
                         src={item.image}
                         alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                        }}
                       />
-                      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                          <FiStar className="w-8 h-8 text-primary" />
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-semibold text-sm">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="font-semibold text-sm">{item.title}</h3>
-                  <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Video Section (if video exists in pages array) */}
-        {unopsPage?.videoEmbed && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mb-12"
-          >
-            <h2 className="text-3xl font-light text-gray-900 mb-6">Project Overview Video</h2>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <iframe
-                src={unopsPage.videoEmbed}
-                title="UNOPS PLEASE Project Overview"
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              ))}
             </div>
-          </motion.section>
-        )}
+          ) : (
+            <div className="text-center py-12 bg-gray-50 rounded-xl">
+              <p className="text-gray-500">No gallery items available</p>
+            </div>
+          )}
+        </motion.section>
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxOpen && (
+      {lightboxOpen && allGalleryItems.length > 0 && (
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={closeLightbox}>
           <button
             onClick={closeLightbox}
@@ -392,18 +367,18 @@ export default function UNOPSExperiencePage() {
           </button>
           
           <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            onClick={(e) => { e.stopPropagation(); prevItem(); }}
             className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
           >
             <FiChevronLeft className="w-8 h-8" />
           </button>
           
           <div className="max-w-5xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
-            {galleryImages[currentImage].video ? (
+            {allGalleryItems[currentItem]?.video ? (
               <div className="aspect-video">
                 <iframe
-                  src={galleryImages[currentImage].videoEmbed}
-                  title={galleryImages[currentImage].title}
+                  src={allGalleryItems[currentItem].videoEmbed}
+                  title={allGalleryItems[currentItem].title}
                   className="w-full h-full rounded-lg"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -412,30 +387,33 @@ export default function UNOPSExperiencePage() {
               </div>
             ) : (
               <img
-                src={galleryImages[currentImage].image}
-                alt={galleryImages[currentImage].title}
+                src={allGalleryItems[currentItem]?.image}
+                alt={allGalleryItems[currentItem]?.title}
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                }}
               />
             )}
             <div className="mt-4 text-center text-white">
-              <h3 className="text-xl font-semibold">{galleryImages[currentImage].title}</h3>
-              <p className="text-gray-300 mt-2">{galleryImages[currentImage].description}</p>
+              <h3 className="text-xl font-semibold">{allGalleryItems[currentItem]?.title}</h3>
+              <p className="text-gray-300 mt-2">{allGalleryItems[currentItem]?.description}</p>
             </div>
           </div>
           
           <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            onClick={(e) => { e.stopPropagation(); nextItem(); }}
             className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
           >
             <FiChevronRight className="w-8 h-8" />
           </button>
           
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {galleryImages.map((_, idx) => (
+            {allGalleryItems.map((_, idx) => (
               <button
                 key={idx}
-                onClick={(e) => { e.stopPropagation(); setCurrentImage(idx); }}
-                className={`w-2 h-2 rounded-full transition-all ${idx === currentImage ? 'bg-white w-4' : 'bg-white/50'}`}
+                onClick={(e) => { e.stopPropagation(); setCurrentItem(idx); }}
+                className={`w-2 h-2 rounded-full transition-all ${idx === currentItem ? 'bg-white w-4' : 'bg-white/50'}`}
               />
             ))}
           </div>
