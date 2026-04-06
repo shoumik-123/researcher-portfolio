@@ -22,7 +22,8 @@ import {
   FiX,
   FiChevronLeft,
   FiChevronRight,
-  FiExternalLink
+  FiExternalLink,
+  FiVideo
 } from 'react-icons/fi';
 import { images } from "@/lib/data";
 
@@ -91,9 +92,6 @@ const videoItems = unopsVideos.map((video, index) => ({
   type: 'video'
 }));
 
-// Combine images and videos for gallery
-const allGalleryItems = [...galleryImages, ...videoItems];
-
 // Published ESMPs List
 const publishedESMPs = [
   "Environmental and Social Management Plan (ESMP) for Plastic Recycling Facility - Dhaka",
@@ -113,6 +111,7 @@ export default function UNOPSExperiencePage() {
   const [key, setKey] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState(0);
+  const [activeGalleryTab, setActiveGalleryTab] = useState<'images' | 'videos'>('images');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -133,11 +132,13 @@ export default function UNOPSExperiencePage() {
   };
 
   const nextItem = () => {
-    setCurrentItem((prev) => (prev + 1) % allGalleryItems.length);
+    const currentItems = activeGalleryTab === 'images' ? galleryImages : videoItems;
+    setCurrentItem((prev) => (prev + 1) % currentItems.length);
   };
 
   const prevItem = () => {
-    setCurrentItem((prev) => (prev - 1 + allGalleryItems.length) % allGalleryItems.length);
+    const currentItems = activeGalleryTab === 'images' ? galleryImages : videoItems;
+    setCurrentItem((prev) => (prev - 1 + currentItems.length) % currentItems.length);
   };
 
   // Handle keyboard navigation
@@ -150,7 +151,7 @@ export default function UNOPSExperiencePage() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen]);
+  }, [lightboxOpen, activeGalleryTab]);
 
   return (
     <div className="bg-white text-gray-900 min-h-screen">
@@ -292,53 +293,41 @@ export default function UNOPSExperiencePage() {
           </div>
         </motion.section>
 
-        {/* Image & Video Gallery Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiImage className="text-primary" />
-            Photo & Video Gallery
-          </h2>
+        {/* Image Gallery Section */}
+        {galleryImages.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiImage className="text-primary" />
+              Photo Gallery
+              <span className="text-sm text-gray-500 font-normal ml-2">
+                ({galleryImages.length} photos)
+              </span>
+            </h2>
 
-          {allGalleryItems.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {allGalleryItems.map((item, index) => (
+              {galleryImages.map((item, index) => (
                 <div
                   key={item.id}
                   className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
-                  onClick={() => openLightbox(index)}
+                  onClick={() => {
+                    setActiveGalleryTab('images');
+                    openLightbox(index);
+                  }}
                 >
                   <div className="relative aspect-[4/3]">
-                    {item.video ? (
-                      <>
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                          <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                            <FiStar className="w-8 h-8 text-primary" />
-                          </div>
-                        </div>
-                      </>
-                    ) : (
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
-                        }}
-                      />
-                    )}
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                      }}
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
@@ -348,16 +337,79 @@ export default function UNOPSExperiencePage() {
                 </div>
               ))}
             </div>
-          ) : (
+          </motion.section>
+        )}
+
+        {/* Video Gallery Section */}
+        {videoItems.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiVideo className="text-primary" />
+              Video Gallery
+              <span className="text-sm text-gray-500 font-normal ml-2">
+                ({videoItems.length} videos)
+              </span>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {videoItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => {
+                    setActiveGalleryTab('videos');
+                    openLightbox(index);
+                  }}
+                >
+                  <div className="relative aspect-[4/3]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <FiVideo className="w-8 h-8 text-primary ml-1" />
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-semibold text-sm">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* No Gallery Items Message */}
+        {galleryImages.length === 0 && videoItems.length === 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-12"
+          >
             <div className="text-center py-12 bg-gray-50 rounded-xl">
+              <FiImage className="w-12 h-12 text-gray-400 mx-auto mb-3" />
               <p className="text-gray-500">No gallery items available</p>
             </div>
-          )}
-        </motion.section>
+          </motion.section>
+        )}
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxOpen && allGalleryItems.length > 0 && (
+      {lightboxOpen && (
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={closeLightbox}>
           <button
             onClick={closeLightbox}
@@ -368,17 +420,17 @@ export default function UNOPSExperiencePage() {
           
           <button
             onClick={(e) => { e.stopPropagation(); prevItem(); }}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronLeft className="w-8 h-8" />
           </button>
           
           <div className="max-w-5xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
-            {allGalleryItems[currentItem]?.video ? (
+            {activeGalleryTab === 'videos' && videoItems[currentItem] ? (
               <div className="aspect-video">
                 <iframe
-                  src={allGalleryItems[currentItem].videoEmbed}
-                  title={allGalleryItems[currentItem].title}
+                  src={videoItems[currentItem].videoEmbed}
+                  title={videoItems[currentItem].title}
                   className="w-full h-full rounded-lg"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -386,30 +438,40 @@ export default function UNOPSExperiencePage() {
                 />
               </div>
             ) : (
-              <img
-                src={allGalleryItems[currentItem]?.image}
-                alt={allGalleryItems[currentItem]?.title}
-                className="max-w-full max-h-[80vh] object-contain rounded-lg"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
-                }}
-              />
+              galleryImages[currentItem] && (
+                <img
+                  src={galleryImages[currentItem].image}
+                  alt={galleryImages[currentItem].title}
+                  className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                  }}
+                />
+              )
             )}
             <div className="mt-4 text-center text-white">
-              <h3 className="text-xl font-semibold">{allGalleryItems[currentItem]?.title}</h3>
-              <p className="text-gray-300 mt-2">{allGalleryItems[currentItem]?.description}</p>
+              <h3 className="text-xl font-semibold">
+                {activeGalleryTab === 'videos' 
+                  ? videoItems[currentItem]?.title 
+                  : galleryImages[currentItem]?.title}
+              </h3>
+              <p className="text-gray-300 mt-2">
+                {activeGalleryTab === 'videos' 
+                  ? videoItems[currentItem]?.description 
+                  : galleryImages[currentItem]?.description}
+              </p>
             </div>
           </div>
           
           <button
             onClick={(e) => { e.stopPropagation(); nextItem(); }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronRight className="w-8 h-8" />
           </button>
           
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {allGalleryItems.map((_, idx) => (
+            {(activeGalleryTab === 'images' ? galleryImages : videoItems).map((_, idx) => (
               <button
                 key={idx}
                 onClick={(e) => { e.stopPropagation(); setCurrentItem(idx); }}

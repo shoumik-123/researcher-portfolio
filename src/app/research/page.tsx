@@ -2,8 +2,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { 
@@ -13,69 +11,113 @@ import {
   FiFileText,
   FiStar,
   FiCheckCircle,
-  FiGlobe,
   FiImage,
   FiX,
   FiChevronLeft,
   FiChevronRight,
-  FiExternalLink,
   FiMic,
   FiTool,
   FiCpu,
   FiUserCheck,
-  FiBookOpen,
-  FiAward
+  FiVideo
 } from 'react-icons/fi';
 import { images } from "@/lib/data";
 
 
-// Get Research page data from pages array
-const researchMediaItems = images.filter(page => page.id === 'research');
-const researchPage = researchMediaItems[0];
+// Get Research page data from images array
+const researchMediaItems = images.filter(item => item.page === "/research" && item.type === "research");
+const researchVideos = images.filter(item => item.page === "/research" && item.type === "video");
 
 // Image URL resolver
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/research/default.jpg';
+  
+  try {
+    // Handle Google Drive URLs
+    if (image.includes('drive.google.com')) {
+      let fileId = null;
+      const fileMatch = image.match(/\/d\/([^/]+)/);
+      if (fileMatch) {
+        fileId = fileMatch[1];
+      }
+      const idMatch = image.match(/[?&]id=([^&]+)/);
+      if (idMatch) {
+        fileId = idMatch[1];
+      }
+      if (fileId) {
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      }
+    }
+  } catch {
+    // keep original
+  }
+  
   return image;
 };
 
-// Video URL resolver - converts YouTube watch/youtu.be URLs to embed format
+// Video URL resolver
 const resolveVideoEmbed = (videoUrl?: string): string => {
   if (!videoUrl) return '';
   
   try {
-    // Handle youtu.be short URLs
     if (videoUrl.includes('youtu.be/')) {
       const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
       if (videoId) return `https://www.youtube.com/embed/${videoId}`;
     }
-    
-    // Handle standard youtube.com URLs
     if (videoUrl.includes('youtube.com')) {
       const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
       const videoId = urlParams.get('v');
       if (videoId) return `https://www.youtube.com/embed/${videoId}`;
     }
-    
-    // Already an embed URL
     if (videoUrl.includes('youtube.com/embed/')) {
       return videoUrl;
     }
   } catch {
-    // return original if parsing fails
+    // return original
   }
   
   return videoUrl;
 };
 
-// Gallery Images from pages array
+// Get YouTube thumbnail
+const getYouTubeThumbnail = (videoUrl?: string): string => {
+  if (!videoUrl) return '/images/placeholder.jpg';
+  
+  try {
+    let videoId = null;
+    if (videoUrl.includes('youtu.be/')) {
+      videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
+    }
+    if (videoUrl.includes('youtube.com')) {
+      const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
+      videoId = urlParams.get('v');
+    }
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+  } catch {
+    // return placeholder
+  }
+  
+  return '/images/placeholder.jpg';
+};
+
+// Process gallery images
 const galleryImages = researchMediaItems.map((item, index) => ({
-  id: item.id ? `${item.id}-${index}` : `research-${index}`,
+  id: item.id || `research-${index}`,
   title: item.title || item.name || 'Research Journey',
-  description: item.description || 'Building a Sustainable Future Through Science',
-  image: resolveImageUrl(item.image),
-  video: !!item.video || !!item.videoEmbed,
-  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
+  description: item.description || 'Research documentation',
+  image: resolveImageUrl(item.image)
+}));
+
+// Process videos
+const videoItems = researchVideos.map((video, index) => ({
+  id: video.id || `video-${index}`,
+  title: video.title || 'Research Video',
+  description: video.description || '',
+  image: getYouTubeThumbnail(video.video || video.url),
+  videoEmbed: resolveVideoEmbed(video.videoEmbed || video.video || video.url),
+  video: true
 }));
 
 // Laboratories
@@ -238,6 +280,12 @@ const conferencePapers = [
     type: "Poster"
   },
   {
+    title: "Enhancing Material Sustainability: A Review of Plastic and Rubber Manufacturing in Bangladesh",
+    authors: "Hasan Ahmed*",
+    event: "Master's Thesis",
+    date: "June 2025"
+  },
+  {
     title: "Biodegradable and Antibacterial Chitosan-Based Tannic Acid-Coated Cellulosic Composite Film for Wound Dressing",
     authors: "Mohammad Ali Tanvir, Popi Khatun, Aniqa Tasnim, Hasan Ahmed, Md. Elias Uddin et al.",
     event: "International Conference on Mechanical Engineering (ICME 2023), BUET",
@@ -266,7 +314,8 @@ const thesisMentorship = {
 export default function ResearchPage() {
   const [key, setKey] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentItem, setCurrentItem] = useState(0);
+  const [activeGalleryTab, setActiveGalleryTab] = useState<'images' | 'videos'>('images');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -275,8 +324,9 @@ export default function ResearchPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const openLightbox = (index: number) => {
-    setCurrentImage(index);
+  const openLightbox = (index: number, type: 'images' | 'videos') => {
+    setActiveGalleryTab(type);
+    setCurrentItem(index);
     setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -286,24 +336,26 @@ export default function ResearchPage() {
     document.body.style.overflow = 'auto';
   };
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % galleryImages.length);
+  const nextItem = () => {
+    const currentItems = activeGalleryTab === 'images' ? galleryImages : videoItems;
+    setCurrentItem((prev) => (prev + 1) % currentItems.length);
   };
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  const prevItem = () => {
+    const currentItems = activeGalleryTab === 'images' ? galleryImages : videoItems;
+    setCurrentItem((prev) => (prev - 1 + currentItems.length) % currentItems.length);
   };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextItem();
+      if (e.key === 'ArrowLeft') prevItem();
       if (e.key === 'Escape') closeLightbox();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen]);
+  }, [lightboxOpen, activeGalleryTab]);
 
   return (
     <div className="bg-white text-gray-900 min-h-screen">
@@ -416,7 +468,7 @@ export default function ResearchPage() {
           
           <div className="flex flex-wrap gap-3">
             {labSkills.map((skill, idx) => (
-              <span key={idx} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-primary hover:text-white transition-colors">
+              <span key={idx} className="px-4 py-2 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-primary hover:text-white transition-colors cursor-default">
                 {skill}
               </span>
             ))}
@@ -545,62 +597,94 @@ export default function ResearchPage() {
         </motion.section>
 
         {/* Photo Gallery Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiImage className="text-primary" />
-            Photo Gallery
-          </h2>
-          <p className="text-gray-600 mb-8">
-            Visual documentation of laboratory work, experiments, and research activities
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((item, index) => (
-              <div
-                key={item.id}
-                className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
-                onClick={() => openLightbox(index)}
-              >
-                <div className="relative aspect-[4/3]">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="font-semibold text-sm">{item.title}</h3>
-                  <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Video Section (if video exists) */}
-        {researchPage?.videoEmbed && (
+        {galleryImages.length > 0 && (
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 0.6 }}
             className="mb-12"
           >
-            <h2 className="text-3xl font-light text-gray-900 mb-6">Research Overview Video</h2>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <iframe
-                src={researchPage.videoEmbed}
-                title="Research Overview"
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiImage className="text-primary" />
+              Photo Gallery
+              <span className="text-sm text-gray-500 font-normal ml-2">
+                ({galleryImages.length} photos)
+              </span>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryImages.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => openLightbox(index, 'images')}
+                >
+                  <div className="relative aspect-[4/3]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-semibold text-sm line-clamp-1">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* Video Gallery Section */}
+        {videoItems.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.65 }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiVideo className="text-primary" />
+              Video Gallery
+              <span className="text-sm text-gray-500 font-normal ml-2">
+                ({videoItems.length} videos)
+              </span>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {videoItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => openLightbox(index, 'videos')}
+                >
+                  <div className="relative aspect-[4/3]">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <FiVideo className="w-8 h-8 text-primary ml-1" />
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="font-semibold text-sm line-clamp-1">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.section>
         )}
@@ -617,37 +701,63 @@ export default function ResearchPage() {
           </button>
           
           <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            onClick={(e) => { e.stopPropagation(); prevItem(); }}
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronLeft className="w-8 h-8" />
           </button>
           
           <div className="max-w-5xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={galleryImages[currentImage]?.image}
-              alt={galleryImages[currentImage]?.title}
-              className="max-w-full max-h-[80vh] object-contain rounded-lg"
-            />
+            {activeGalleryTab === 'videos' && videoItems[currentItem] ? (
+              <div className="aspect-video">
+                <iframe
+                  src={`${videoItems[currentItem].videoEmbed}?autoplay=1`}
+                  title={videoItems[currentItem].title}
+                  className="w-full h-full rounded-lg"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              galleryImages[currentItem] && (
+                <img
+                  src={galleryImages[currentItem].image}
+                  alt={galleryImages[currentItem].title}
+                  className="max-w-full max-h-[80vh] object-contain rounded-lg"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                  }}
+                />
+              )
+            )}
             <div className="mt-4 text-center text-white">
-              <h3 className="text-xl font-semibold">{galleryImages[currentImage]?.title}</h3>
-              <p className="text-gray-300 mt-2">{galleryImages[currentImage]?.description}</p>
+              <h3 className="text-xl font-semibold">
+                {activeGalleryTab === 'videos' 
+                  ? videoItems[currentItem]?.title 
+                  : galleryImages[currentItem]?.title}
+              </h3>
+              <p className="text-gray-300 mt-2">
+                {activeGalleryTab === 'videos' 
+                  ? videoItems[currentItem]?.description 
+                  : galleryImages[currentItem]?.description}
+              </p>
             </div>
           </div>
           
           <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            onClick={(e) => { e.stopPropagation(); nextItem(); }}
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronRight className="w-8 h-8" />
           </button>
           
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {galleryImages.map((_, idx) => (
+            {(activeGalleryTab === 'images' ? galleryImages : videoItems).map((_, idx) => (
               <button
                 key={idx}
-                onClick={(e) => { e.stopPropagation(); setCurrentImage(idx); }}
-                className={`w-2 h-2 rounded-full transition-all ${idx === currentImage ? 'bg-white w-4' : 'bg-white/50'}`}
+                onClick={(e) => { e.stopPropagation(); setCurrentItem(idx); }}
+                className={`w-2 h-2 rounded-full transition-all ${idx === currentItem ? 'bg-white w-4' : 'bg-white/50'}`}
               />
             ))}
           </div>

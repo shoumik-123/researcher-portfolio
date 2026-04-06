@@ -27,7 +27,8 @@ import {
   FiThermometer,
   FiGrid,
   FiMic,
-  FiBookOpen
+  FiBookOpen,
+  FiVideo
 } from 'react-icons/fi';
 
 import { 
@@ -35,14 +36,34 @@ import {
   images
 } from '@/lib/data';
 
-// Get Lab Experimentations page data from images array (all items matching the ID)
-const labMediaItems = images.filter(page => page.id === 'research-lab');
-// Main page data
-const labPage = labMediaItems[0];
+// Get Lab Experimentations page data from images array
+const labMediaItems = images.filter(item => item.page === "/research/lab" && item.type === "research");
+const labVideos = images.filter(item => item.page === "/research/lab" && item.type === "research" && (item.video || item.videoEmbed));
 
 // Image URL resolver
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/research/lab-default.jpg';
+  
+  try {
+    // Handle Google Drive URLs
+    if (image.includes('drive.google.com')) {
+      let fileId = null;
+      const fileMatch = image.match(/\/d\/([^/]+)/);
+      if (fileMatch) {
+        fileId = fileMatch[1];
+      }
+      const idMatch = image.match(/[?&]id=([^&]+)/);
+      if (idMatch) {
+        fileId = idMatch[1];
+      }
+      if (fileId) {
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      }
+    }
+  } catch {
+    // keep original
+  }
+  
   return image;
 };
 
@@ -59,6 +80,11 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
     
     // Handle standard youtube.com URLs
     if (videoUrl.includes('youtube.com')) {
+      // Handle shorts URLs
+      if (videoUrl.includes('/shorts/')) {
+        const videoId = videoUrl.split('/shorts/')[1]?.split('?')[0];
+        if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+      }
       const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
       const videoId = urlParams.get('v');
       if (videoId) return `https://www.youtube.com/embed/${videoId}`;
@@ -75,15 +101,62 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
   return videoUrl;
 };
 
-// Gallery Images from images array
-const galleryImages = labMediaItems.map((item) => ({ 
-  id: item.id || `lab-${Math.random()}`,
-  title: item.title || item.name || 'Lab Experimentations',
-  description: item.description || 'Lab gallery',
-  image: resolveImageUrl(item.image),
-  video: !!item.video || !!item.videoEmbed,
-  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
-}));
+// Get YouTube thumbnail from video URL
+const getYouTubeThumbnail = (videoUrl?: string): string => {
+  if (!videoUrl) return '/images/placeholder.jpg';
+  
+  try {
+    let videoId = null;
+    
+    // Handle youtu.be short URLs
+    if (videoUrl.includes('youtu.be/')) {
+      videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
+    }
+    
+    // Handle standard youtube.com URLs
+    if (videoUrl.includes('youtube.com')) {
+      // Handle shorts URLs
+      if (videoUrl.includes('/shorts/')) {
+        videoId = videoUrl.split('/shorts/')[1]?.split('?')[0];
+      } else {
+        const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
+        videoId = urlParams.get('v');
+      }
+    }
+    
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+  } catch {
+    // return placeholder
+  }
+  
+  return '/images/placeholder.jpg';
+};
+
+// Process gallery images (items with images)
+const galleryImages = labMediaItems
+  .filter(item => item.image && !item.video)
+  .map((item) => ({ 
+    id: item.id || `lab-${Math.random()}`,
+    title: item.title || item.name || 'Lab Experimentations',
+    description: item.description || 'Lab gallery',
+    image: resolveImageUrl(item.image),
+    video: false,
+    videoEmbed: ''
+  }));
+
+// Process videos (items with video URLs)
+const videoItems = labVideos
+  .filter(item => item.video || item.videoEmbed)
+  .map((item) => ({ 
+    id: item.id || `lab-video-${Math.random()}`,
+    title: item.title || item.name || 'Lab Video',
+    description: item.description || 'Lab experiment video',
+    image: getYouTubeThumbnail(item.video || item.videoEmbed),
+    video: true,
+    videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
+  }));
 
 // Material Preparation & Processing
 const materialPreparation = [
@@ -122,7 +195,8 @@ const fieldProcesses = [
 export default function LabExperimentationsPage() {
   const [key, setKey] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentItem, setCurrentItem] = useState(0);
+  const [activeGalleryTab, setActiveGalleryTab] = useState<'images' | 'videos'>('videos');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -131,8 +205,9 @@ export default function LabExperimentationsPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const openLightbox = (index: number) => {
-    setCurrentImage(index);
+  const openLightbox = (index: number, type: 'images' | 'videos') => {
+    setActiveGalleryTab(type);
+    setCurrentItem(index);
     setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -142,24 +217,28 @@ export default function LabExperimentationsPage() {
     document.body.style.overflow = 'auto';
   };
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % galleryImages.length);
+  const nextItem = () => {
+    const currentItems = activeGalleryTab === 'images' ? galleryImages : videoItems;
+    if (currentItems.length === 0) return;
+    setCurrentItem((prev) => (prev + 1) % currentItems.length);
   };
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  const prevItem = () => {
+    const currentItems = activeGalleryTab === 'images' ? galleryImages : videoItems;
+    if (currentItems.length === 0) return;
+    setCurrentItem((prev) => (prev - 1 + currentItems.length) % currentItems.length);
   };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextItem();
+      if (e.key === 'ArrowLeft') prevItem();
       if (e.key === 'Escape') closeLightbox();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen]);
+  }, [lightboxOpen, activeGalleryTab]);
 
   return (
     <div className="bg-white text-gray-900 min-h-screen">
@@ -283,51 +362,113 @@ export default function LabExperimentationsPage() {
           </div>
         </motion.section>
 
-        {/* Gallery Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mb-12"
-        >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiCamera className="text-primary" />
-            Video Gallery
-          </h2>
-          {/* <p className="text-gray-600 mb-8">
-            Visual documentation of laboratory experiments, material preparation, analytical testing, and prototype development
-          </p> */}
+        {/* Video Gallery Section */}
+        {videoItems.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiVideo className="text-primary" />
+              Video Gallery
+              <span className="text-sm text-gray-500 font-normal ml-2">
+                ({videoItems.length} videos)
+              </span>
+            </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((item, index) => (
-              <div
-                key={item.id}
-                className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
-                onClick={() => openLightbox(index)}
-              >
-                <div className="relative aspect-video">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {item.video && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {videoItems.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => openLightbox(index, 'videos')}
+                >
+                  <div className="relative aspect-video">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                      }}
+                    />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-colors">
-                      <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-primary shadow-lg">
-                        <FiZap className="w-7 h-7 ml-0.5" />
+                      <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-primary shadow-lg group-hover:scale-110 transition-transform">
+                        <FiVideo className="w-7 h-7 ml-0.5" />
                       </div>
                     </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/80 to-transparent">
+                    <h3 className="font-semibold text-sm line-clamp-2">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <h3 className="font-semibold text-sm">{item.title}</h3>
-                  <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* Photo Gallery Section */}
+        {galleryImages.length > 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
+            className="mb-12"
+          >
+            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
+              <FiImage className="text-primary" />
+              Photo Gallery
+              <span className="text-sm text-gray-500 font-normal ml-2">
+                ({galleryImages.length} photos)
+              </span>
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryImages.map((item, index) => (
+                <div
+                  key={item.id}
+                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
+                  onClick={() => openLightbox(index, 'images')}
+                >
+                  <div className="relative aspect-video">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/80 to-transparent">
+                    <h3 className="font-semibold text-sm line-clamp-2">{item.title}</h3>
+                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </motion.section>
+              ))}
+            </div>
+          </motion.section>
+        )}
+
+        {/* No Items Message */}
+        {videoItems.length === 0 && galleryImages.length === 0 && (
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mb-12"
+          >
+            <div className="text-center py-12 bg-gray-50 rounded-xl">
+              <FiVideo className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <p className="text-gray-500">No experiment videos available yet. Check back soon!</p>
+            </div>
+          </motion.section>
+        )}
       </div>
 
       {/* Lightbox Modal */}
@@ -341,48 +482,62 @@ export default function LabExperimentationsPage() {
           </button>
           
           <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            onClick={(e) => { e.stopPropagation(); prevItem(); }}
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronLeft className="w-8 h-8" />
           </button>
           
           <div className="max-w-5xl max-h-[90vh] mx-4 w-full" onClick={(e) => e.stopPropagation()}>
-            {galleryImages[currentImage]?.video && galleryImages[currentImage]?.videoEmbed ? (
+            {activeGalleryTab === 'videos' && videoItems[currentItem] ? (
               <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-black shadow-2xl">
                 <iframe
-                  src={`${galleryImages[currentImage].videoEmbed}?autoplay=1`}
+                  src={`${videoItems[currentItem].videoEmbed}?autoplay=1`}
+                  title={videoItems[currentItem].title}
                   className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </div>
             ) : (
-              <img
-                src={galleryImages[currentImage]?.image}
-                alt={galleryImages[currentImage]?.title}
-                className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg shadow-2xl"
-              />
+              galleryImages[currentItem] && (
+                <img
+                  src={galleryImages[currentItem].image}
+                  alt={galleryImages[currentItem].title}
+                  className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg shadow-2xl"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                  }}
+                />
+              )
             )}
             <div className="mt-4 text-center text-white">
-              <h3 className="text-xl font-semibold">{galleryImages[currentImage]?.title}</h3>
-              <p className="text-gray-300 mt-2">{galleryImages[currentImage]?.description}</p>
+              <h3 className="text-xl font-semibold">
+                {activeGalleryTab === 'videos' 
+                  ? videoItems[currentItem]?.title 
+                  : galleryImages[currentItem]?.title}
+              </h3>
+              <p className="text-gray-300 mt-2">
+                {activeGalleryTab === 'videos' 
+                  ? videoItems[currentItem]?.description 
+                  : galleryImages[currentItem]?.description}
+              </p>
             </div>
           </div>
           
           <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            onClick={(e) => { e.stopPropagation(); nextItem(); }}
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronRight className="w-8 h-8" />
           </button>
           
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {galleryImages.map((_, idx) => (
+            {(activeGalleryTab === 'images' ? galleryImages : videoItems).map((_, idx) => (
               <button
                 key={idx}
-                onClick={(e) => { e.stopPropagation(); setCurrentImage(idx); }}
-                className={`w-2 h-2 rounded-full transition-all ${idx === currentImage ? 'bg-white w-4' : 'bg-white/50'}`}
+                onClick={(e) => { e.stopPropagation(); setCurrentItem(idx); }}
+                className={`w-2 h-2 rounded-full transition-all ${idx === currentItem ? 'bg-white w-4' : 'bg-white/50'}`}
               />
             ))}
           </div>

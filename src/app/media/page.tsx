@@ -30,7 +30,10 @@ import {
   FiPlay,
   FiTv,
   FiSpeaker,
-  FiMessageSquare
+  FiMessageSquare,
+  FiExternalLink,
+  FiFacebook,
+  FiYoutube
 } from 'react-icons/fi';
 
 import { 
@@ -39,31 +42,70 @@ import {
 } from '@/lib/data';
 
 // Get Media page data from images array
-const mediaMediaItems = images.filter(page => page.id === 'media');
-const mediaPage = mediaMediaItems[0];
+const mediaItems = images.filter(item => item.page === "/media" && item.type === "media");
 
 // Image URL resolver
 const resolveImageUrl = (image?: string): string => {
   if (!image) return '/images/media/default.jpg';
+  
+  try {
+    // Handle Google Drive URLs
+    if (image.includes('drive.google.com')) {
+      let fileId = null;
+      const fileMatch = image.match(/\/d\/([^/]+)/);
+      if (fileMatch) {
+        fileId = fileMatch[1];
+      }
+      const idMatch = image.match(/[?&]id=([^&]+)/);
+      if (idMatch) {
+        fileId = idMatch[1];
+      }
+      if (fileId) {
+        return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+      }
+    }
+  } catch {
+    // keep original
+  }
+  
   return image;
 };
 
-// Video URL resolver
+// Video URL resolver - converts various video URLs to embed format
 const resolveVideoEmbed = (videoUrl?: string): string => {
   if (!videoUrl) return '';
   
   try {
+    // Handle Facebook videos
+    if (videoUrl.includes('facebook.com')) {
+      // Extract Facebook video ID
+      const fbMatch = videoUrl.match(/\/videos\/(\d+)/);
+      if (fbMatch) {
+        return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(videoUrl)}&show_text=0&autoplay=1`;
+      }
+      return videoUrl;
+    }
+    
+    // Handle youtu.be short URLs
     if (videoUrl.includes('youtu.be/')) {
       const videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
-      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+      if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     }
     
+    // Handle standard youtube.com URLs
     if (videoUrl.includes('youtube.com')) {
+      // Handle live URLs
+      if (videoUrl.includes('/live/')) {
+        const videoId = videoUrl.split('/live/')[1]?.split('?')[0];
+        if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      }
+      // Handle watch URLs
       const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
       const videoId = urlParams.get('v');
-      if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+      if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     }
     
+    // Already an embed URL
     if (videoUrl.includes('youtube.com/embed/')) {
       return videoUrl;
     }
@@ -74,89 +116,69 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
   return videoUrl;
 };
 
-// Gallery Images from images array
-const galleryImages = mediaMediaItems.map((item) => ({ 
-  id: item.id || `media-${Math.random()}`,
-  title: item.title || item.name || 'Media Features',
-  description: item.description || 'Media gallery',
+// Get YouTube thumbnail from video URL
+const getYouTubeThumbnail = (videoUrl?: string): string => {
+  if (!videoUrl) return '/images/placeholder.jpg';
+  
+  try {
+    let videoId = null;
+    
+    // Handle youtu.be short URLs
+    if (videoUrl.includes('youtu.be/')) {
+      videoId = videoUrl.split('youtu.be/')[1]?.split('?')[0];
+    }
+    
+    // Handle standard youtube.com URLs
+    if (videoUrl.includes('youtube.com')) {
+      if (videoUrl.includes('/live/')) {
+        videoId = videoUrl.split('/live/')[1]?.split('?')[0];
+      } else {
+        const urlParams = new URLSearchParams(videoUrl.split('?')[1]);
+        videoId = urlParams.get('v');
+      }
+    }
+    
+    if (videoId) {
+      return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    }
+  } catch {
+    // return placeholder
+  }
+  
+  return '/images/placeholder.jpg';
+};
+
+// Process media items as blog-style posts
+const mediaPosts = mediaItems.map((item, index) => ({
+  id: item.id || `media-${index}`,
+  title: item.title || item.name || 'Media Feature',
+  description: item.description || '',
   image: resolveImageUrl(item.image),
-  video: !!item.video || !!item.videoEmbed,
-  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video)
+  video: item.video || item.videoEmbed || '',
+  videoEmbed: resolveVideoEmbed(item.videoEmbed || item.video),
+  type: item.video || item.videoEmbed ? 'video' : 'image',
+  thumbnail: item.video || item.videoEmbed ? getYouTubeThumbnail(item.video || item.videoEmbed) : resolveImageUrl(item.image)
 }));
 
-// Media Features
-const mediaFeatures = [
-  {
-    id: 1,
-    title: "Research Seminar – Keynote Speaker",
-    description: "Delivered a keynote lecture on sustainable waste management, circular economy solutions, and innovation in environmental practices.",
-    icon: <FiMic className="w-6 h-6" />,
-    color: "bg-purple-100 text-purple-600",
-    type: "Keynote Speech"
-  },
-  {
-    id: 2,
-    title: "TBS Meeting – National Stakeholder Engagement",
-    description: "Participated in a live telecast focusing on plastic policy for national government stakeholders, contributing expertise on plastic pollution mitigation and circular economy approaches.",
-    icon: <FiTv className="w-6 h-6" />,
-    color: "bg-blue-100 text-blue-600",
-    type: "Live Telecast"
-  },
-  {
-    id: 3,
-    title: "Cattle-Edible Bioplastic – Research Innovation Publication",
-    description: "Presented research on alternative bioplastics made from shrimp shells, a sustainable and cattle-edible material, demonstrating innovative solutions for plastic reduction and environmental sustainability.",
-    icon: <FiFileText className="w-6 h-6" />,
-    color: "bg-green-100 text-green-600",
-    type: "Research Innovation"
-  },
-  {
-    id: 4,
-    title: "RBU Inauguration – BPCL, Feni",
-    description: "Invited to attend the opening of a Recycling Business Unit (RBU), providing technical guidance and insights on circular economy integration.",
-    icon: <FiAward className="w-6 h-6" />,
-    color: "bg-orange-100 text-orange-600",
-    type: "Industry Event"
-  },
-  {
-    id: 5,
-    title: "Transitional Research Workshop – Trainer",
-    description: "Conducted training sessions for researchers on applied research methods, innovation, and sustainability solutions.",
-    icon: <FiUsers className="w-6 h-6" />,
-    color: "bg-teal-100 text-teal-600",
-    type: "Training"
-  },
-  {
-    id: 6,
-    title: "UNYSAB Workshop – Trainer",
-    description: "Guided participants on environmental innovation and circular economy practices, promoting youth engagement in sustainability.",
-    icon: <FiGlobe className="w-6 h-6" />,
-    color: "bg-indigo-100 text-indigo-600",
-    type: "Youth Engagement"
-  },
-  {
-    id: 7,
-    title: "Explore the Dhaka City – Collaboration with Imajo Kazuhisa, Japan",
-    description: "Participated in an international knowledge exchange, focusing on urban sustainability and innovative environmental approaches.",
-    icon: <FiUsers className="w-6 h-6" />,
-    color: "bg-rose-100 text-rose-600",
-    type: "International Collaboration"
-  }
-];
+// Helper function to get platform icon
+const getPlatformIcon = (url: string) => {
+  if (url.includes('facebook.com')) return <FiFacebook className="w-4 h-4" />;
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return <FiYoutube className="w-4 h-4" />;
+  return <FiExternalLink className="w-4 h-4" />;
+};
 
-// Media Statistics
-const mediaStats = [
-  { label: "Keynote Speeches", value: "1+", icon: <FiMic className="w-5 h-5" /> },
-  { label: "Live Telecasts", value: "1+", icon: <FiTv className="w-5 h-5" /> },
-  { label: "Training Sessions", value: "2+", icon: <FiUsers className="w-5 h-5" /> },
-  { label: "Industry Events", value: "1+", icon: <FiAward className="w-5 h-5" /> },
-  { label: "International Collaborations", value: "1+", icon: <FiGlobe className="w-5 h-5" /> }
-];
+// Helper function to get platform name
+const getPlatformName = (url: string) => {
+  if (url.includes('facebook.com')) return 'Facebook';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return 'YouTube';
+  return 'External Link';
+};
 
 export default function MediaPage() {
   const [key, setKey] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentPost, setCurrentPost] = useState(0);
+  const [activeTab, setActiveTab] = useState<'all' | 'videos' | 'images'>('all');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -166,7 +188,7 @@ export default function MediaPage() {
   }, []);
 
   const openLightbox = (index: number) => {
-    setCurrentImage(index);
+    setCurrentPost(index);
     setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -176,24 +198,43 @@ export default function MediaPage() {
     document.body.style.overflow = 'auto';
   };
 
-  const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % galleryImages.length);
+  const nextPost = () => {
+    const filteredPosts = getFilteredPosts();
+    setCurrentPost((prev) => (prev + 1) % filteredPosts.length);
   };
 
-  const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  const prevPost = () => {
+    const filteredPosts = getFilteredPosts();
+    setCurrentPost((prev) => (prev - 1 + filteredPosts.length) % filteredPosts.length);
   };
+
+  const getFilteredPosts = () => {
+    if (activeTab === 'videos') return mediaPosts.filter(post => post.type === 'video');
+    if (activeTab === 'images') return mediaPosts.filter(post => post.type === 'image');
+    return mediaPosts;
+  };
+
+  const filteredPosts = getFilteredPosts();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!lightboxOpen) return;
-      if (e.key === 'ArrowRight') nextImage();
-      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextPost();
+      if (e.key === 'ArrowLeft') prevPost();
       if (e.key === 'Escape') closeLightbox();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen]);
+  }, [lightboxOpen, activeTab]);
+
+  // Media Statistics
+  const mediaStats = [
+    { label: "Keynote Speeches", value: mediaPosts.filter(p => p.title.includes('Keynote')).length.toString(), icon: <FiMic className="w-5 h-5" /> },
+    { label: "Live Telecasts", value: mediaPosts.filter(p => p.title.includes('Live') || p.title.includes('TBS')).length.toString(), icon: <FiTv className="w-5 h-5" /> },
+    { label: "Training Sessions", value: mediaPosts.filter(p => p.title.includes('Workshop') || p.title.includes('Trainer')).length.toString(), icon: <FiUsers className="w-5 h-5" /> },
+    { label: "Research Features", value: mediaPosts.filter(p => p.title.includes('Research') || p.title.includes('Innovation')).length.toString(), icon: <FiFileText className="w-5 h-5" /> },
+    { label: "International Collab", value: mediaPosts.filter(p => p.title.includes('Japan') || p.title.includes('International')).length.toString(), icon: <FiGlobe className="w-5 h-5" /> }
+  ];
 
   return (
     <div className="bg-white text-gray-900 min-h-screen">
@@ -251,117 +292,152 @@ export default function MediaPage() {
           </p>
         </motion.section>
 
+    
 
-        {/* Key Highlights Section */}
-        <motion.section
+        {/* Tab Navigation */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-16"
+          className="mb-8"
         >
-          <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-            <FiStar className="text-primary" />
-            Key Highlights
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {mediaFeatures.map((feature, idx) => (
-              <div key={feature.id} className="bg-gray-50 rounded-xl p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-start gap-4">
-                  <div className={`w-12 h-12 rounded-full ${feature.color} flex items-center justify-center flex-shrink-0`}>
-                    {feature.icon}
+          <div className="flex gap-3 border-b border-gray-200">
+            <button
+              onClick={() => setActiveTab('all')}
+              className={`px-6 py-3 font-medium transition-all duration-300 ${
+                activeTab === 'all'
+                  ? 'text-primary border-b-2 border-primary'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              All Posts ({mediaPosts.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('videos')}
+              className={`px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${
+                activeTab === 'videos'
+                  ? 'text-primary border-b-2 border-primary'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <FiVideo className="w-4 h-4" />
+              Videos ({mediaPosts.filter(p => p.type === 'video').length})
+            </button>
+            <button
+              onClick={() => setActiveTab('images')}
+              className={`px-6 py-3 font-medium transition-all duration-300 flex items-center gap-2 ${
+                activeTab === 'images'
+                  ? 'text-primary border-b-2 border-primary'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <FiImage className="w-4 h-4" />
+              Photos ({mediaPosts.filter(p => p.type === 'image').length})
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Blog-style Media Posts */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15 }}
+          className="mb-12"
+        >
+          <div className="space-y-8">
+            {filteredPosts.map((post, index) => (
+              <div
+                key={post.id}
+                className="group bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+                onClick={() => openLightbox(index)}
+              >
+                <div className="flex flex-col md:flex-row">
+                  {/* Media Thumbnail */}
+                  <div className="relative md:w-80 h-56 bg-gray-100 overflow-hidden">
+                    {post.type === 'video' ? (
+                      <>
+                        <img
+                          src={post.thumbnail}
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                          <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                            <FiPlay className="w-6 h-6 text-primary ml-0.5" />
+                          </div>
+                        </div>
+                        {post.video && (
+                          <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-md rounded-full px-2 py-1 text-xs text-white flex items-center gap-1">
+                            {getPlatformIcon(post.video)}
+                            <span>{getPlatformName(post.video)}</span>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                        }}
+                      />
+                    )}
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <h3 className="text-lg font-semibold text-gray-900">{feature.title}</h3>
-                      <span className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full">
-                        {feature.type}
+
+                  {/* Post Content */}
+                  <div className="flex-1 p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${
+                        post.type === 'video' 
+                          ? 'bg-red-100 text-red-600' 
+                          : 'bg-blue-100 text-blue-600'
+                      }`}>
+                        {post.type === 'video' ? <FiVideo className="w-3 h-3" /> : <FiImage className="w-3 h-3" />}
+                        {post.type === 'video' ? 'Video' : 'Photo'}
                       </span>
+                      {post.video && (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                          {getPlatformIcon(post.video)}
+                          {getPlatformName(post.video)}
+                        </span>
+                      )}
                     </div>
-                    <p className="text-gray-600 text-sm">{feature.description}</p>
+
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+                    
+                    <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                      {post.description}
+                    </p>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-primary text-sm font-medium">
+                        <span>View {post.type === 'video' ? 'video' : 'photo'}</span>
+                        <FiExternalLink className="w-4 h-4" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          {filteredPosts.length === 0 && (
+            <div className="text-center py-12 bg-gray-50 rounded-xl">
+              <FiImage className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+              <p className="text-gray-500">No media posts available in this category.</p>
+            </div>
+          )}
         </motion.section>
-
-        {/* Gallery Section */}
-        {galleryImages.length > 0 && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mb-12"
-          >
-            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-              <FiImage className="text-primary" />
-              Photo Gallery
-            </h2>
-            <p className="text-gray-600 mb-8">
-              Moments from keynote speeches, workshops, stakeholder engagements, and international collaborations
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {galleryImages.map((item, index) => (
-                <div
-                  key={item.id}
-                  className="group relative bg-gray-100 rounded-xl overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300"
-                  onClick={() => openLightbox(index)}
-                >
-                  <div className="relative aspect-[4/3]">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {item.video && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/40 transition-colors">
-                        <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                          <FiPlay className="w-6 h-6 fill-current ml-0.5" />
-                        </div>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="font-semibold text-sm">{item.title}</h3>
-                    <p className="text-xs text-gray-200 mt-1 line-clamp-2">{item.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.section>
-        )}
-
-        {/* Video Section */}
-        {mediaPage?.videoEmbed && (
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mb-12"
-          >
-            <h2 className="text-3xl font-light text-gray-900 mb-6 flex items-center gap-3">
-              <FiVideo className="text-primary" />
-              Featured Video
-            </h2>
-            <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
-              <iframe
-                src={mediaPage.videoEmbed}
-                title="Media Feature"
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </motion.section>
-        )}
       </div>
 
-      {/* Lightbox Modal */}
-      {lightboxOpen && (
+      {/* Lightbox Modal for Media Posts */}
+      {lightboxOpen && filteredPosts[currentPost] && (
         <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center" onClick={closeLightbox}>
           <button
             onClick={closeLightbox}
@@ -371,17 +447,18 @@ export default function MediaPage() {
           </button>
           
           <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            onClick={(e) => { e.stopPropagation(); prevPost(); }}
+            className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronLeft className="w-8 h-8" />
           </button>
           
           <div className="max-w-5xl max-h-[90vh] mx-4 w-full" onClick={(e) => e.stopPropagation()}>
-            {galleryImages[currentImage]?.video && galleryImages[currentImage]?.videoEmbed ? (
+            {filteredPosts[currentPost]?.type === 'video' && filteredPosts[currentPost]?.videoEmbed ? (
               <div className="relative aspect-video w-full rounded-lg overflow-hidden bg-black shadow-2xl">
                 <iframe
-                  src={`${galleryImages[currentImage].videoEmbed}?autoplay=1`}
+                  src={filteredPosts[currentPost].videoEmbed}
+                  title={filteredPosts[currentPost].title}
                   className="absolute inset-0 w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
@@ -389,30 +466,46 @@ export default function MediaPage() {
               </div>
             ) : (
               <img
-                src={galleryImages[currentImage]?.image}
-                alt={galleryImages[currentImage]?.title}
+                src={filteredPosts[currentPost]?.image}
+                alt={filteredPosts[currentPost]?.title}
                 className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg shadow-2xl"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/images/placeholder.jpg';
+                }}
               />
             )}
             <div className="mt-4 text-center text-white">
-              <h3 className="text-xl font-semibold">{galleryImages[currentImage]?.title}</h3>
-              <p className="text-gray-300 mt-2">{galleryImages[currentImage]?.description}</p>
+              <h3 className="text-xl font-semibold">{filteredPosts[currentPost]?.title}</h3>
+              <p className="text-gray-300 mt-2">{filteredPosts[currentPost]?.description}</p>
+              {filteredPosts[currentPost]?.video && (
+                <a 
+                  href={filteredPosts[currentPost].video}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-3 text-primary hover:underline text-sm"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {getPlatformIcon(filteredPosts[currentPost].video)}
+                  View on {getPlatformName(filteredPosts[currentPost].video)}
+                  <FiExternalLink className="w-3 h-3" />
+                </a>
+              )}
             </div>
           </div>
           
           <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2"
+            onClick={(e) => { e.stopPropagation(); nextPost(); }}
+            className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors bg-black/50 rounded-full p-2 z-10"
           >
             <FiChevronRight className="w-8 h-8" />
           </button>
           
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
-            {galleryImages.map((_, idx) => (
+            {filteredPosts.map((_, idx) => (
               <button
                 key={idx}
-                onClick={(e) => { e.stopPropagation(); setCurrentImage(idx); }}
-                className={`w-2 h-2 rounded-full transition-all ${idx === currentImage ? 'bg-white w-4' : 'bg-white/50'}`}
+                onClick={(e) => { e.stopPropagation(); setCurrentPost(idx); }}
+                className={`w-2 h-2 rounded-full transition-all ${idx === currentPost ? 'bg-white w-4' : 'bg-white/50'}`}
               />
             ))}
           </div>
