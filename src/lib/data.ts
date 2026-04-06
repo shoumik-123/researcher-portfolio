@@ -152,7 +152,7 @@ export const socialLinks = [
   // { name: "Web of Science", url: "https://publons.com/researcher/your-id", icon: "WoS", title: "Web of Science" }, // ✅ Hardcoded
   { name: "ORCID", url: researcherInfo.social.orcid, icon: "ORCID", title: "ORCID" },
   { name: "Google Scholar", url: researcherInfo.social.googleScholar, icon: "GS", title: "Google Scholar" },
-  { name: "Institutional", url: "https://ki.se", icon: "I", title: "Institutional Web Page" }
+  // { name: "Institutional", url: "https://ki.se", icon: "I", title: "Institutional Web Page" }
 ];
 export const images = [
   {
@@ -1771,7 +1771,7 @@ export const images = [
 
 
 
-  
+
   {
     "id": "blog",
     "name": "Blog & Insights",
