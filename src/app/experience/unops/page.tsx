@@ -427,7 +427,7 @@ export default function UNOPSExperiencePage() {
           
           <div className="max-w-5xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
             {activeGalleryTab === 'videos' && videoItems[currentItem] ? (
-              <div className="aspect-video">
+              // <div className="aspect-video">
                 <iframe
                   src={videoItems[currentItem].videoEmbed}
                   title={videoItems[currentItem].title}
@@ -436,7 +436,7 @@ export default function UNOPSExperiencePage() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
-              </div>
+              // </div>
             ) : (
               galleryImages[currentItem] && (
                 <img

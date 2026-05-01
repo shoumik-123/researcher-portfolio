@@ -124,6 +124,7 @@ const completedProjects = [
     organization: "UNOPS | Institute of Marine Sciences, University of Chittagong",
     period: "Jun 2024 – Jun 2025",
     description: "Community-level initiatives promoting circular economy and biodegradable product adoption.",
+        link: "https://please-project.org/",
     icon: <FiUsers className="w-5 h-5" />
   },
   {
@@ -131,6 +132,8 @@ const completedProjects = [
     organization: "UNOPS | RedOrange Communications",
     period: "Jun 2024 – Jun 2025",
     description: "Integrated flood risk mitigation with enhanced plastic waste collection in urban communities.",
+        link: "https://please-project.org/",
+
     icon: <FiMapPin className="w-5 h-5" />
   },
   {
@@ -138,6 +141,8 @@ const completedProjects = [
     organization: "UNOPS | Arannayk Foundation",
     period: "Jun 2024 – Jun 2025",
     description: "Reduced plastic pollution in transboundary Sundarbans ecosystems.",
+        link: "https://please-project.org/",
+
     icon: <FiHeart className="w-5 h-5" />
   },
   {
@@ -145,6 +150,8 @@ const completedProjects = [
     organization: "UNOPS | Bangladesh Petrochemical Company Limited (BPCL)",
     period: "Apr 2024 – Jun 2025",
     description: "Developed structured recycling business units and promoted circular plastic economy.",
+        link: "https://please-project.org/",
+
     icon: <FiTrendingUp className="w-5 h-5" />
   },
   {
@@ -152,6 +159,8 @@ const completedProjects = [
     organization: "UNOPS | BRAC (UDP)",
     period: "Apr 2024 – Jun 2025",
     description: "Human-centered waste management interventions in refugee-affected regions.",
+        link: "https://please-project.org/",
+
     icon: <FiUsers className="w-5 h-5" />
   }
 ];
@@ -163,26 +172,30 @@ const selectedPublications = [
     journal: "Polymer Composites",
     year: "2023",
     citations: "30",
-    description: "Developed sustainable composite materials from tannery waste."
+    description: "Developed sustainable composite materials from tannery waste.",
+    link: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4858792",
   },
   {
     title: "Development and Characterization of Chitosan-Based Antimicrobial Films: A Sustainable Alternative to Plastic Packaging",
     journal: "Cleaner Chemical Engineering",
     year: "2025",
     citations: "28",
-    description: "Explores biodegradable packaging solutions with antimicrobial properties."
+    description: "Explores biodegradable packaging solutions with antimicrobial properties.",
+    link: "https://www.sciencedirect.com/science/article/pii/S2772782325000129",
   },
   {
     title: "Tannery Shaving Dust-Based Charcoal Blended Adsorbent for Efficient Heavy Metal Remediation",
     journal: "Case Studies in Chemical and Environmental Engineering",
     year: "2025",
-    description: "Combines material innovation and machine learning for heavy metal remediation."
+    description: "Combines material innovation and machine learning for heavy metal remediation.",
+    link: "https://www.sciencedirect.com/science/article/pii/S266601642500163X?via%3Dihub",
   },
   {
     title: "Development of Chitosan-Based Hydrogel Containing Polyvinyl Alcohol, Cellulose and ZnO Nanoparticles",
     journal: "Dhaka University Journal of Science",
     year: "2025",
-    description: "Advanced biomaterials for biomedical applications."
+    description: "Advanced biomaterials for biomedical applications.",
+    link: "https://banglajol.info/index.php/DUJS/article/view/81284",
   },
 ];
 
@@ -331,6 +344,12 @@ export default function AchievementsPage() {
                   {pub.citations && <span>Cited by {pub.citations}</span>}
                 </div>
                 <p className="text-gray-600 text-sm">{pub.description}</p>
+                {pub.link && (
+                  <a href={pub.link} target="_blank" rel="noopener noreferrer"
+                     className="inline-flex items-center gap-1 text-primary text-sm mt-2 ml-8 hover:underline">
+                    <FiExternalLink className="w-3 h-3" /> Visit Publications
+                  </a>
+                )}
               </div>
             ))}
           </div>
