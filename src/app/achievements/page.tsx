@@ -319,7 +319,7 @@ export default function AchievementsPage() {
                 <p className="text-gray-700 mt-2 ml-8">{project.description}</p>
                 {project.link && (
                   <a href={project.link} target="_blank" rel="noopener noreferrer"
-                     className="inline-flex items-center gap-1 text-primary text-sm mt-2 ml-8 hover:underline">
+                     className="inline-flex items-center gap-1 text-primary text-sm mt-2 hover:underline">
                     <FiExternalLink className="w-3 h-3" /> Visit Project
                   </a>
                 )}
