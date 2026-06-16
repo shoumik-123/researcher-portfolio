@@ -167,7 +167,7 @@ export default function Home() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors flex items-center justify-center text-gray-600"
+                    className="border border-primary w-12 h-12 rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors flex items-center justify-center text-primary hover:text-white bold"
                     title={link.title}
                   >
                     <span className="text-sm font-medium">{link.icon}</span>
@@ -271,7 +271,7 @@ export default function Home() {
                     </div>
                     <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 sm:col-span-2">
                       <Image
-                        src={getDriveImageUrl("https://drive.google.com/file/d/1vEchfAZYqX2o5QjfGy3QlVGmkqZMPgdn/view?usp=drive_link")}
+                        src={getDriveImageUrl("https://drive.google.com/thumbnail?id=1i5s-UqaXNJqyilIGvPak-hKVIoMHDkrS&sz=w1000")}
                         alt="UNOPS Bangladesh Country Team"
                         fill
                         className="object-cover"
@@ -467,7 +467,7 @@ export default function Home() {
         <div>
           <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
             <Image
-              src={getDriveImageUrl("https://drive.google.com/file/d/1x0e4p5pFlZMUTNKgkdV7eGfGG8UQOXkN/view?usp=drive_link")}
+              src={getDriveImageUrl("https://drive.google.com/file/d/1kIOHSQah1ui02CP5u-vX1it-Ohq9whYO/view?usp=drive_link")}
               alt="Sivakumaran Sithamparanathan"
               fill
               className="object-cover"
@@ -483,7 +483,7 @@ export default function Home() {
         <div>
           <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
             <Image
-              src={getDriveImageUrl("https://drive.google.com/file/d/1314LBg16ZhcVfWwqU0wWx-VqF095RPBs/view?usp=drive_link")}
+              src={getDriveImageUrl("https://drive.google.com/file/d/1gn2yue7EkCFY2MDWhcA8KD6gf-TIZyHY/view?usp=drive_link")}
               alt="Professional Colleague"
               fill
               className="object-cover"
@@ -514,7 +514,7 @@ export default function Home() {
         <div>
           <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 mb-3">
             <Image
-              src={getDriveImageUrl("https://drive.google.com/file/d/1dTD6nFmqfo7RVlhRadT6DIyOocnoIhEs/view?usp=drive_link")}
+              src={getDriveImageUrl("https://drive.google.com/file/d/1pQHB_p2vMGdxwI6HLI3dXfdKa66xBV8o/view?usp=drive_link")}
               alt="Jaime Alarma Olmos"
               fill
               className="object-cover"

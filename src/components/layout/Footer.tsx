@@ -23,14 +23,14 @@ export default function Footer() {
               >
                 <FiLinkedin size={18} />
               </a>
-              <a 
+              {/* <a 
                 href="https://twitter.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-white/80 hover:text-white transition-colors bg-white/10 p-2 rounded-full hover:bg-white/20"
               >
                 <FiTwitter size={18} />
-              </a>
+              </a> */}
               <a 
                 href="https://scholar.google.com/citations?user=0DuQk4wAAAAJ&hl=en" 
                 target="_blank" 

@@ -157,6 +157,8 @@ const publications = [
       "Enhancements in tensile strength, elongation, hardness, and density",
       "Versatile, eco-friendly material for packaging and furnishings"
     ]
+    ,
+    link: "https://doi.org/10.1002/pc.27644"
   },
   {
     title: "Automatic detection, classification, and segmentation of sagittal MR images for diagnosing prolapsed lumbar intervertebral disc",
@@ -172,6 +174,8 @@ const publications = [
       "Segmentation achieved 95.72% Dice score",
       "Enhances diagnostic accuracy and efficiency in PLID assessment"
     ]
+    ,
+    link: "http://dx.doi.org/10.1038/s41598-024-84301-7"
   },
   {
     title: "Development and Characterization of Chitosan-Based Antimicrobial Films: A Sustainable Alternative to Plastic Packaging",
@@ -187,6 +191,8 @@ const publications = [
       "Antibacterial properties enhance food safety",
       "Sustainable path forward for food packaging"
     ]
+    ,
+    link: "http://dx.doi.org/10.1016/j.clce.2025.100157"
   },
   {
     title: "Development of Chitosan-Based Hydrogel Containing Polyvinyl Alcohol, Cellulose and ZnO Nanoparticles for Potential Biomedical Applications",
@@ -198,6 +204,8 @@ const publications = [
       "Sustainable approach transforms discarded resources into valuable biomaterials",
       "Environmentally friendly solution for advanced healthcare needs"
     ]
+    ,
+    link: "http://dx.doi.org/10.3329/dujs.v73i1.81284"
   },
   {
     title: "Automated lumbar intervertebral disc identification and herniation detection in MR images using cascade CNN architecture",
@@ -210,12 +218,16 @@ const publications = [
       "Attention-enhanced VGG19 and ResNet50 models achieve 98.09% classification accuracy",
       "Aims to assist physicians by improving diagnostic efficiency"
     ]
+    ,
+    link: "http://dx.doi.org/10.1016/j.imu.2025.101648"
   },
   {
     title: "Tannery Shaving Dust-Based Charcoal Blended Adsorbents for Efficient Heavy Metal Remediation: An Experimental and Machine Learning Approach",
     authors: "Md. Sabbir Hosen, Md. Sahariar Sahen, Hasan Ahmed, Md. Selim Reza, Pranta Bhowmik, Farzana Mim, Md. Badrul Islam, Md. Azizul Haque Khan Naim, Mohammad Majibur Rahman, Md. Mostafizur Rahman",
     journal: "Journal of Environmental Management",
     year: 2024
+    ,
+    link: "http://dx.doi.org/10.1016/j.cscee.2025.101256"
   },
   {
     title: "Fabrication of Tannic Acid-Functionalized Sugarcane Fiber Reinforced Chitosan-Based Biocomposite Sheet: A Sustainable Antibacterial Solution for Shoe Insoles",
@@ -229,6 +241,8 @@ const publications = [
       "Demonstrated strong antibacterial activity against 1.5 × 10⁵ CFU/mL bacterial suspension",
       "Effective, sustainable, and biodegradable solution for antibacterial shoe insoles and biomedical applications"
     ]
+    ,
+    link: "https://www.sciencedirect.com/science/article/pii/S2589014X25004050"
   }
 ];
 
@@ -241,36 +255,48 @@ const conferencePapers = [
     date: "December 2025",
     location: "Dhaka, Bangladesh",
     highlights: ["Developed a functional prototype integrating blockchain and encryption for secure, real-time remote patient monitoring in smart hospital wards."]
+    ,
+    link: "https://ieeexplore.ieee.org/document/11414908"
   },
   {
     title: "Mechanical Behavior of Hybrid Glass-Jute Fiber Composite Sheet in Honeycomb Core Sandwich Panels",
     authors: "Shafat Hasan, Hasan Ahmed, Md. Abu Sayed, Ahmed Seam, et al.",
     event: "15th International Conference on Mechanical Engineering (ICME 2025)",
     date: "December 2025"
+    ,
+    link: "http://researchgate.net/publication/398922071_Mechanical_Behavior_of_Hybrid_Glass-Jute_Fiber_Composite_Sheet_in_Honeycomb_Core_Sandwich_Panels?_sg%5B0%5D=j3p8l2dmO9CwIsEMSYFeim2cewDVw4WZVJLx20Iw2TDCcVExILrDdyZxJi5w7IWl22pRA-ZiwPASP4F7kSIU9qYc1_F5b4B0ZdaZIViw.Az-Ik9kXLTV5rtybD67eriFzN1qDx-PYU2ZsWl-evjtz2Dp4EHDgCfH8U7Je7WTaUbYUAZ04IoqVUEPMVEKsPQ"
   },
   {
     title: "Sustainable and Eco-Friendly Development of Tannery Solid Waste-Based Chitosan/Eggshell Antibacterial Composite Sheets",
     authors: "Hasan Ahmed*, Engr. Md. Sabbir Hosen, Muttakee Bin Ali et al.",
     event: "7th International Conference on Advances in Civil Engineering (ICACE 2024)",
     date: "December 2024"
+    ,
+    link: "https://www.researchgate.net/publication/386905177_SUSTAINABLE_AND_ECO-FRIENDLY_DEVELOPMENT_OF_TANNERY_SOLID_WASTE_BASED_CHITOSANEGG_SHELL_ANTIBACTERIAL_COMPOSITE_SHEETS"
   },
   {
     title: "Antibacterial Biocomposite Sheet from Tannery Waste: A Sustainable Waste-to-Worth Solution",
     authors: "Muttakee Bin Ali, Md. Ibrahim Al Imran, Rupok Kumar Nayak, Hasan Ahmed, et al.",
     event: "7th International Conference on Advances in Civil Engineering (ICACE 2024)",
     date: "December 2024"
+    ,
+    link: "http://researchgate.net/publication/386905419_ANTIBACTERIAL_BIOCOMPOSITE_SHEET_FROM_TANNERY_WASTE_A_SUSTAINABLE_WASTE-TO-WORTH_SOLUTION?_sg%5B0%5D=9DTXYd6o0NqMD2WrSAbq5CVyLnUYB4rOq13KJq5jmHYa7KhaV47MoFu4V4aJLUkZoccArMClHqv0xjeYpO64RZ7XyHIpjQGGSkhRpq1k.9BuY_XWKK80-YS_hb4ePL37zFa7FCs8UKq5QLobtwJR7-ezoxb3ecAacVOiLNAoEZgRm2cAFjGR7h2A1Yjn1Cw&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uIiwicGFnZSI6InByb2ZpbGUiLCJwb3NpdGlvbiI6InBhZ2VDb250ZW50In19"
   },
   {
     title: "Development and Performance Analysis of Biodegradable, Transparent Antimicrobial Bioplastic from Tannery Solid Waste",
     authors: "Nusrat Jahan, Aniqa Tasnim, Mohammad Ali Tanvir, Hasan Ahmed, et al.",
     event: "7th International Conference on Advances in Civil Engineering (ICACE 2024)",
     date: "December 2024"
+    ,
+    link: "http://researchgate.net/publication/386900400_DEVELOPMENT_AND_PERFORMANCE_ANALYSIS_OF_BIODEGRADABLE_TRANSPARENT_ANTIMICROBIAL_BIOPLASTIC_FROM_TANNERY_SOLID_WASTE?_sg%5B0%5D=Uy2gLAIAk30CTG3fUXYzQ2DXalWzoZ79wS5srffNDqeZE6_AGPSPv7gr-Pf_VVOULqrtsnzH98BiCRc9qnid_Iueh9Xz2s7fI0kEaN8P.nvnJYNxZ3jvz1feT_rpwQErohCuP0aG0ltDgdf3FuOlAJfH3lTtDxGB83n7xTx67VyiXeXbJLRStIKRB951m9Q&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6InB1YmxpY2F0aW9uIiwicGFnZSI6InByb2ZpbGUiLCJwb3NpdGlvbiI6InBhZ2VDb250ZW50In19"
   },
   {
     title: "Conversion and Characterization of Bio-Diesel from Tannery Solid Waste",
     authors: "Saad Ahmed, Iftehaj Rafa Rian, Hasan Ahmed, Engr. Md. Sabbir Hosen et al.",
     event: "2nd International Conference on Textile Science and Engineering (ICTSE 2024)",
     date: "May 2024"
+    ,
+    link: "https://www.researchgate.net/publication/381096428_Conversion_and_Characterization_of_Bio-Diesel_from_Tannery_Solid_Waste"
   },
   {
     title: "Gentamicin-Loaded Sugarcane Fiber-Chitosan Hydrogel Sponge for Enhanced Skin Wound Healing",
@@ -534,7 +560,15 @@ export default function ResearchPage() {
           <div className="space-y-8">
             {publications.map((pub, idx) => (
               <div key={idx} className="border-l-4 border-primary pl-6 py-2 hover:bg-gray-50 transition-colors">
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{pub.title}</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {pub.link ? (
+                    <a href={pub.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      {pub.title}
+                    </a>
+                  ) : (
+                    pub.title
+                  )}
+                </h3>
                 <p className="text-gray-600 text-sm mb-2">{pub.authors}</p>
                 <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-3">
                   <span>{pub.journal}</span>
@@ -573,7 +607,15 @@ export default function ResearchPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {conferencePapers.map((paper, idx) => (
               <div key={idx} className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow">
-                <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{paper.title}</h3>
+                <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
+                  {paper.link ? (
+                    <a href={paper.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                      {paper.title}
+                    </a>
+                  ) : (
+                    paper.title
+                  )}
+                </h3>
                 <p className="text-sm text-gray-600 mb-2">{paper.authors}</p>
                 <p className="text-sm text-primary font-medium">{paper.event}</p>
                 <div className="flex flex-wrap gap-3 mt-2 text-xs text-gray-500">
