@@ -21,6 +21,15 @@ import {
   images 
 } from '@/lib/data';
 
+// Helper function to get Google Drive direct image URL
+const getDriveImageUrl = (driveUrl: string) => {
+  const fileIdMatch = driveUrl.match(/\/d\/(.+?)\//);
+  if (fileIdMatch) {
+    return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+  }
+  return driveUrl;
+};
+
 // Get experience page data from images array
 const experienceMediaItems = images.filter(page => page.id === 'experience');
 const experiencePage = experienceMediaItems[0];
@@ -91,25 +100,32 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
 const experiences = [
   {
     id: 'unops',
-    title: "Technical Expert (Environment)",
-    organization: "United Nations Office for Project Services (UNOPS)",
-    project: "PLEASE Project (Plastic-free Rivers and Seas for South Asia)",
-    timeline: "April 2024 – June 2025",
+    title: "United Nations Office for Project Services (UNOPS)",
+    organization: "UNOPS",
+    project: "",
+    timeline: "April 2024 – June 2025 & May 2026 – Present",
     location: "Dhaka, Bangladesh",
-    description: "Served as national environmental technical lead for the $3.18M PLEASE Project (Plastic-free Rivers and Seas for South Asia). Designed, implemented, and monitored environmental and social safeguards (ESS, ESMPs, EIA) in alignment with World Bank and SACEP standards. Guided national partners and grantees on environmental compliance, risk screening, and sustainability integration. Supported innovation, prototyping, and validation of circular plastic solutions through community and private-sector engagement. Coordinated with regional UNOPS offices to align national implementation with South Asia–wide objectives. Conducted site assessments and environmental audits across 25+ project locations. Delivered training on source segregation, waste handling, and leakage prevention to local governments and enterprises. Developed SOPs for Material Recovery Facilities (MRFs) and advised on environmentally appropriate machinery specifications.",
+    description: "Served as national environmental technical lead for the $3.18M PLEASE Project (Plastic-free Rivers and Seas for South Asia). Designed, implemented, and monitored environmental and social safeguards (ESS, ESMPs, EIA) in alignment with World Bank and SACEP standards. Guided national partners and grantees on environmental compliance, risk screening, and sustainability integration. Supported innovation, prototyping, and validation of circular plastic solutions through community and private-sector engagement. Coordinated with regional UNOPS offices to align national implementation with South Asia–wide objectives. Conducted site assessments and environmental audits across 25+ project locations. Delivered training on source segregation, waste handling, and leakage prevention to local governments and enterprises. Developed SOPs for Material Recovery Facilities (MRFs) and advised on environmentally appropriate machinery specifications.\n\nCurrently serving as Business Development Associate, supporting strategic partnerships, proposal development, and stakeholder engagement initiatives to strengthen sustainable development programming in Bangladesh. Working closely with the Partnerships Advisor to identify funding opportunities, develop high-quality concept notes and business proposals, and coordinate high-level donor and corporate engagement events.",
     achievements: [
       "Directed implementation leading to 20% reduction in plastic leakage into riverine and marine ecosystems.",
       "Developed 11 ESMPs, 4 ESS reports, and 1 EIA, ensuring full donor compliance.",
       "Supported establishment of 8 plastic recycling business units, embedding circular economy principles.",
       "Strengthened environmental capacity of community and women-led enterprises through structured training and mentoring.",
-      "Represented Bangladesh in regional dialogues with World Bank, SACEP, and UNOPS on sustainable waste management strategies."
+      "Represented Bangladesh in regional dialogues with World Bank, SACEP, and UNOPS on sustainable waste management strategies.",
+      "Developing concept notes, grant applications, EOIs, and partnership proposals",
+      "Conducting donor mapping, market research, and opportunity analysis",
+      "Coordinating networking events, workshops, webinars, and partnership ceremonies",
+      "Preparing briefing notes, presentation decks, and post-event reports",
+      "Collaborating with technical teams to synthesize project data and impact stories",
+      "Monitoring proposal deadlines and ensuring compliance with donor requirements",
+      "Supporting partnership development aligned with SDGs and resilient development priorities"
     ],
     type: "UNOPS",
     icon: <FiBriefcase className="w-6 h-6" />,
     color: "bg-blue-100 text-blue-600",
     image: resolveImageUrl(experienceMediaItems.find(item => item.type === 'UNOPS')?.image),
-    video: experienceMediaItems.find(item => item.type === 'UNOPS')?.video,
-    videoEmbed: experienceMediaItems.find(item => item.type === 'UNOPS')?.videoEmbed
+    video: "",
+    videoEmbed: ""
   },
   {
     id: 'bpcl',
@@ -175,7 +191,6 @@ const experiences = [
     videoEmbed: experienceMediaItems.find(item => item.type === 'CARS')?.videoEmbed
   }
 ];
-
 
 // Training & Workshops data
 const trainings = [
@@ -301,11 +316,6 @@ export default function ExperiencePage() {
               transition={{ delay: index * 0.1 }}
               className="relative"
             >
-              {/* Timeline connector (except last) */}
-              {/* {index < experiences.length - 1 && (
-                <div className="absolute left-8 top-24 bottom-0 w-0.5 bg-gray-200 hidden md:block"></div>
-              )} */}
-              
               <div className="flex flex-col md:flex-row gap-6 md:gap-8">
                 {/* Left Column - Image & Meta */}
                 <div className="md:w-1/3">
@@ -371,7 +381,7 @@ export default function ExperiencePage() {
                     </h2>
                     
                     {/* Description */}
-                    <p className="text-gray-700 leading-relaxed text-justify">
+                    <p className="text-gray-700 leading-relaxed text-justify whitespace-pre-line">
                       {exp.description}
                     </p>
                     
@@ -379,7 +389,7 @@ export default function ExperiencePage() {
                     <div className="space-y-4">
                       <h3 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
                         <FiAward className="text-primary" />
-                        Key Contributions
+                        Key Achievements & Responsibilities
                       </h3>
                       <ul className="space-y-3">
                         {exp.achievements.map((achievement, i) => (
@@ -404,42 +414,6 @@ export default function ExperiencePage() {
             </motion.div>
           ))}
         </div>
-
-        {/* TRAINING & WORKSHOPS SECTION */}
-        {/* <section className="mt-24 space-y-12">
-          <h2 className="text-4xl font-bold uppercase tracking-wide text-center">
-            Lectures, Training & Workshops
-          </h2>
-          <p className="text-center text-gray-600 max-w-2xl mx-auto">
-            Professional development activities during UNOPS tenure and beyond
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {trainings.map((training, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="flex gap-4 p-6 bg-gray-50 rounded-xl hover:shadow-md transition-shadow"
-              >
-                <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
-                  {training.icon}
-                </div>
-                <div>
-                  <h3 className="font-medium text-gray-900 mb-1">
-                    {training.title}
-                  </h3>
-                  <span className="text-xs uppercase tracking-wider text-primary font-medium">
-                    {training.type}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section> */}
-
-      
       </div>
     </div>
   );
