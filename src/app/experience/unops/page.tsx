@@ -198,6 +198,66 @@ export default function UNOPSExperiencePage() {
 
       {/* MAIN CONTENT */}
       <div className="max-w-5xl mx-auto px-6 py-12">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="bg-blue-50/70 border border-blue-100 rounded-2xl p-8 mb-12"
+        >
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                <FiBriefcase className="w-6 h-6" />
+              </div>
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-900">Business Development Associate</h2>
+                <p className="text-gray-600">United Nations Office for Project Services (UNOPS)</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-6 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <FiCalendar className="w-4 h-4" />
+                <span>May 2026 – Present</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <FiMapPin className="w-4 h-4" />
+                <span>Dhaka, Bangladesh</span>
+              </div>
+            </div>
+
+            <p className="text-gray-700 leading-relaxed">
+              Supporting strategic partnerships, proposal development, and stakeholder engagement initiatives to strengthen sustainable development programming in Bangladesh. Working closely with the Partnerships Advisor to identify funding opportunities, develop high-quality concept notes and business proposals, and coordinate high-level donor and corporate engagement events.
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3 text-sm">
+              <span className="font-medium text-gray-800">Picture:</span>
+              <a
+                href="https://drive.google.com/file/d/1M_4k3ou3eAzo7qVIjOxyzM0ZUJr8jcMZ/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-primary hover:underline"
+              >
+                <FiExternalLink className="w-4 h-4" />
+                View picture
+              </a>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">Key responsibilities include:</h3>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
+                <li className="flex gap-2"><span className="text-primary">•</span> Developing concept notes, grant applications, EOIs, and partnership proposals</li>
+                <li className="flex gap-2"><span className="text-primary">•</span> Conducting donor mapping, market research, and opportunity analysis</li>
+                <li className="flex gap-2"><span className="text-primary">•</span> Coordinating networking events, workshops, webinars, and partnership ceremonies</li>
+                <li className="flex gap-2"><span className="text-primary">•</span> Preparing briefing notes, presentation decks, and post-event reports</li>
+                <li className="flex gap-2"><span className="text-primary">•</span> Collaborating with technical teams to synthesize project data and impact stories</li>
+                <li className="flex gap-2"><span className="text-primary">•</span> Monitoring proposal deadlines and ensuring compliance with donor requirements</li>
+                <li className="flex gap-2"><span className="text-primary">•</span> Supporting partnership development aligned with SDGs and resilient development priorities</li>
+              </ul>
+            </div>
+          </div>
+        </motion.section>
+
         {/* Project Overview Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -169,7 +169,7 @@ export default function Home() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border border-primary w-12 h-12 rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors flex items-center justify-center text-primary hover:text-white bold"
+                    className="border border-primary w-12 h-12 rounded-full bg-gray-100 hover:bg-primary hover:text-white transition-colors flex items-center justify-center text-primary hover:text-white bold-font font-extrabold"
                     title={link.title}
                   >
                     <span className="text-sm font-medium">{link.icon}</span>
@@ -279,6 +279,33 @@ export default function Home() {
                         UNOPS Regional Team in Bangladesh
                       </div>
                     </div>
+
+                    <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+    <Image
+      src={getDriveImageUrl(
+        "https://drive.google.com/file/d/1gYDB-S47jDyOZzdK-n4e0YF6r3OMa5NT/view?usp=drive_link",
+      )}
+      alt="UNOPS Team Photo"
+      fill
+      className="object-cover"
+    />
+    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+      UNOPS Team Photo
+    </div>
+  </div>
+  <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+    <Image
+      src={getDriveImageUrl(
+        "https://drive.google.com/file/d/1uPJ1wVXmDdNv03rQLskSZumc3s0i8vLp/view?usp=drive_link",
+      )}
+      alt="UNOPS Team Photo"
+      fill
+      className="object-cover"
+    />
+    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-2 text-center">
+      UNOPS Team Photo
+    </div>
+  </div>
                     <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100 sm:col-span-2">
                       <Image
                         src={getDriveImageUrl(
@@ -467,87 +494,119 @@ export default function Home() {
           </ul>
         </section>
 
+
+
 <section className="space-y-16">
   <h2 className="text-5xl font-bold uppercase tracking-wide text-center">
     Mentors & Colleagues
   </h2>
 
-  {/* Professional Mentors - Full Width */}
-  <div>
+  <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+    {/* Professional Supervisors & Colleagues - Left Column */}
+    <div className="flex-1">
+      <h3 className="text-3xl font-semibold mb-6 text-center lg:text-left">
+        Professional Supervisors & Colleagues
+      </h3>
 
-
-    {/* List of Researchers with Designations */}
-    <div className="space-y-4 mb-12 max-w-3xl mx-auto">
-      <div className="text-lg font-light border-l-4 border-gray-300 pl-6 py-1">
-        <span className="font-medium">Sudhir Muralidharan</span>
-        <span className="text-gray-600">
-          {" "}
-          — Country Manager | SAMCO | UNOPS Bangladesh
-        </span>
-      </div>
-      <div className="text-lg font-light border-l-4 border-gray-300 pl-6 py-1">
-        <span className="font-medium">
-          Sivakumaran Sithamparanathan
-        </span>
-        <span className="text-gray-600">
-          {" "}
-          — Technical Specialist, PLEASE Project, UNOPS SAMCO
-        </span>
-      </div>
-      <div className="text-lg font-light border-l-4 border-gray-300 pl-6 py-1">
-        <span className="font-medium">Shirn Sultana</span>
-        <span className="text-gray-600">
-          {" "}
-          — Partnership Advisor, UNOPS Bangladesh
-        </span>
-      </div>
-      <div className="text-lg font-light border-l-4 border-gray-300 pl-6 py-1">
-        <span className="font-medium">Suman Dewanjee</span>
-        <span className="text-gray-600">
-          {" "}
-          — PhD Fellow, Virginia Tech
-        </span>
-      </div>
-      <div className="text-lg font-light border-l-4 border-gray-300 pl-6 py-1">
-        <span className="font-medium">Punya Lakmini DANGALLAGE</span>
-        <span className="text-gray-600">
-          {" "}
-          — Programme Management - Senior Assistant | UNOPS, SAMCO
-        </span>
-      </div>
-      <div className="text-lg font-light border-l-4 border-gray-300 pl-6 py-1">
-        <span className="font-medium">Labio Bala</span>
-        <span className="text-gray-600">
-          {" "}
-          — Finance Specialist, UNOPS Vienna
-        </span>
+      {/* List of Researchers with Designations */}
+      <div className="space-y-3 mb-8 max-w-full">
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Sudhir Muralidharan</span>
+          <span className="text-gray-600"> — Country Manager | SAMCO | UNOPS Bangladesh</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Shirn Sultana</span>
+          <span className="text-gray-600"> — Partnership Advisor, UNOPS Bangladesh</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Jaime Alarma Olmos</span>
+          <span className="text-gray-600"> — Project Management Specialist, PLEASE Project, UNOPS</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Sivakumaran Sithamparanathan</span>
+          <span className="text-gray-600"> — Technical Specialist, PLEASE Project, UNOPS SAMCO</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Labio Bala</span>
+          <span className="text-gray-600"> — Finance Specialist, UNOPS Vienna</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Khadem Yousuf</span>
+          <span className="text-gray-600"> — MD & CEO, BPCL</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Nusrat Jahan</span>
+          <span className="text-gray-600"> — Project Management Officer, UNOPS PLEASE Project, Bangladesh</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Nusrat Shaheen</span>
+          <span className="text-gray-600"> — Technical Expert (Environment), UNOPS PLEASE Project, Bhutan</span>
+        </div>
+        <div className="text-base font-light border-l-4 border-gray-300 pl-4 py-1">
+          <span className="font-medium">Punya Lakmini DANGALLAGE</span>
+          <span className="text-gray-600"> — Programme Management - Senior Assistant | UNOPS, SAMCO</span>
+        </div>
       </div>
     </div>
 
-    {/* Image Gallery - Only Images, No Text */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+    {/* Academic Supervisors - Right Column */}
+    <div className="flex-1">
+      <h3 className="text-3xl font-semibold mb-6 text-center lg:text-left">
+        Academic Supervisors
+      </h3>
+
+      {/* List of Academic Supervisors */}
+      <div className="space-y-4 mb-8 max-w-full">
+        <div className="text-base font-light border-l-4 border-purple-300 pl-4 py-1">
+          <span className="font-medium">Dr. Tarek Arafat</span>
+          <span className="text-gray-600"> (Head of BME, BUET)</span>
+          <p className="text-sm text-gray-500 mt-1">In challenging times, his generosity and mentorship reignited my passion for research.</p>
+        </div>
+        <div className="text-base font-light border-l-4 border-purple-300 pl-4 py-1">
+          <span className="font-medium">Dr. Latiful Bari</span>
+          <span className="text-gray-600"> (Chief Scientist, CARS, University of Dhaka)</span>
+          <p className="text-sm text-gray-500 mt-1">As his research assistant, I learned discipline and impactful research, making him my lifelong role model.</p>
+        </div>
+        <div className="text-base font-light border-l-4 border-purple-300 pl-4 py-1">
+          <span className="font-medium">Dr. Asma Rahman</span>
+          <span className="text-gray-600"> (Principal Scientist, CARS, University of Dhaka)</span>
+          <p className="text-sm text-gray-500 mt-1">Provided invaluable opportunities to work in her lab, greatly enhancing my skills and knowledge.</p>
+        </div>
+        <div className="text-base font-light border-l-4 border-purple-300 pl-4 py-1">
+          <span className="font-medium">Dr. Fatema-Tuj-Zohra</span>
+          <span className="text-gray-600"> (Associate Professor, ILET, University of Dhaka)</span>
+          <p className="text-sm text-gray-500 mt-1">A wonderful motivator with a kind heart and an inspiring personality, and her guidance, encouragement, and unwavering support made a lasting impact on my professional growth.</p>
+        </div>
+        <div className="text-base font-light border-l-4 border-purple-300 pl-4 py-1">
+          <span className="font-medium">Suman Dewanjee</span>
+          <span className="text-gray-600"> (PhD Fellow, Virginia Tech)</span>
+          <p className="text-sm text-gray-500 mt-1">A pivotal figure who reshaped my life's trajectory, bringing clarity, purpose, and dedication to research.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Image Gallery - All Images in One Section (Outside the flex container) */}
+  <div>
+    <h3 className="text-3xl font-semibold mb-6 text-center">
+      Gallery
+    </h3>
+    
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
       {/* Sudhir Muralidharan */}
       <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
         <Image
           src={getDriveImageUrl(
             "https://drive.google.com/file/d/1jEB3-OqU_0Ky8l35X7yOP7DWj9U-Dndm/view?usp=drive_link",
           )}
-          alt="Sudhir Muralidharan - Country Manager, UNOPS Bangladesh"
+          alt="Sudhir Muralidharan"
           fill
           className="object-cover"
         />
-      </div>
-
-      {/* Sivakumaran Sithamparanathan */}
-      <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
-        <Image
-          src={getDriveImageUrl(
-            "https://drive.google.com/file/d/152OG1nyN-HWfIxUYXzOm3u4j0WTzDzBO/view?usp=drive_link",
-          )}
-          alt="Sivakumaran Sithamparanathan - Technical Specialist, UNOPS"
-          fill
-          className="object-cover"
-        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3">
+          <p className="text-white text-sm font-medium text-center leading-tight">Sudhir Muralidharan</p>
+          <p className="text-white/70 text-xs text-center leading-tight">Country Manager, UNOPS Bangladesh</p>
+        </div>
       </div>
 
       {/* Shirn Sultana */}
@@ -556,35 +615,31 @@ export default function Home() {
           src={getDriveImageUrl(
             "https://drive.google.com/file/d/1vAXJ054cZTAs-QHLWZRjkuADCT45uqNT/view?usp=drive_link",
           )}
-          alt="Shirn Sultana - Partnership Advisor, UNOPS Bangladesh"
+          alt="Shirn Sultana"
           fill
           className="object-cover"
         />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3">
+          <p className="text-white text-sm font-medium text-center leading-tight">Shirn Sultana</p>
+          <p className="text-white/70 text-xs text-center leading-tight">Partnership Advisor, UNOPS Bangladesh</p>
+        </div>
       </div>
 
-      {/* Suman Dewanjee */}
+      {/* Sivakumaran Sithamparanathan */}
       <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
         <Image
           src={getDriveImageUrl(
-            "https://drive.google.com/file/d/1ot4UgQE5NUtszTwH58qD4S2e7sjkoaE8/view?usp=drive_link",
+            "https://drive.google.com/file/d/152OG1nyN-HWfIxUYXzOm3u4j0WTzDzBO/view?usp=drive_link",
           )}
-          alt="Suman Dewanjee - PhD Fellow, Virginia Tech"
+          alt="Sivakumaran Sithamparanathan"
           fill
           className="object-cover"
         />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3">
+          <p className="text-white text-sm font-medium text-center leading-tight">Sivakumaran Sithamparanathan</p>
+          <p className="text-white/70 text-xs text-center leading-tight">Technical Specialist, UNOPS SAMCO</p>
+        </div>
       </div>
-
-      {/* Punya Lakmini DANGALLAGE
-      <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
-        <Image
-          src={getDriveImageUrl(
-            "https://drive.google.com/file/d/1vAXJ054cZTAs-QHLWZRjkuADCT45uqNT/view?usp=drive_link",
-          )}
-          alt="Punya Lakmini DANGALLAGE - Programme Management, UNOPS SAMCO"
-          fill
-          className="object-cover"
-        />
-      </div> */}
 
       {/* Labio Bala */}
       <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
@@ -592,14 +647,58 @@ export default function Home() {
           src={getDriveImageUrl(
             "https://drive.google.com/file/d/1UCBNNZTbo8nZCQY3REqAgchE53oKv005/view?usp=drive_link",
           )}
-          alt="Labio Bala - Finance Specialist, UNOPS Vienna"
+          alt="Labio Bala"
           fill
           className="object-cover"
         />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3">
+          <p className="text-white text-sm font-medium text-center leading-tight">Labio Bala</p>
+          <p className="text-white/70 text-xs text-center leading-tight">Finance Specialist, UNOPS Vienna</p>
+        </div>
       </div>
+
+      {/* Punya Lakmini DANGALLAGE */}
+      <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+        <Image
+          src={getDriveImageUrl(
+            "https://drive.google.com/file/d/1hmJwQh-pj1SWKtTRP1BOSsmgGT0ZVTmb/view",
+          )}
+          alt="Punya Lakmini DANGALLAGE"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3">
+          <p className="text-white text-sm font-medium text-center leading-tight">Punya Lakmini DANGALLAGE</p>
+          <p className="text-white/70 text-xs text-center leading-tight">Programme Management, UNOPS SAMCO</p>
+        </div>
+      </div>
+
+      {/* Suman Dewanjee */}
+      <div className="relative h-48 rounded-lg overflow-hidden bg-gray-100">
+        <Image
+          src={getDriveImageUrl(
+            "https://drive.google.com/file/d/1_VdmOM8YL02JeEuESfeCPHSO904IZVDQ/view?usp=drive_link",
+          )}
+          alt="Suman Dewanjee"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-3">
+          <p className="text-white text-sm font-medium text-center leading-tight">Suman Dewanjee</p>
+          <p className="text-white/70 text-xs text-center leading-tight">PhD Fellow, Virginia Tech</p>
+        </div>
+      </div>
+
+      
+
+    
     </div>
   </div>
 </section>
+
+
+
+
         {/* KEY ACHIEVEMENTS */}
         <section className="space-y-16">
           <h2 className="text-5xl font-bold uppercase tracking-wide text-center">

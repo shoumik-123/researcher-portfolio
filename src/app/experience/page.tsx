@@ -99,19 +99,14 @@ const resolveVideoEmbed = (videoUrl?: string): string => {
 
 const experiences = [
   {
-    id: 'unops',
-    title: "United Nations Office for Project Services (UNOPS)",
-    organization: "UNOPS",
+    id: 'unops-2026',
+    title: "Business Development Associate",
+    organization: "United Nations Office for Project Services (UNOPS)",
     project: "",
-    timeline: "April 2024 – June 2025 & May 2026 – Present",
+    timeline: "May 2026 – Present",
     location: "Dhaka, Bangladesh",
-    description: "Served as national environmental technical lead for the $3.18M PLEASE Project (Plastic-free Rivers and Seas for South Asia). Designed, implemented, and monitored environmental and social safeguards (ESS, ESMPs, EIA) in alignment with World Bank and SACEP standards. Guided national partners and grantees on environmental compliance, risk screening, and sustainability integration. Supported innovation, prototyping, and validation of circular plastic solutions through community and private-sector engagement. Coordinated with regional UNOPS offices to align national implementation with South Asia–wide objectives. Conducted site assessments and environmental audits across 25+ project locations. Delivered training on source segregation, waste handling, and leakage prevention to local governments and enterprises. Developed SOPs for Material Recovery Facilities (MRFs) and advised on environmentally appropriate machinery specifications.\n\nCurrently serving as Business Development Associate, supporting strategic partnerships, proposal development, and stakeholder engagement initiatives to strengthen sustainable development programming in Bangladesh. Working closely with the Partnerships Advisor to identify funding opportunities, develop high-quality concept notes and business proposals, and coordinate high-level donor and corporate engagement events.",
+    description: "Supporting strategic partnerships, proposal development, and stakeholder engagement initiatives to strengthen sustainable development programming in Bangladesh. Working closely with the Partnerships Advisor to identify funding opportunities, develop high-quality concept notes and business proposals, and coordinate high-level donor and corporate engagement events.",
     achievements: [
-      "Directed implementation leading to 20% reduction in plastic leakage into riverine and marine ecosystems.",
-      "Developed 11 ESMPs, 4 ESS reports, and 1 EIA, ensuring full donor compliance.",
-      "Supported establishment of 8 plastic recycling business units, embedding circular economy principles.",
-      "Strengthened environmental capacity of community and women-led enterprises through structured training and mentoring.",
-      "Represented Bangladesh in regional dialogues with World Bank, SACEP, and UNOPS on sustainable waste management strategies.",
       "Developing concept notes, grant applications, EOIs, and partnership proposals",
       "Conducting donor mapping, market research, and opportunity analysis",
       "Coordinating networking events, workshops, webinars, and partnership ceremonies",
@@ -123,9 +118,31 @@ const experiences = [
     type: "UNOPS",
     icon: <FiBriefcase className="w-6 h-6" />,
     color: "bg-blue-100 text-blue-600",
-    image: resolveImageUrl(experienceMediaItems.find(item => item.type === 'UNOPS')?.image),
+    image: "/images/profile.jpg",
     video: "",
     videoEmbed: ""
+  },
+  {
+    id: 'unops-2024',
+    title: "Technical Expert (Environment)",
+    organization: "United Nations Office for Project Services (UNOPS)",
+    project: "PLEASE Project (Plastic-free Rivers and Seas for South Asia)",
+    timeline: "April 2024 – June 2025",
+    location: "Dhaka, Bangladesh",
+    description: "Served as national environmental technical lead for the $3.18M PLEASE Project (Plastic-free Rivers and Seas for South Asia). Designed, implemented, and monitored environmental and social safeguards (ESS, ESMPs, EIA) in alignment with World Bank and SACEP standards. Guided national partners and grantees on environmental compliance, risk screening, and sustainability integration. Supported innovation, prototyping, and validation of circular plastic solutions through community and private-sector engagement. Coordinated with regional UNOPS offices to align national implementation with South Asia–wide objectives. Conducted site assessments and environmental audits across 25+ project locations. Delivered training on source segregation, waste handling, and leakage prevention to local governments and enterprises. Developed SOPs for Material Recovery Facilities (MRFs) and advised on environmentally appropriate machinery specifications.",
+    achievements: [
+      "Directed implementation leading to 20% reduction in plastic leakage into riverine and marine ecosystems.",
+      "Developed 11 ESMPs, 4 ESS reports, and 1 EIA, ensuring full donor compliance.",
+      "Supported establishment of 8 plastic recycling business units, embedding circular economy principles.",
+      "Strengthened environmental capacity of community and women-led enterprises through structured training and mentoring.",
+      "Represented Bangladesh in regional dialogues with World Bank, SACEP, and UNOPS on sustainable waste management strategies."
+    ],
+    type: "UNOPS",
+    icon: <FiBriefcase className="w-6 h-6" />,
+    color: "bg-blue-100 text-blue-600",
+    image: resolveImageUrl(experienceMediaItems.find(item => item.type === 'UNOPS')?.image),
+    video: experienceMediaItems.find(item => item.type === 'UNOPS')?.video,
+    videoEmbed: experienceMediaItems.find(item => item.type === 'UNOPS')?.videoEmbed
   },
   {
     id: 'bpcl',
@@ -191,7 +208,6 @@ const experiences = [
     videoEmbed: experienceMediaItems.find(item => item.type === 'CARS')?.videoEmbed
   }
 ];
-
 // Training & Workshops data
 const trainings = [
   {
